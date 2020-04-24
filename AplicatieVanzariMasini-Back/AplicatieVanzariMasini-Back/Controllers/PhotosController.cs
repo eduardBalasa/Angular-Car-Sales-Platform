@@ -16,16 +16,16 @@ using System.Threading.Tasks;
 
 namespace AplicatieVanzariMasini_Back.Controllers
 {
-    [Route("api/users/{userId}/photos")]
+    [Route("users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase
     {
-        private readonly IDatingRepository _repo;
+        private readonly ICarRepository _repo;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
 
-        public PhotosController(IDatingRepository repo, IMapper mapper,
+        public PhotosController(ICarRepository repo, IMapper mapper,
             IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _repo = repo;
@@ -39,6 +39,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             );
             _cloudinary = new Cloudinary(acc);
         }
+
         [HttpGet("{id}", Name = "GetPhoto")]
         public async Task<IActionResult> GetPhoto(int id)
         {
@@ -93,7 +94,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 return CreatedAtRoute("GetPhoto", new { userId, id = photo.Id }, photoToReturn);
             }
 
-            return BadRequest("Could not add the photo");
+            return BadRequest("Eroare la adaugarea pozei.");
         }
 
         [HttpPost("{id}/setMain")]
@@ -110,7 +111,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             var photoFromRepo = await _repo.GetPhoto(id);
 
             if (photoFromRepo.IsMain)
-                return BadRequest("This is already the main photo");
+                return BadRequest("Poza este deja setata ca poza de profil.");
 
             var currentMainPhoto = await _repo.GetMainPhotoForUser(userId);
             currentMainPhoto.IsMain = false;
@@ -120,7 +121,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (await _repo.SaveAll())
                 return NoContent();
 
-            return BadRequest("Could not set photo to main");
+            return BadRequest("Eroare la setarea pozei de profil.");
         }
 
         [HttpDelete("{id}")]
@@ -137,7 +138,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             var photoFromRepo = await _repo.GetPhoto(id);
 
             if (photoFromRepo.IsMain)
-                return BadRequest("You cannot delete your main photo");
+                return BadRequest("Nu poti sterge poza de profil");
 
             if (photoFromRepo.PublicId != null)
             {
@@ -159,7 +160,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (await _repo.SaveAll())
                 return Ok();
 
-            return BadRequest("Failed to delete the photo");
+            return BadRequest("Eroare la stergerea pozei.");
         }
     }
 }

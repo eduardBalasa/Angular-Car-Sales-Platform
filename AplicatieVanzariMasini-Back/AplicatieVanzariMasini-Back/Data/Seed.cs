@@ -20,9 +20,7 @@ namespace AplicatieVanzariMasini_Back.Data
                 var roles = new List<Role>
                 {
                     new Role{Name = "Member"},
-                    new Role{Name = "Admin"},
-                    new Role{Name = "Moderator"},
-                    new Role{Name = "VIP"}
+                    new Role{Name = "Admin"}
                 };
 
                 foreach (var role in roles)
@@ -47,7 +45,7 @@ namespace AplicatieVanzariMasini_Back.Data
                 if (result.Succeeded)
                 {
                     var admin = userManager.FindByNameAsync("Admin").Result;
-                    userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"}).Wait();
+                    userManager.AddToRolesAsync(admin, new[] {"Admin"}).Wait();
 
                 }
             }

@@ -1,16 +1,16 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()">
-  <h2 class="text-center text-primary">Sign Up</h2>
+  <h2 class="text-center text-primary">Inregistrare</h2>
   <hr />
 
   <div class="form-group">
-    <label class="control-label" style="margin-right:10px">I am a: </label>
+    <label class="control-label" style="margin-right:10px">Sunt: </label>
     <label class="radio-inline">
       <input
         class="mr-3"
         type="radio"
         value="male"
         formControlName="gender"
-      />Male
+      />Barbat
     </label>
     <label class="radio-inline ml-3">
       <input
@@ -18,7 +18,7 @@
         type="radio"
         value="female"
         formControlName="gender"
-      />Female
+      />Femeie
     </label>
   </div>
 
@@ -32,9 +32,9 @@
       }"
       class="form-control"
       formControlName="username"
-      placeholder="Username"
+      placeholder="Utilizator"
     />
-    <div class="invalid-feedback">Please choose a username</div>
+    <div class="invalid-feedback">Alege un nume de utilizator</div>
   </div>
 
   <div class="form-group">
@@ -45,7 +45,7 @@
           registerForm.get('knownAs').touched
       }"
       class="form-control"
-      placeholder="Known as"
+      placeholder="Cunoscut ca"
       formControlName="knownAs"
     />
     <div
@@ -55,7 +55,29 @@
         registerForm.get('knownAs').hasError('required')
       "
     >
-      Known as is required
+      Cunoscut ca este necesar
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          registerForm.get('phoneNumber').errors &&
+          registerForm.get('phoneNumber').touched
+      }"
+      class="form-control"
+      placeholder="Numar de telefon"
+      formControlName="phoneNumber"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        registerForm.get('phoneNumber').touched &&
+        registerForm.get('phoneNumber').hasError('required')
+      "
+    >
+      Numarul de telefon este necesar
     </div>
   </div>
 
@@ -67,7 +89,7 @@
           registerForm.get('dateOfBirth').touched
       }"
       class="form-control"
-      placeholder="Date of Birth"
+      placeholder="Data nasterii"
       formControlName="dateOfBirth"
       type="text"
       bsDatepicker [bsConfig]="bsConfig"
@@ -79,7 +101,7 @@
         registerForm.get('dateOfBirth').hasError('required')
       "
     >
-      Date of Birth is required
+      Data nasterii este necesara
     </div>
   </div>
 
@@ -90,7 +112,7 @@
           registerForm.get('city').errors && registerForm.get('city').touched
       }"
       class="form-control"
-      placeholder="City"
+      placeholder="Oras"
       formControlName="city"
     />
     <div
@@ -100,7 +122,7 @@
         registerForm.get('city').hasError('required')
       "
     >
-      City is required
+      Orasul este necesar
     </div>
   </div>
 
@@ -112,7 +134,7 @@
           registerForm.get('country').touched
       }"
       class="form-control"
-      placeholder="Country"
+      placeholder="Țară"
       formControlName="country"
     />
     <div
@@ -122,7 +144,7 @@
         registerForm.get('country').hasError('required')
       "
     >
-      Country is required
+      Țara este necesara
     </div>
   </div>
 
@@ -136,7 +158,7 @@
       }"
       class="form-control"
       formControlName="password"
-      placeholder="Password"
+      placeholder="Parola"
     />
     <div
       class="invalid-feedback"
@@ -145,7 +167,7 @@
         registerForm.get('password').touched
       "
     >
-      Password is required
+      Parola este necesara
     </div>
     <div
       class="invalid-feedback"
@@ -154,7 +176,7 @@
         registerForm.get('password').touched
       "
     >
-      Password must be at least 4 characters
+      Parola trebuie sa contina cel putin 4 caractere
     </div>
     <div
       class="invalid-feedback"
@@ -163,7 +185,7 @@
         registerForm.get('password').touched
       "
     >
-      Password cannot exceed 8 characters
+      Parola nu poate depasi 8 caractere
     </div>
   </div>
 
@@ -179,7 +201,7 @@
       type="password"
       class="form-control"
       formControlName="confirmPassword"
-      placeholder="Confirm Password"
+      placeholder="Confirma parola"
     />
     <div
       class="invalid-feedback"
@@ -188,7 +210,7 @@
         registerForm.get('confirmPassword').touched
       "
     >
-      Confirm Password is required
+      Confirmarea parolei este necesara
     </div>
     <div
       class="invalid-feedback"
@@ -197,7 +219,7 @@
         registerForm.get('confirmPassword').touched
       "
     >
-      Passwords must match
+      Parolele trebuie sa se potriveasca
     </div>
   </div>
 
@@ -207,10 +229,10 @@
       [disabled]="!registerForm.valid"
       type="submit"
     >
-      Register
+      Inregistrare
     </button>
     <button class="btn btn-default" type="button" (click)="cancel()">
-      Cancel
+      Anulare
     </button>
   </div>
 </form>

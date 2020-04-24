@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace AplicatieVanzariMasini_Back.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class AdminController : ControllerBase
     {
 
@@ -74,15 +74,16 @@ namespace AplicatieVanzariMasini_Back.Controllers
             var selectedRoles = roleEditDto.RoleNames;
 
             selectedRoles = selectedRoles ?? new string[] { };
+
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
 
             if (!result.Succeeded)
-                return BadRequest("Failed to add to roles");
+                return BadRequest("Eroare la adaugarea de roluri");
 
             result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
 
             if (!result.Succeeded)
-                return BadRequest("Failed to remove the roles");
+                return BadRequest("Eroare la stergerea de roluri");
 
             return Ok(await _userManager.GetRolesAsync(user));
         }
@@ -130,7 +131,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 .FirstOrDefaultAsync(p => p.Id == photoId);
 
             if (photo.IsMain)
-                return BadRequest("You cannot reject the main photo");
+                return BadRequest("Nu poti sterge o poza principala");
 
             if (photo.PublicId != null)
             {

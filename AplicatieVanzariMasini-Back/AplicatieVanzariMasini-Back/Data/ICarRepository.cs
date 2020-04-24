@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AplicatieVanzariMasini_Back.Data
 {
-    public interface IDatingRepository
+    public interface ICarRepository
     {
         void Add<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;

@@ -17,6 +17,22 @@ namespace AplicatieVanzariMasini_Back.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Advert> Adverts { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Body> Bodies { get; set; }
+        public DbSet<CylindricalCapacity> CylindricalCapacities { get; set; }
+        public DbSet<Fuel> Fuels { get; set; }
+        public DbSet<Gearbox> Gearboxes { get; set; }
+        public DbSet<Model> Models { get; set; }
+        public DbSet<ModelVersion> ModelVersions { get; set; }
+        public DbSet<PollutionRule> PollutionRules { get; set; }
+        public DbSet<Power> Powers { get; set; }
+        public DbSet<Transmission> Transmissions { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Km> Kms { get; set; }
+        public DbSet<Price> Prices { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

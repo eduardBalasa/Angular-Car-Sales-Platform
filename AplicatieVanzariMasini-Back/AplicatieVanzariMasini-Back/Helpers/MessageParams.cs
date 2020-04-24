@@ -18,7 +18,7 @@ namespace AplicatieVanzariMasini_Back.Helpers
         }
 
         public int UserId { get; set; }
-        public string MessageContainer { get; set; } = "Unread";
+        public string MessageContainer { get; set; } = "Necitit";
 
     }
 }

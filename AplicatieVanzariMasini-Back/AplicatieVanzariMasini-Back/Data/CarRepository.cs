@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AplicatieVanzariMasini_Back.Data
 {
-    public class DatingRepository : IDatingRepository
+    public class CarRepository : ICarRepository
     {
         private readonly DataContext _context;
 
-        public DatingRepository(DataContext context)
+        public CarRepository(DataContext context)
         {
             _context = context;
         }

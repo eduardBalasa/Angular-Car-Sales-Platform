@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <div *ngIf="messages?.length === 0">
-      <p>No messages yet... say hi my using the message box below</p>
+      <p>Nu ai inca niciun mesaj... Spune Salut! folosit chenarul de mai jos</p>
     </div>
 
     <ul class="chat">
@@ -44,10 +44,10 @@
                   message.messageSent | timeAgo
                 }}</span>
                 <span *ngIf="!message.isRead" class="text-danger"
-                  >(unread)</span
+                  >(necitit)</span
                 >
                 <span *ngIf="message.isRead" class="text-success"
-                  >(Read {{ message.dateRead | timeAgo }})</span
+                  >(Citit {{ message.dateRead | timeAgo }})</span
                 >
               </small>
               <strong class="primary-font float-right">{{
@@ -69,10 +69,10 @@
           name="content"
           required
           class="form-control input-sm"
-          placeholder="send a private message"
+          placeholder="trimite un mesaj privat"
         />
         <div class="input-group-append">
-          <button class="btn btn-primary" [disabled]="!messageForm.valid">Send</button>
+          <button class="btn btn-primary" [disabled]="!messageForm.valid">Trimite</button>
         </div>
       </div>
     </form>

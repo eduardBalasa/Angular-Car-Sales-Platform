@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 namespace AplicatieVanzariMasini_Back.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IDatingRepository _repo;
+        private readonly ICarRepository _repo;
         private readonly IMapper _mapper;
 
-        public UsersController(IDatingRepository repo, IMapper mapper)
+        public UsersController(ICarRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -38,7 +38,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             
             if (string.IsNullOrEmpty(userParams.Gender))
             {
-                userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
+                userParams.Gender = userFromRepo.Gender == "barbat" ? "femeie" : "barbat";
             }
             
             var users = await _repo.GetUsers(userParams);
@@ -75,7 +75,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (await _repo.SaveAll())
                 return NoContent();
 
-            throw new Exception($"Updating user {id} failed on save");
+            throw new Exception($"Actualizarea utilizatorului {id} a esuat la salvare.");
         }
 
         [HttpPost("{id}/like/{recipientId}")]

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AplicatieVanzariMasini_Back.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             _context = context;
         }
 
-        // GET api/values
+        // GET values
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetValues()
@@ -31,7 +31,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(values);
         }
 
-        // GET api/values/5
+        // GET values/5
         [Authorize(Roles = "Member")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
@@ -41,19 +41,19 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(value);
         }
 
-        // POST api/values
+        // POST values
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

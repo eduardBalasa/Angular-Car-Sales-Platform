@@ -13,9 +13,18 @@ import { PreventUnsavedChanges } from "./_guards/prevent-unsaved-changes.guard";
 import { ListResolver } from "./_resolver/lists.resolver";
 import { MessagesResolver } from "./_resolver/messages.resolver";
 import { AdminPanelComponent } from "./admin/admin-panel/admin-panel.component";
+import { BrandsResolver } from './_resolver/brands.resolver';
+import { ModelsResolver } from './_resolver/models.resolver';
+import { PricesResolver } from './_resolver/prices.resolver';
+import { KmsResolver } from './_resolver/kms.resolver';
 
 export const appRoutes: Routes = [
-  { path: "", component: HomeComponent },
+  { path: "", 
+  component: HomeComponent,
+  resolve: {  brands : BrandsResolver,
+              models: ModelsResolver,
+              prices: PricesResolver,
+              kms: KmsResolver} },
   {
     path: "",
     runGuardsAndResolvers: "always",
@@ -50,7 +59,7 @@ export const appRoutes: Routes = [
       {
         path: "admin",
         component: AdminPanelComponent,
-        data: {roles: ['Admin', "Moderator"]}
+        data: { roles: ["Admin"] },
       },
     ],
   },

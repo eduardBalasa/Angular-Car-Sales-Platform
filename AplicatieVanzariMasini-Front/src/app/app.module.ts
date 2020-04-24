@@ -10,6 +10,12 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from "time-ago-pipe";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule, MatInputModule } from "@angular/material";
+import { MaterialModule } from './material.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import {SelectModule} from 'ng2-select';
 
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
@@ -40,6 +46,12 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { FiltersComponent } from './filters/filters.component';
+import { FiltersService } from './_services/filters.service';
+import { BrandsResolver } from './_resolver/brands.resolver';
+import { ModelsResolver } from './_resolver/models.resolver';
+import { PricesResolver } from './_resolver/prices.resolver';
+import { KmsResolver } from './_resolver/kms.resolver';
 
 export function tokenGetter(){
    return localStorage.getItem('token');
@@ -65,7 +77,8 @@ export function tokenGetter(){
       HasRoleDirective,
       UserManagementComponent,
       PhotoManagementComponent,
-      RolesModalComponent
+      RolesModalComponent,
+      FiltersComponent
    ],
    imports: [
       BrowserModule,
@@ -81,12 +94,19 @@ export function tokenGetter(){
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
       FileUploadModule,
+      MatFormFieldModule,
+      MatButtonModule,
+      MaterialModule,
+      MatAutocompleteModule,
+      MatInputModule,
+      TextInputAutocompleteModule,
+      SelectModule,
       ModalModule.forRoot(),
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
             whitelistedDomains: ['localhost:44329'],
-            blacklistedRoutes: ['localhost:44329/api/auth']
+            blacklistedRoutes: ['localhost:44329//auth']
          }
       })
    ],
@@ -99,10 +119,16 @@ export function tokenGetter(){
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
+      BrandsResolver,
+      ModelsResolver,
+      PricesResolver,
+      KmsResolver,
       PreventUnsavedChanges,
       ListResolver,
       MessagesResolver,
-      AdminService
+      AdminService,
+      FiltersService
+      
    ],
    entryComponents: [
       RolesModalComponent

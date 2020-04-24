@@ -11,8 +11,12 @@ namespace AplicatieVanzariMasini_Back.Dtos
         [Required]
         public string Username { get; set; }
         [Required]
-        [StringLength(8, MinimumLength = 4, ErrorMessage = "You must specify password between 4 and 8 characters")]
+        [StringLength(8, MinimumLength = 4, ErrorMessage = "Trebuie sa introduci o parola intre 4 si 8 caractere")]
         public string  Password { get; set; }
+        [Required(ErrorMessage = "Este necesar un numar de telefon.")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Numar de telefon invalid")]
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Numar de telefon invalid")]
+        public string PhoneNumber { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]

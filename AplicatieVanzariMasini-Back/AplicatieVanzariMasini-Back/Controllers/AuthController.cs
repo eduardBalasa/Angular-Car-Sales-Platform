@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace AplicatieVanzariMasini_Back.Controllers
 {
     [AllowAnonymous]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

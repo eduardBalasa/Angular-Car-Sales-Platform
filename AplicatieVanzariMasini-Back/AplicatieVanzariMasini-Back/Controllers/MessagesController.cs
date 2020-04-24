@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 namespace AplicatieVanzariMasini_Back.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Route("api/users/{userId}/[controller]")]
+    [Route("users/{userId}/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private readonly IDatingRepository _repo;
+        private readonly ICarRepository _repo;
         private readonly IMapper _mapper;
 
-        public MessagesController(IDatingRepository repo, IMapper mapper)
+        public MessagesController(ICarRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -89,7 +89,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             var recipient = await _repo.GetUser(messageForCreationDto.RecipientId, false);
 
             if (recipient == null)
-                return BadRequest("Could not find user");
+                return BadRequest("Utilizatorul nu a fost gasit.");
 
             var message = _mapper.Map<Message>(messageForCreationDto);
 
@@ -104,7 +104,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 return CreatedAtRoute("GetMessage", new { userId, id = message.Id }, messageToReturn);
             }
 
-            throw new Exception("Creating the message failed on save");
+            throw new Exception("Eroare la crearea mesajului.");
         }
 
         [HttpPost("{id}")]
@@ -127,7 +127,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (await _repo.SaveAll())
                 return NoContent();
 
-            throw new Exception("Error deleting the message");
+            throw new Exception("Eroare la stergerea mesajului");
         }
 
         [HttpPost("{id}/read")]

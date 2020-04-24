@@ -1,12 +1,12 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
-      <h1>Your Profile</h1>
+      <h1>Profilul tau</h1>
     </div>
     <div class="col-sm-8">
       <div *ngIf="editForm.dirty" class="alert alert-info">
-        <strong>Information:</strong> You have made changes. Any unsaved changes
-        will be lost!
+        <strong>Information:</strong> Ai facut modificari. Unele modificari
+         nesalvate ar putea fi pierdute!
       </div>
     </div>
   </div>
@@ -20,19 +20,19 @@
         />
         <div class="card-body">
           <div>
-            <strong>Location:</strong>
+            <strong>Locatie:</strong>
             <p>{{ user.city }}, {{ user.country }}</p>
           </div>
           <div>
-            <strong>Age:</strong>
+            <strong>Varsta:</strong>
             <p>{{ user.age }}</p>
           </div>
           <div>
-            <strong>Last Active:</strong>
+            <strong>Ultima Conectare:</strong>
             <p>{{user.lastActive | timeAgo}}</p>
           </div>
           <div>
-            <strong>Member since:</strong>
+            <strong>Membru din:</strong>
             <p>{{ user.created | date: 'mediumDate'}}</p>
           </div>
         </div>
@@ -42,7 +42,7 @@
             form="editForm"
             class="btn btn-success btn-block"
           >
-            Save Changes
+            Salveaza modificarile
           </button>
         </div>
       </div>
@@ -50,7 +50,7 @@
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="Edit Profile">
+          <tab heading="Editeaza Profilul">
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
               <h4>Description</h4>
               <textarea
@@ -91,7 +91,7 @@
               </div>
             </form>
           </tab>
-          <tab heading="Edit Photos">
+          <tab heading="Editeaza pozele">
             <app-photo-editor
               [photos]="user.photos"
               (getMemberPhotoChange)="updateMainPhoto($event)"
