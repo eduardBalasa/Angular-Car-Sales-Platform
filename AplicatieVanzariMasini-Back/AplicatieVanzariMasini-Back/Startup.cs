@@ -96,6 +96,7 @@ namespace AplicatieVanzariMasini_Back
             services.AddTransient<Seed>();
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarSpecificationRepository, CarSpecificationRepository>();
+            services.AddScoped<IAnnounceRepository, AnnounceRepository>();
             services.AddScoped<LogUserActivity>();
         }
         //

@@ -78,12 +78,26 @@
 }
 
 .submitButton {
-  height: 41px;
+  height: 35px;
+  width: 89px;
   font-size: 16px;
   background: #c82814;
   box-shadow: 0 1px 2px #af4d41;
+  bottom: -23px;
+  right: 43px;
 }
+
 .submitButton:hover {
   background-color: #9c1907;
   color: #fff;
 }
+
+/* .my-carousel{
+  top: 0;
+} */
+
+/* img {
+  width: 100%;
+  height: 600px;
+} */
+

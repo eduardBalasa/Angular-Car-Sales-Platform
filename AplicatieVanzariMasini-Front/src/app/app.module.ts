@@ -15,7 +15,10 @@ import { MatButtonModule, MatInputModule } from "@angular/material";
 import { MaterialModule } from './material.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
-import {SelectModule} from 'ng2-select';
+import { SelectModule } from 'ng2-select';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { MatCardModule } from '@angular/material/card';
+
 
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
@@ -52,6 +55,8 @@ import { BrandsResolver } from './_resolver/brands.resolver';
 import { ModelsResolver } from './_resolver/models.resolver';
 import { PricesResolver } from './_resolver/prices.resolver';
 import { KmsResolver } from './_resolver/kms.resolver';
+import { AnnouncesComponent } from './announces/announces.component';
+import { AddAnnounceModalComponent } from './add-announce-modal/add-announce-modal.component';
 
 export function tokenGetter(){
    return localStorage.getItem('token');
@@ -78,7 +83,9 @@ export function tokenGetter(){
       UserManagementComponent,
       PhotoManagementComponent,
       RolesModalComponent,
-      FiltersComponent
+      FiltersComponent,
+      AnnouncesComponent,
+      AddAnnounceModalComponent
    ],
    imports: [
       BrowserModule,
@@ -92,6 +99,7 @@ export function tokenGetter(){
       BsDatepickerModule.forRoot(),
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
+      CarouselModule.forRoot(),
       NgxGalleryModule,
       FileUploadModule,
       MatFormFieldModule,
@@ -101,7 +109,9 @@ export function tokenGetter(){
       MatInputModule,
       TextInputAutocompleteModule,
       SelectModule,
+      MatCardModule,
       ModalModule.forRoot(),
+      CarouselModule.forRoot(),
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
@@ -131,7 +141,8 @@ export function tokenGetter(){
       
    ],
    entryComponents: [
-      RolesModalComponent
+      RolesModalComponent,
+      AddAnnounceModalComponent
    ],
    bootstrap: [
       AppComponent

@@ -25,6 +25,10 @@ namespace AplicatieVanzariMasini_Back.Data
         {
             _context.Remove(entity);
         }
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
 
         public async Task<Like> GetLike(int userId, int recipientId)
         {
@@ -44,6 +48,26 @@ namespace AplicatieVanzariMasini_Back.Data
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             return photo;
+        }
+
+        public async Task<PhotoForAnnounce> GetAnnouncePhoto(int id)
+        {
+            var photo = await _context.PhotoForAnnounces.IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p => p.AnnounceId == id);
+
+            return photo;
+        }
+
+        public async Task<Announce> GetAnnounce(int id, bool isCurrentAnnounce)
+        {
+            var query = _context.Announce.Include(p => p.PhotoForAnnounce).AsQueryable();
+
+            if (isCurrentAnnounce)
+                query = query.IgnoreQueryFilters();
+
+            var announce = await query.FirstOrDefaultAsync(u => u.AnnounceId == id);
+
+            return announce;
         }
 
         public async Task<User> GetUser(int id, bool isCurrentUser)
@@ -116,11 +140,6 @@ namespace AplicatieVanzariMasini_Back.Data
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
 
-        }
-
-        public async Task<bool> SaveAll()
-        {
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<Message> GetMessage(int id)

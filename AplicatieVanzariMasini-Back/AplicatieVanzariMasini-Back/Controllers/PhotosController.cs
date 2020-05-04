@@ -40,6 +40,16 @@ namespace AplicatieVanzariMasini_Back.Controllers
             _cloudinary = new Cloudinary(acc);
         }
 
+        [HttpGet("{id}", Name = "GetAnnouncePhoto")]
+        public async Task<IActionResult> GetAnnouncePhoto(int id)
+        {
+            var photoFromRepo = await _repo.GetAnnouncePhoto(id);
+
+            var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+
+            return Ok(photo);
+        }
+
         [HttpGet("{id}", Name = "GetPhoto")]
         public async Task<IActionResult> GetPhoto(int id)
         {
@@ -49,6 +59,54 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             return Ok(photo);
         }
+
+        [HttpPost("{announceid}/announcephotos")]
+        public async Task<IActionResult> AddPhotoForAnnounce(int userId, int announceId,
+            [FromForm]PhotoForCreationDto photoForCreationDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var announceFromRepo = await _repo.GetAnnounce(announceId, true);
+
+            var file = photoForCreationDto.File;
+
+            var uploadResult = new ImageUploadResult();
+
+            if (file.Length > 0)
+            {
+                using (var stream = file.OpenReadStream())
+                {
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(file.Name, stream),
+                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+
+                    };
+
+                    uploadResult = _cloudinary.Upload(uploadParams);
+                }
+            }
+            photoForCreationDto.Url = uploadResult.Uri.ToString();
+            photoForCreationDto.PublicId = uploadResult.PublicId;
+
+            var photo = _mapper.Map<PhotoForAnnounce>(photoForCreationDto);
+
+            //if (!announceFromRepo.Photos.Any(u => u.IsMain))
+            //    photo.IsMain = true;
+
+            announceFromRepo.PhotoForAnnounce.Add(photo);
+
+
+            if (await _repo.SaveAll())
+            {
+                var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
+                return CreatedAtRoute("GetAnnouncePhoto", new { userId, id = photo.Id }, photoToReturn);
+            }
+
+            return BadRequest("Eroare la adaugarea pozei.");
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId,

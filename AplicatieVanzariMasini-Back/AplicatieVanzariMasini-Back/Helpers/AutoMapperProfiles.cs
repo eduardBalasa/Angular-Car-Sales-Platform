@@ -28,7 +28,11 @@ namespace AplicatieVanzariMasini_Back.Helpers
 
             CreateMap<Photo, PhotoForReturnDto>();
 
+            CreateMap<PhotoForAnnounce, PhotoForReturnDto>();
+
             CreateMap<PhotoForCreationDto, Photo>();
+
+            CreateMap<PhotoForCreationDto, PhotoForAnnounce>();
 
             CreateMap<UserForRegisterDto, User>();
 

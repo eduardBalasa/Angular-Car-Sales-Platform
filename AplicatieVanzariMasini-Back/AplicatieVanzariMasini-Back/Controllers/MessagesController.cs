@@ -26,6 +26,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             _repo = repo;
             _mapper = mapper;
         }
+
         [HttpGet("{id}", Name = "GetMessage")]
         public async Task<IActionResult> GetMessage(int userId, int id)
         {
@@ -39,8 +40,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             return Ok(messageFromRepo);
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> GetMessagesForUser(int userId,

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AplicatieVanzariMasini_Back.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200424083305_AddedListsOfPricesAndKms")]
-    partial class AddedListsOfPricesAndKms
+    [Migration("20200503161808_newCarAnnounceRelation2")]
+    partial class newCarAnnounceRelation2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,19 +21,30 @@ namespace AplicatieVanzariMasini_Back.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Advert", b =>
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Announce", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AnnounceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MyProperty")
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("Adverts");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AnnounceId");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Announce");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Body", b =>
@@ -68,7 +79,7 @@ namespace AplicatieVanzariMasini_Back.Migrations
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Car", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CarId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -86,9 +97,6 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Damaged")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FuelId")
@@ -127,7 +135,7 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<int>("TransmissionId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CarId");
 
                     b.HasIndex("BodyId");
 
@@ -354,6 +362,38 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.PhotoForAnnounce", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AnnounceId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnnounceId");
+
+                    b.ToTable("PhotoForAnnounces");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.PollutionRule", b =>
@@ -649,6 +689,15 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Announce", b =>
+                {
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Car", "Car")
+                        .WithMany("Announce")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Car", b =>
                 {
                     b.HasOne("AplicatieVanzariMasini_Back.Models.Body", "Body")
@@ -675,7 +724,7 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.Fuel", "Fueld")
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Fuel", "Fuel")
                         .WithMany("Cars")
                         .HasForeignKey("FuelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -768,6 +817,15 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.HasOne("AplicatieVanzariMasini_Back.Models.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.PhotoForAnnounce", b =>
+                {
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Announce", "Announce")
+                        .WithMany("PhotoForAnnounce")
+                        .HasForeignKey("AnnounceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

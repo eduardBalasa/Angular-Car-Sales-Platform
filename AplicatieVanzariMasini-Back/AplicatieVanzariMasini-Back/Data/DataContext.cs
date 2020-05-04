@@ -17,7 +17,6 @@ namespace AplicatieVanzariMasini_Back.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<Advert> Adverts { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Body> Bodies { get; set; }
@@ -32,6 +31,10 @@ namespace AplicatieVanzariMasini_Back.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<Km> Kms { get; set; }
         public DbSet<Price> Prices { get; set; }
+        public DbSet<Announce> Announce { get; set; }
+        public DbSet<PhotoForAnnounce> PhotoForAnnounces{ get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

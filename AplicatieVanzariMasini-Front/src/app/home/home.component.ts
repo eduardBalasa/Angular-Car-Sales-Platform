@@ -1,21 +1,21 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { FormControl } from "@angular/forms";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
-import { FiltersComponent } from "../filters/filters.component";
 import { FiltersService } from "../_services/filters.service";
 import { Brand } from "../_models/brand";
 import { ActivatedRoute } from "@angular/router";
 import { Model } from "../_models/model";
 import { Price } from '../_models/price';
 import { Km } from '../_models/km';
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   encapsulation: ViewEncapsulation.None,
   styleUrls: ["./home.component.css"],
+  providers: [
+    { provide: CarouselConfig, useValue: { interval: 3000, noPause: true, showIndicators: true } }
+  ]
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   public kms: Km[];
   public kmsValues: string[] = [];
   public value: any = {};
+  
 
   constructor(
     private http: HttpClient,
