@@ -1,0 +1,81 @@
+<mat-card class="announce-card">
+  <mat-card-header>
+    <div mat-card-avatar class="announce-card-header-image"></div>
+    <mat-card-title>{{ announce.brand }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ announce.model }}{{ announce.modelVersion }}</mat-card-subtitle
+    >
+    <div class="container">
+      <div class="d-flex justify-content-end">
+        <div class="lastActive">
+          <span>Anunt creat:</span>
+          <p>{{ announce.createdDate | timeAgo }}</p>
+        </div>
+      </div>
+    </div>
+  </mat-card-header>
+
+  <div class="announce-card-img-wrapper">
+    <img mat-card-image src="\assets\audi.jpg" alt="audi" />
+    <ul class="social">
+      <li>
+        <!-- [routerLink]="['/members/', user.id]" -->
+        <button
+          matTooltip="Vezi profilul"
+        >
+          <i class="fa fa-user"></i>
+        </button>
+      </li>
+      <li>
+        <!-- [routerLink]="['/members/', user.id]"
+        [queryParams]="{ tab: 3 }" -->
+        <button
+          matTooltip="Vezi anuntul"
+        >
+          <i class="fa fa-car"></i>
+        </button>
+      </li>
+      <li>
+        <button matTooltip="Salveaza anuntul" (click)="sendLike(user.id)">
+          <i class="fa fa-save"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <mat-card-content>
+    <ul id="card-car-info" class="list-unstyled list-inline">
+      <li class="list-inline-item">{{ announce.body }}</li>
+      <li class="list-inline-item">|</li>
+      <li class="list-inline-item">{{ announce.manufacturingDate }}</li>
+      <li class="list-inline-item">|</li>
+      <li class="list-inline-item">{{ announce.fuel }}</li>
+      <li class="list-inline-item">|</li>
+      <li class="list-inline-item">{{ announce.km }} km</li>
+      <li class="list-inline-item">|</li>
+      <li class="list-inline-item">{{ announce.gearbox }}</li>
+      <li class="list-inline-item">|</li>
+      <li class="list-inline-item">{{ announce.enginePower }} cp</li>
+    </ul>
+    <!-- <div class="card-car-info">
+      {{announce.body}}&nbsp; | &nbsp;2012&nbsp; | &nbsp;255.000km
+    </div>
+    <div class="card-car-info">
+      2.967cmc&nbsp; | &nbsp;diesel | &nbsp;manuala
+    </div> -->
+    <hr class="solid" />
+    <div class="card-car-price">{{ announce.price }}eur</div>
+    <hr class="solid" />
+    <div class="card-car-location">
+      <span class="material-icons">
+        location_on
+      </span>
+      {{ announce.country }}
+    </div>
+    <!-- <hr class="solid" />
+    <div class="lastActive">
+      <span>Anunt creat:</span>
+      <p>{{ announce.createdDate | timeAgo }}</p>
+    </div> -->
+  </mat-card-content>
+</mat-card>

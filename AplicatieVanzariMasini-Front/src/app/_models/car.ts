@@ -1,22 +1,24 @@
+import { Announce } from './announce';
+
 export interface Car {
     id: number;
+    km: string;
+    price: string;
+    enginePower: string;
+    cylindricalCapacity: string;
     state: string;
     damaged: string;
     descripion: string;
     particleFilter: string;
     rightHandDrive: string;
-    manufacturingDate: Date;
     brandId: number;
     modelId: number;
     bodyId: number;
     fuelId: number;
-    cylindricalCapacityId: number;
     countryId: number;
     transmissionId: number;
+    manufacturingDateId: number;
     gearboxId: number;
     pollutionRuleId: number;
-    powerId: number;
-    kmId: number;
-    priceId: number;
-
+    announce?: Announce[];
 }

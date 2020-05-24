@@ -10,22 +10,26 @@ namespace AplicatieVanzariMasini_Back.Dtos
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string Km { get; set; }
+        public string Price { get; set; }
+        public string CylindricalCapacity { get; set; }
+        public string EnginePower { get; set; }
         public string State { get; set; }
         public string Damaged { get; set; }
         public string ParticleFilter { get; set; }
         public string RightHandDrive { get; set; }
-        public DateTime ManufacturingDate { get; set; }
         public int BrandId { get; set; }
         public int ModelId { get; set; }
         public int BodyId { get; set; }
         public int FuelId { get; set; }
-        public int CylindricalCapacityId { get; set; }
         public int CountryId { get; set; }
         public int TransmissionId { get; set; }
+        public int ManufacturingDateId { get; set; }
         public int GearboxId { get; set; }
         public int PollutionRuleId { get; set; }
-        public int PowerId { get; set; }
-        public int KmId { get; set; }
-        public int PriceId { get; set; }
+        public CarForAnnounceDto()
+        {
+            CreatedDate = DateTime.Now;
+        }
     }
 }

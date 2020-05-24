@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AplicatieVanzariMasini_Back.Helpers;
 using AplicatieVanzariMasini_Back.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AplicatieVanzariMasini_Back.Data
@@ -30,11 +31,29 @@ namespace AplicatieVanzariMasini_Back.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<Car> GetCar(int id)
+        {
+            var car = await _context.Cars.FirstOrDefaultAsync(c => c.CarId == id);
+
+            return car;
+        }
+
+        public async Task<List<Car>> GetCars()
+        {
+            return await _context.Cars.ToListAsync();
+        }
+
         public async Task<Like> GetLike(int userId, int recipientId)
         {
             return await _context.Likes.FirstOrDefaultAsync(u =>
             u.LikerId == userId && u.LikeeId == recipientId);
         }
+
+        //public async Task<Like> GetAnnounceLike(int announceId, int recipientId)
+        //{
+        //    return await _context.Likes.FirstOrDefaultAsync(u =>
+        //    u.LikerId == announceId && u.LikeeId == recipientId);
+        //}
 
         public Task<Photo> GetMainPhotoForUser(int userId)
         {
@@ -50,26 +69,6 @@ namespace AplicatieVanzariMasini_Back.Data
             return photo;
         }
 
-        public async Task<PhotoForAnnounce> GetAnnouncePhoto(int id)
-        {
-            var photo = await _context.PhotoForAnnounces.IgnoreQueryFilters()
-                .FirstOrDefaultAsync(p => p.AnnounceId == id);
-
-            return photo;
-        }
-
-        public async Task<Announce> GetAnnounce(int id, bool isCurrentAnnounce)
-        {
-            var query = _context.Announce.Include(p => p.PhotoForAnnounce).AsQueryable();
-
-            if (isCurrentAnnounce)
-                query = query.IgnoreQueryFilters();
-
-            var announce = await query.FirstOrDefaultAsync(u => u.AnnounceId == id);
-
-            return announce;
-        }
-
         public async Task<User> GetUser(int id, bool isCurrentUser)
         {
             var query = _context.Users.Include(p => p.Photos).AsQueryable();
@@ -82,6 +81,7 @@ namespace AplicatieVanzariMasini_Back.Data
             return user;
 
         }
+
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
@@ -141,6 +141,21 @@ namespace AplicatieVanzariMasini_Back.Data
             }
 
         }
+
+        //private async Task<IEnumerable<int>> GetAnnounceLikes(int id, bool likers)
+        //{
+        //    var announce = await _context.Announce.FirstOrDefaultAsync(u => u.AnnounceId == id);
+
+        //    if (likers)
+        //    {
+        //        return announce.AnnounceLikers.Where(u => u.AnnounceLikeeId == id).Select(i => i.AnnounceLikeeId);
+        //    }
+        //    else
+        //    {
+        //        return announce.AnnounceLikees.Where(u => u.AnnounceLikerId == id).Select(i => i.AnnounceLikerId);
+        //    }
+
+        //}
 
         public async Task<Message> GetMessage(int id)
         {

@@ -14,7 +14,7 @@ import { AlertifyService } from "../_services/alertify.service";
 export class MessagesComponent implements OnInit {
   messages: Message[];
   pagination: Pagination;
-  messageContainer = "Unread";
+  messageContainer = "Inbox";
 
   constructor(
     private userService: UserService,
@@ -42,12 +42,12 @@ export class MessagesComponent implements OnInit {
   }
 
   deleteMessage(id: number){
-    this.alertify.confirm('Are you sure you want to delete this message?', () => {
+    this.alertify.confirm('Esti sigur ca vrei sa stergi acest mesaj?', () => {
       this.userService.deleteMessage(id, this.authService.decodedToken.nameid).subscribe(() => {
         this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
-        this.alertify.success('Message has been deleted');
+        this.alertify.success('Mesajul a fost sters');
       }, error => {
-        this.alertify.error('Failed to delete the message');
+        this.alertify.error('Eroare la stergerea mesajului');
       });
     });
   }

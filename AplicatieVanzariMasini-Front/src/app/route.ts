@@ -13,18 +13,41 @@ import { PreventUnsavedChanges } from "./_guards/prevent-unsaved-changes.guard";
 import { ListResolver } from "./_resolver/lists.resolver";
 import { MessagesResolver } from "./_resolver/messages.resolver";
 import { AdminPanelComponent } from "./admin/admin-panel/admin-panel.component";
-import { BrandsResolver } from './_resolver/brands.resolver';
-import { ModelsResolver } from './_resolver/models.resolver';
-import { PricesResolver } from './_resolver/prices.resolver';
-import { KmsResolver } from './_resolver/kms.resolver';
+import { BrandsResolver } from "./_resolver/brands.resolver";
+import { ModelsResolver } from "./_resolver/models.resolver";
+import { ManufacturingDateResolver } from "./_resolver/manufacturingDates.resolver";
+import { BodiesResolver } from "./_resolver/bodies.resolver";
+import { FuelsResolver } from "./_resolver/fuels.resolver";
+import { ModelVersionsResolver } from "./_resolver/modelVersions.resolver";
+import { CountriesResolver } from "./_resolver/countries.resolver";
+import { AnnouncesResolver } from "./_resolver/announces.resolver";
+import { AnnounceDetailsPageComponent } from "./announce/announce-details-page/announce-details-page.component";
+import { CarsResolver } from "./_resolver/cars.resolver";
+import { AnnounceDetailResolver } from "./_resolver/announce-detail.resolver";
+import { ContactComponent } from './contact/contact.component';
+import { GearboxesResolver } from './_resolver/gearboxes.resolver';
+import { PollutionRulesResolver } from './_resolver/pollutionRules.resolver';
+import { TransmissionsResolver } from './_resolver/transmissions.resolver';
 
 export const appRoutes: Routes = [
-  { path: "", 
-  component: HomeComponent,
-  resolve: {  brands : BrandsResolver,
-              models: ModelsResolver,
-              prices: PricesResolver,
-              kms: KmsResolver} },
+  {
+    path: "",
+    component: HomeComponent,
+    resolve: {
+      announces: AnnouncesResolver,
+      cars: CarsResolver,
+      brands: BrandsResolver,
+      models: ModelsResolver,
+      modelVersions: ModelVersionsResolver,
+      manufacturingDates: ManufacturingDateResolver,
+      bodies: BodiesResolver,
+      fuels: FuelsResolver,
+      pollutionRules: PollutionRulesResolver,
+      countries: CountriesResolver,
+      gearboxes: GearboxesResolver,
+      transmissions: TransmissionsResolver
+    },
+  },
   {
     path: "",
     runGuardsAndResolvers: "always",
@@ -60,6 +83,21 @@ export const appRoutes: Routes = [
         path: "admin",
         component: AdminPanelComponent,
         data: { roles: ["Admin"] },
+      },
+      {
+        path: "contact",
+        component: ContactComponent,
+      },
+      {
+        path: "announce",
+        component: AnnounceDetailsPageComponent,
+        resolve: { announceDetail: AnnounceDetailResolver },
+
+      },
+      {
+        path: "announce/:id",
+        component: AnnounceDetailsPageComponent,
+        resolve: { announceDetail: AnnounceDetailResolver },
       },
     ],
   },

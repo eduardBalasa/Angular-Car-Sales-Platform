@@ -15,13 +15,14 @@ namespace AplicatieVanzariMasini_Back.Data
         Task<List<Model>> GetModels();
         Task<List<ModelVersion>> GetModelVersions();
         Task<List<Transmission>> GetTransmissions();
-        Task<List<Power>> GetPowers();
+        Task<List<ManufacturingDate>> GetManufacturingDates();
+        //Task<List<Power>> GetPowers();
         Task<List<PollutionRule>> GetPollutionRules();
         Task<List<Gearbox>> GetGearboxes();
         Task<List<Fuel>> GetFuels();
-        Task<List<CylindricalCapacity>> GetCylindricalCapacities();
+        //Task<List<CylindricalCapacity>> GetCylindricalCapacities();
         Task<List<Country>> GetCountries();
-        Task<List<Km>> GetKms();
-        Task<List<Price>> GetPrices();
+        //Task<List<Km>> GetKms();
+        //Task<List<Price>> GetPrices();
     }
 }

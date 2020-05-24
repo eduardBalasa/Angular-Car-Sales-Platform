@@ -1,0 +1,491 @@
+<div class="modal-header">
+  <div id="headline-holder" class="shadow">
+    <h1 class="modal-title">
+      Adauga anunt cu autoturisme vechi si noi pe doarMasini.ro
+    </h1>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="bsModalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<div class="modal-body">
+  <form [formGroup]="announceForm" (ngSubmit)="createAnnounce()">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Titlu</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('title').errors &&
+                    announceForm.get('title').touched
+                }"
+                class="form-control"
+                placeholder="Alege un titlu"
+                formControlName="title"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('title').touched &&
+                  announceForm.get('title').hasError('required')
+                "
+              >
+                Titlul este necesar
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+      <div class="row">
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Marca</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="brandsName"
+              [active]="[brandsName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedBrand($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="brands"
+              placeholder="Alege marca"
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Model</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="modelsName"
+              [active]="[modelsName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedModel($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="models"
+              placeholder="Alege modelul"
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Versiune model</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="modelVersionsName"
+              [active]="[modelVersionsName]"
+              (data)="refreshValue($event)"
+              (selected)="selected($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="modelVersions"
+              placeholder="Alege versiunea modelului"
+            >
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Anul fabricatiei</h3>
+            <ng-select
+              [allowClear]="true"
+              [items]="manufacturingDatesValues"
+              [active]="[manufacturingDatesValues]"
+              (data)="refreshValue($event)"
+              (selected)="selectedManDate($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="manufacturingDates"
+              placeholder="Alege anul fabricatiei"
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Caroserie</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="bodiesName"
+              [active]="[bodiesName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedBody($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="bodies"
+              placeholder="Alege tipul caroseriei"
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Combustibil</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="fuelsName"
+              [active]="[fuelsName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedFuel($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="fuels"
+              placeholder="Alege tipul de combustibil"
+            >
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Cutia de viteze</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="gearboxesName"
+              [active]="[gearboxesName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedCountry($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="gearboxes"
+              placeholder="cutia de viteze"
+            >
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Tara</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="countriesName"
+              [active]="[countriesName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedCountry($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="countries"
+              placeholder="Alege tara de origine"
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Kilometrii</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('km').errors &&
+                    announceForm.get('km').touched
+                }"
+                class="form-control"
+                placeholder="km"
+                formControlName="km"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('km').touched &&
+                  announceForm.get('km').hasError('required')
+                "
+              >
+                Kilometrii sunt necesari
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Pret</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('price').errors &&
+                    announceForm.get('price').touched
+                }"
+                class="form-control"
+                placeholder="Alege un pret"
+                formControlName="price"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('price').touched &&
+                  announceForm.get('price').hasError('required')
+                "
+              >
+                Pretul este necesar
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Puterea motorului</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('enginePower').errors &&
+                    announceForm.get('enginePower').touched
+                }"
+                class="form-control"
+                placeholder="Puterea motorului"
+                formControlName="enginePower"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('enginePower').touched &&
+                  announceForm.get('enginePower').hasError('required')
+                "
+              >
+                Puterea motorului este necesara
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Capacitate cilindrica</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('cylindricalCapacity').errors &&
+                    announceForm.get('cylindricalCapacity').touched
+                }"
+                class="form-control"
+                placeholder="Capacitatea cilindrica"
+                formControlName="cylindricalCapacity"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('cylindricalCapacity').touched &&
+                  announceForm.get('cylindricalCapacity').hasError('required')
+                "
+              >
+                Capacitatea cilindrica este necesara
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Stare</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('state').errors &&
+                    announceForm.get('state').touched
+                }"
+                class="form-control"
+                placeholder="Noua sau second-hand"
+                formControlName="state"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('state').touched &&
+                  announceForm.get('state').hasError('required')
+                "
+              >
+                Starea masinii este necesara
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Avariata</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('damaged').errors &&
+                    announceForm.get('damaged').touched
+                }"
+                class="form-control"
+                placeholder="Ex.: Da, nu"
+                formControlName="damaged"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('damaged').touched &&
+                  announceForm.get('damaged').hasError('required')
+                "
+              >
+                Avarierea masinii este necesara
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Filtru de particule</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('particleFilter').errors &&
+                    announceForm.get('particleFilter').touched
+                }"
+                class="form-control"
+                placeholder="Ex.: Da, nu"
+                formControlName="particleFilter"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('particleFilter').touched &&
+                  announceForm.get('particleFilter').hasError('required')
+                "
+              >
+                Filtru de particule este necesar
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Volan dreapta</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('rightHandDrive').errors &&
+                    announceForm.get('rightHandDrive').touched
+                }"
+                class="form-control"
+                placeholder="Ex.: Da, nu"
+                formControlName="rightHandDrive"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('rightHandDrive').touched &&
+                  announceForm.get('rightHandDrive').hasError('required')
+                "
+              >
+                Volan dreapta este necesar
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <div>
+              <h3 style="font-size: small;">Scurta descriere</h3>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    announceForm.get('description').errors &&
+                    announceForm.get('description').touched
+                }"
+                id="label-content"
+                class="form-control"
+                placeholder="Descrie pe scurt masina.."
+                formControlName="description"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('description').hasError('required') &&
+                  announceForm.get('description').touched
+                "
+              >
+                Descrierea este necesara
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  announceForm.get('description').hasError('minLength') &&
+                  announceForm.get('description').touched
+                "
+              >
+                Descrierea este prea scurta
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+      <div class="row">
+        <div class="col-sm">
+          <app-announce-photo-editor></app-announce-photo-editor>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">
+    Anuleaza
+  </button>
+  <button
+    type="submit"
+    class="btn btn-success"
+    [disabled]="!announceForm.valid"
+    form="announceForm"
+    (click)="createAnnounce()"
+  >
+    Adauga
+  </button>
+  <!-- <p>Form value: {{ announceForm.value | json }}</p>
+  <p>Form status: {{ announceForm.status | json }}</p> -->
+</div>

@@ -1,0 +1,167 @@
+.announce-card {
+  max-width: 323px;
+}
+
+.announce-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.announce-card-header-image {
+  background-image: url("G:\LICENTA\AplicatieVanzariMasini\AplicatieVanzariMasini-Front\src\assets\audi.jpg");
+  background-size: cover;
+}
+
+.announce-card:hover img {
+  transform: scale(1.1, 1.1);
+  transition-duration: 390ms;
+  transition-timing-function: ease-out;
+  opacity: 0.7;
+}
+
+.announce-card img {
+  transform: scale(1, 1);
+  transition-duration: 390ms;
+  transition-timing-function: ease-out;
+}
+
+.announce-card-img-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.member-icons {
+  position: absolute;
+  bottom: -30%;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  opacity: 0;
+}
+
+.announce-card-img-wrapper:hover .member-icons {
+  bottom: 0;
+  opacity: 1;
+}
+
+.animate {
+  transition: all 0.2s ease-in-out;
+}
+
+.mat-card {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  background-color: #ffff;
+  color: #2c3e50;
+}
+
+.mat-card-content > :first-child,
+.mat-card > :first-child {
+  margin-top: -4px;
+}
+.mat-card-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -12px;
+}
+
+.mat-card-header .mat-card-subtitle:not(:first-child) {
+  margin-top: -8px;
+  color: #2c3e50;
+}
+
+.list-inline-item {
+  display: inline-block;
+  font-size: 13px;
+}
+
+#card-car-info {
+  color: #b6b6b6;
+  /* float: left; */
+  font-size: 13px;
+  line-height: 19px;
+  margin: 10px 15px;
+  /* height: 62px; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}
+
+.card-car-price {
+  /* float: left;  */
+  /* width: 240px; */
+  margin: 0 15px;
+  font-size: 20px;
+  /* line-height: 25px; */
+  color: #212121;
+  text-transform: uppercase;
+}
+
+hr.solid {
+  border-top: 1px solid #bbb;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -4px;
+  text-transform: none;
+  display: contents;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.social {
+  width: 200px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -23px;
+  transform: scale(0);
+  transition: all 0.3s ease 0s;
+}
+
+.announce-card-img-wrapper:hover .social {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.social li {
+  display: inline-block;
+}
+.social li button {
+  color: #343f4d;
+  background: #fff;
+  font-size: 18px;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  margin: 23px 2px;
+  display: block;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  opacity: 0.9;
+}
+
+.social li button:hover {
+  background: #18bc9c;
+  color: #fff;
+}
+
+.lastActive{
+  color: #b6b6b6;
+  font-size: 13px;
+  line-height: 19px;
+}
+

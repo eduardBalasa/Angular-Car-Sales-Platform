@@ -1,7 +1,6 @@
 import { Car } from './car';
 
 export interface Brand {
-    brandId: number;
+    id: number;
     name: string;
-    cars?: Car[];
 }

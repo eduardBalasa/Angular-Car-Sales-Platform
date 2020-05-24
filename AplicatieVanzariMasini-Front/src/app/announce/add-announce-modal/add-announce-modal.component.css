@@ -1,0 +1,33 @@
+.modal-content {
+  width: 670px;
+  margin-left: -110px;
+}
+
+#label-content {
+  height: 50px;
+}
+
+.dropdown-divider {
+  height: 0;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  border-top: 1px solid #ecf0f1;
+}
+
+#headline-holder {
+  background-color: #eef0ef;
+  display: block;
+  height: 60px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+#headline-holder h1 {
+    font-size: 20px;
+    line-height: 60px;
+    color: #212121;
+    float: left;
+    margin-left: 10;
+    margin-left: 45px;
+}

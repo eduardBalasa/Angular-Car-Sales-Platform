@@ -1,7 +1,7 @@
 import { Car } from './car';
 
 export interface Body {
-    bodyId: number;
+    id: number;
     name: string;
     cars?: Car[];
 }

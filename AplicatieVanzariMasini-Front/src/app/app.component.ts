@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { AuthService } from "./_services/auth.service";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from "./_models/user";
@@ -6,13 +6,18 @@ import { User } from "./_models/user";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
   jwtHelper = new JwtHelperService();
 
-  constructor(private authService: AuthService) {}
+  isShow: boolean;
+  topPosToStartShowing = 100;
 
+  
+  
+  constructor(private authService: AuthService) {}
+  
   ngOnInit() {
     const token = localStorage.getItem("token");
     const user: User = JSON.parse(localStorage.getItem("user"));
@@ -25,5 +30,28 @@ export class AppComponent implements OnInit {
       this.authService.changeMemberPhoto(user.photoUrl);
       // console.log(user);
     }
+  }
+  
+  @HostListener("window:scroll")
+  checkScroll() {  
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
+
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   }
 }

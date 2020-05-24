@@ -1,232 +1,286 @@
-<!-- <carousel class="my-carousel">
-  <slide>
-    <img src="assets/car.jpg" alt="first slide" />
-    <div class="carousel-caption d-none d-md-block">
-      <h3>Poza cu masina 1</h3>
-      <p>Descriere a pozei cu masina 1.</p>
-    </div>
-  </slide>
-  <slide>
-    <img src="assets/bmw.jpg" alt="second slide" />
-    <div class="carousel-caption d-none d-md-block">
-      <h3>Poza cu masina 2</h3>
-      <p>Descriere a pozei cu masina 2.</p>
-    </div>
-  </slide>
-  <slide>
-    <img src="assets/suba.jpg" alt="third slide" />
-    <div class="carousel-caption d-none d-md-block">
-      <h3>Poza cu masina 3</h3>
-      <p>Descriere a pozei cu masina 3.</p>
-    </div>
-  </slide>
-</carousel> -->
+<div class="jumbotron parallax" id="parallax-static">
+  <div class="container">
+    <h1 style="text-align: center; color: white;">Alege masina inteligent</h1>
+    <p class="lead" style="text-align: center; color: white;">
+      Dai un ban, da da-l cu cap...
+    </p>
 
-<div class="container mt-5">
-  <h1 style="text-align: center;">Alege masina inteligent</h1>
-  <p class="lead" style="text-align: center;">
-    Dai un ban, da da-l cu cap...
-  </p>
-  <mat-divider></mat-divider>
-  <!-- <iframe
-    width="100%"
-    height="400px"
-    src="https://www.youtube.com/embed/BDCU5OFXZ2c"
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-
-  <audio
-    controls
-    src="/assets/coffin.mp3"
-    muted
-  ></audio> -->
-
-  <div id="search_bar_holder" class="rounded">
-    <div id="hold_together">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <div style="width: 175px; margin-bottom: 20px;">
-              <h3 style="font-size: small;">Marca</h3>
-              <ng-select
-                [allowClear]="true"
-                [items]="brandsName"
-                (data)="refreshValue($event)"
-                (selected)="selected($event)"
-                (removed)="removed($event)"
-                (typed)="typed($event)"
-                placeholder="Marca"
-              >
-              </ng-select>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div style="width: 175px; margin-bottom: 20px;">
-              <h3 style="font-size: small;">Model</h3>
-              <ng-select
-                [allowClear]="true"
-                [items]="modelsName"
-                (data)="refreshValue($event)"
-                (selected)="selected($event)"
-                (removed)="removed($event)"
-                (typed)="typed($event)"
-                placeholder="Model"
-              >
-              </ng-select>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="d-flex flex-sm-wrap">
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">Pret</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="pricesValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="De la"
-                >
-                </ng-select>
-              </div>
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">Pret</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="pricesValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="Pana la"
-                >
-                </ng-select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm">
-            <div class="d-flex flex-sm-wrap">
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">Anul fabricatiei</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="pricesValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="De la"
-                >
-                </ng-select>
-              </div>
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">.</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="pricesValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="Pana la"
-                >
-                </ng-select>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="d-flex flex-sm-wrap">
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">Kilometraj</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="kmsValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="De la"
-                >
-                </ng-select>
-              </div>
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">.</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="kmsValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="Pana la"
-                >
-                </ng-select>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="d-flex flex-sm-wrap">
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">Anul fabricatiei</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="pricesValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="De la"
-                >
-                </ng-select>
-              </div>
-              <div style="width: 90px;">
-                <h3 style="font-size: small;">.</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="pricesValues"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="Pana la"
-                >
-                </ng-select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex justify-content-end">
-        <button mat-raised-button class="submitButton">
-          Cauta
-          <mat-icon>
-            search
-          </mat-icon>
+    <div *ngIf="loggedIn()">
+      <div class="text-center">
+        <button
+          style="text-align: center;"
+          mat-button
+          id="add-announce-button"
+          class="btn btn-success my-2 my-sm-0"
+          type="submit"
+          (click)="
+            announceModal(
+              brands,
+              models,
+              modelVersions,
+              manufacturingDates,
+              fuels,
+              bodies,
+              gearboxes,
+              countries,
+              pollutionRules,
+              transmissions
+            )
+          "
+        >
+          Adauga anunt
+          <i class="fa fa-plus"></i>
         </button>
       </div>
     </div>
-  </div>
-  <div *ngIf="!registerMode" style="text-align: center;">
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">
-        Inregistrare
-      </button>
-      <button class="btn btn-info btn-lg">Afla mai multe</button>
+    <div *ngIf="!loggedIn()">
+      <div *ngIf="!registerMode" style="text-align: center;">
+        <div class="text-center">
+          <button
+            mat-button
+            id="registerButton"
+            class="btn btn-primary btn-lg mr-2"
+            (click)="registerToggle()"
+          >
+            <a>Inregistrare</a>
+            &nbsp;
+            <i class="fa fa-align-left"></i>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <app-register
-          (cancelRegister)="cancelRegisterMode($event)"
-        ></app-register>
+    <div id="filter_bar_holder" class="rounded">
+      <div id="hold_together">
+        <div class="container">
+          <div
+            class="row text-center text-xs-center text-sm-center text-md-center"
+          >
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <div style="width: 175px; margin-bottom: 20px;">
+                <h3 style="font-size: small;">Marca</h3>
+                <ng-select
+                  [allowClear]="true"
+                  [items]="brandsName"
+                  (data)="refreshValue($event)"
+                  (selected)="selected($event)"
+                  (removed)="removed($event)"
+                  (typed)="typed($event)"
+                  placeholder="Alege marca"
+                >
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <div style="width: 175px; margin-bottom: 20px;">
+                <h3 style="font-size: small;">Model</h3>
+                <ng-select
+                  [allowClear]="true"
+                  [items]="modelsName"
+                  (data)="refreshValue($event)"
+                  (selected)="selected($event)"
+                  (removed)="removed($event)"
+                  (typed)="typed($event)"
+                  placeholder="Alege model"
+                >
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <div style="width: 175px; margin-bottom: 20px;">
+                <h3 style="font-size: small;">Versiune model</h3>
+                <ng-select
+                  [allowClear]="true"
+                  [items]="modelVersionsName"
+                  (data)="refreshValue($event)"
+                  (selected)="selected($event)"
+                  (removed)="removed($event)"
+                  (typed)="typed($event)"
+                  placeholder="Alege versiune model"
+                >
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <div style="width: 175px; margin-bottom: 20px;">
+                <h3 style="font-size: small;">Combustibil</h3>
+                <ng-select
+                  [allowClear]="true"
+                  [items]="fuelsName"
+                  (data)="refreshValue($event)"
+                  (selected)="selected($event)"
+                  (removed)="removed($event)"
+                  (typed)="typed($event)"
+                  placeholder="Alege combustibil"
+                >
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <div class="d-flex flex-sm-wrap">
+                <div style="width: 90px;">
+                  <h3 style="font-size: small;">Kilometraj</h3>
+                  <ng-select
+                    [allowClear]="true"
+                    [items]="kmsValues"
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    (typed)="typed($event)"
+                    placeholder="De la"
+                  >
+                  </ng-select>
+                </div>
+                <div style="width: 90px;">
+                  <h3 style="font-size: small;">.</h3>
+                  <ng-select
+                    [allowClear]="true"
+                    [items]="kmsValues"
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    (typed)="typed($event)"
+                    placeholder="Pana la"
+                  >
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <div class="d-flex flex-sm-wrap">
+                <div style="width: 90px;">
+                  <h3 style="font-size: small;">Anul fabricatiei</h3>
+                  <ng-select
+                    [allowClear]="true"
+                    [items]="manufacturingDatesValues"
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    (typed)="typed($event)"
+                    placeholder="De la"
+                  >
+                  </ng-select>
+                </div>
+                <div style="width: 90px;">
+                  <h3 style="font-size: small;">.</h3>
+                  <ng-select
+                    [allowClear]="true"
+                    [items]="manufacturingDatesValues"
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    (typed)="typed($event)"
+                    placeholder="Pana la"
+                  >
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <div class="d-flex flex-sm-wrap">
+                <div style="width: 90px;">
+                  <h3 style="font-size: small;">Pret</h3>
+                  <ng-select
+                    [allowClear]="true"
+                    [items]="pricesValues"
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    (typed)="typed($event)"
+                    placeholder="De la"
+                  >
+                  </ng-select>
+                </div>
+                <div style="width: 90px;">
+                  <h3 style="font-size: small;">.</h3>
+                  <ng-select
+                    [allowClear]="true"
+                    [items]="pricesValues"
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    (typed)="typed($event)"
+                    placeholder="Pana la"
+                  >
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-xs-12 col-sm-4 col-md-4">
+              <div style="width: 175px; margin-bottom: 20px;">
+                <h3 style="font-size: small;">Gearbox</h3>
+                <ng-select
+                  [allowClear]="true"
+                  [items]="gearboxesNames"
+                  (data)="refreshValue($event)"
+                  (selected)="selected($event)"
+                  (removed)="removed($event)"
+                  (typed)="typed($event)"
+                  placeholder="gearbox"
+                >
+                </ng-select>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button mat-raised-button class="submitButton">
+            Cauta
+            <mat-icon>
+              search
+            </mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<div id="subheader-bar">
+  <a class="subheader-bar-container" title="">
+    <i class="fa fa-bullhorn fa-1x"></i>
+    Anunturile afisate in rubrica de mai jos sunt preluate in ordinea adaugarii
+    lor pe site!
+  </a>
+</div>
+
+<div *ngIf="registerMode" class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <app-register
+        (cancelRegister)="cancelRegisterMode($event)"
+      ></app-register>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loggedIn() || loggedIn()">
+  <div class="announce-card-holder">
+    <div class="container">
+      <div class="row text-center text-xs-center text-sm-center text-md-center">
+        <div
+          *ngFor="let announce of announces"
+          class="col-xs-12 col-sm-4 col-md-4"
+        >
+          <app-announce-card [announce]="announce"></app-announce-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <form>
+  <agm-map
+    style="height: 300px;"
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    (mapClick)="mapClicked($event)"
+  >
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+</form> -->

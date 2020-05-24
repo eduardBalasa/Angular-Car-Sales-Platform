@@ -1,15 +1,17 @@
-<div class="container mt-5">
-  <h2>Panoul Administratorului</h2>
-  <div class="tab-panel">
-    <tabset class="member-tabset">
-      <tab heading="Managementul Utilizatorilor" *appHasRole="['Admin']">
-        <div class="container">
-          <app-user-management></app-user-management>
-        </div>
-      </tab>
-      <tab heading="Managementul Pozelor" *appHasRole="['Admin']">
-        <app-photo-management></app-photo-management>
-      </tab>
-    </tabset>
+<div class="admin-wrapper">
+  <div class="container mt-5">
+    <h2>Panoul Administratorului</h2>
+    <div class="tab-panel">
+      <tabset class="member-tabset">
+        <tab heading="Managementul Utilizatorilor" *appHasRole="['Admin']">
+          <div class="container">
+            <app-user-management></app-user-management>
+          </div>
+        </tab>
+        <tab heading="Managementul Pozelor" *appHasRole="['Admin']">
+          <app-photo-management></app-photo-management>
+        </tab>
+      </tabset>
+    </div>
   </div>
 </div>

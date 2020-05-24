@@ -1,0 +1,403 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.min.js"></script>
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+  rel="stylesheet"
+  integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+  crossorigin="anonymous"
+/>
+
+<div class="announce-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="cars-gallery">
+          <div class="swiper-container gallery-top">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="swiper-zoom-container">
+                  <img
+                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="swiper-zoom-container">
+                  <img
+                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="swiper-zoom-container">
+                  <img
+                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+          </div>
+          <div class="swiper-container gallery-thumbs">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="swiper-zoom-container">
+                  <img
+                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="swiper-zoom-container">
+                  <img
+                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="swiper-zoom-container">
+                  <img
+                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="announce-metabar">
+          <span class="announce-metabar-value" title="Data adaugarii anuntului"
+            >{{announce.createdDate | date: "mediumDate" }}</span
+          >
+        </div>
+        <hr class="announce-photo-divider" />
+
+        <div
+          class="cars-overview card-body pt-3 border mt-2"
+          style="background-color: white;"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Detalii</h4>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Marca :
+                </li>
+                <li class="list-inline-item">{{announce.brand}}</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Model :
+                </li>
+                <li class="list-inline-item">Golf</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Versiune :
+                </li>
+                <li class="list-inline-item">8</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Tara
+                  de origine :
+                </li>
+                <li class="list-inline-item">Olanda</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Accident in istoric :
+                </li>
+                <li class="list-inline-item">Nu</li>
+              </ul>
+            </div>
+
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Kilometraj :
+                </li>
+                <li class="list-inline-item">24000 km</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Anul
+                  fabricatiei :
+                </li>
+                <li class="list-inline-item">2010</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Combustibil :
+                </li>
+                <li class="list-inline-item">Diesel</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Transmisie :
+                </li>
+                <li class="list-inline-item">Automata</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Stare :
+                </li>
+                <li class="list-inline-item">Folosita</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Caroserie :
+                </li>
+                <li class="list-inline-item">Hatchback</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1"></i> Caroserie :
+                </li>
+                <li class="list-inline-item">Hatchback</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <accordion [isAnimated]="true">
+          <accordion-group heading="Dotari">
+            ABS CD Geamuri fata electrice Servodirectie Aer conditionat doua
+            zone Airbag-uri cortina Camera parcare spate Faruri automate
+            Interior din piele Oglinzi retrovizoare ajustabile electric
+            Proiectoare ceata Suspensie reglabila
+          </accordion-group>
+          <accordion-group heading="Descriere">
+            <p>Some content</p>
+          </accordion-group>
+        </accordion>
+      </div>
+
+      <div class="col-md-4">
+        <div class="d-flex justify-content-center">
+          <div class="announce-summary">
+            <h3 style="padding-left: 30px;">Volkswagen</h3>
+            <h4 style="padding-left: 85px;">Golf 8</h4>
+            <ul style="color: #66676c;" class="list-unstyled list-inline">
+              <li class="list-inline-item">255.000 km</li>
+              <li class="list-inline-item">|</li>
+              <li class="list-inline-item">2016</li>
+              <li class="list-inline-item">|</li>
+              <li class="list-inline-item">Diesel</li>
+              <li class="list-inline-item">|</li>
+              <li class="list-inline-item">Berlină</li>
+            </ul>
+            <div class="announce-price-wrapper">
+              <div class="price-wrapper">
+                <span class="announce-price-number">10 000</span>
+                <span class="announce-price-currency">EUR</span>
+              </div>
+              <hr class="seller-divider" />
+              <span class="announce-price-details">Pretul este negociabil</span>
+              <hr class="seller-divider" />
+            </div>
+            <button mat-raised-button class="messageButton">
+              <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+              Trimite mesaj vanzătorului
+            </button>
+            <accordion [isAnimated]="true">
+              <button
+                mat-raised-button
+                class="phoneButton"
+                popover="+40762903876"
+              >
+                <i
+                  class="fa fa-phone fa-2x"
+                  style="color: black;"
+                  aria-hidden="true"
+                ></i>
+                Vezi numarul de telefon
+              </button>
+              
+            </accordion>
+
+            <div class="seller-box-wrapper">
+              <div class="seller-name">
+                <a href="/home" title="Marian Vadim">Marian Vadim</a>
+                <hr class="seller-divider" />
+              </div>
+              <span class="seller-member-since">Vanzator pe site din 2020</span>
+              <hr class="seller-divider" />
+              <div class="seller-box-address">
+                <span class="seller-box-address-title">
+                  Localizare vanzator
+                </span>
+
+                <i
+                  class="fa fa-map-marker fa-2x"
+                  style="color: #18bc9c;"
+                  id="seller-box-address-info-icon"
+                  aria-hidden="true"
+                ></i>
+                <br />
+                <span class="seller-box-address-info">
+                  Caracal, Jud. Olt
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h3>Find Similar Products</h3>
+      <p>Listopia - Directory, Community Theme</p>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row py-2">
+            <div class="col-md-3 vertical-box">
+              <div class="card">
+                <img
+                  class="card-img-top mh200-text"
+                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
+                  alt="Card image"
+                />
+                <div class="card-body">
+                  <h4 class="card-title mw30-text">
+                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
+                    2.5 V Diesel 7-se
+                  </h4>
+                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
+
+                  <ul class="list-inline">
+                    <li class="list-inline-item">44,114 Km</li>
+                    <li class="list-inline-item">Petrol</li>
+                    <li class="list-inline-item">Gurugram</li>
+                  </ul>
+                  <button type="button" class="btn btn-outline-danger">
+                    Contact Sellers
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 vertical-box">
+              <div class="card">
+                <img
+                  class="card-img-top mh200-text"
+                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
+                  alt="Card image"
+                />
+                <div class="card-body">
+                  <h4 class="card-title mw30-text">
+                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
+                    2.5 V Diesel 7-se
+                  </h4>
+                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
+
+                  <ul class="list-inline">
+                    <li class="list-inline-item">44,114 Km</li>
+                    <li class="list-inline-item">Petrol</li>
+                    <li class="list-inline-item">Gurugram</li>
+                  </ul>
+                  <button type="button" class="btn btn-outline-danger">
+                    Contact Sellers
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 vertical-box">
+              <div class="card">
+                <img
+                  class="card-img-top mh200-text"
+                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
+                  alt="Card image"
+                />
+                <div class="card-body">
+                  <h4 class="card-title mw30-text">
+                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
+                    2.5 V Diesel 7-se
+                  </h4>
+                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
+
+                  <ul class="list-inline">
+                    <li class="list-inline-item">44,114 Km</li>
+                    <li class="list-inline-item">Petrol</li>
+                    <li class="list-inline-item">Gurugram</li>
+                  </ul>
+                  <button type="button" class="btn btn-outline-danger">
+                    Contact Sellers
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 vertical-box">
+              <div class="card">
+                <img
+                  class="card-img-top mh200-text"
+                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
+                  alt="Card image"
+                />
+                <div class="card-body">
+                  <h4 class="card-title mw30-text">
+                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
+                    2.5 V Diesel 7-se
+                  </h4>
+                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
+
+                  <ul class="list-inline">
+                    <li class="list-inline-item">44,114 Km</li>
+                    <li class="list-inline-item">Petrol</li>
+                    <li class="list-inline-item">Gurugram</li>
+                  </ul>
+                  <button type="button" class="btn btn-outline-danger">
+                    Contact Sellers
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

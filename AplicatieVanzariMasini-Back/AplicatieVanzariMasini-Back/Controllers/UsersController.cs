@@ -38,7 +38,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             
             if (string.IsNullOrEmpty(userParams.Gender))
             {
-                userParams.Gender = userFromRepo.Gender == "barbat" ? "femeie" : "barbat";
+                userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
             }
             
             var users = await _repo.GetUsers(userParams);

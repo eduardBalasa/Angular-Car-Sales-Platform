@@ -1,4 +1,4 @@
 export interface ModelVersion {
-    modelVersionId: number;
+    id: number;
     name: string;
 }

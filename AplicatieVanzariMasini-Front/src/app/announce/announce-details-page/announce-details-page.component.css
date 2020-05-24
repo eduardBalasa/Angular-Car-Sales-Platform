@@ -1,0 +1,197 @@
+.announce-wrapper {
+  margin-top: 110px;
+}
+
+.announce-price-number {
+  color: #18bc9c;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.announce-price-currency {
+  color: #18bc9c;
+  font-size: 18px;
+  padding-left: 5px;
+}
+
+.announce-price-details {
+  color: #66676c;
+  display: block;
+  font-size: 13px;
+}
+
+.announce-summary {
+  padding-left: 70px;
+}
+
+.announce-price-wrapper {
+  padding-left: 68px;
+}
+
+.messageButton {
+  height: 40px;
+  width: 255px;
+  font-size: 16px;
+  background-color: #18bc9c;
+  box-shadow: 0 1px 2px #267e6d;
+  bottom: -20px;
+  right: 38%;
+  font-size: 15px;
+  left: 10px;
+}
+
+.messageButton:hover {
+  background-color: #267e6d;
+  color: #fff;
+}
+
+.phoneButton {
+  height: 40px;
+  width: 255px;
+  font-size: 16px;
+  bottom: -32px;
+  right: 38%;
+  font-size: 15px;
+  left: 10px;
+  margin-bottom: 8px;
+  color: black;
+  background-color: #f3f3f3;
+  text-align: center;
+  /* width: 100%; */
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(24, 188, 156);
+  -webkit-border-image: initial;
+  -o-border-image: initial;
+  border-image: initial;
+}
+
+.phoneButton:hover {
+  background-color: #18bc9c;
+  color: #fff;
+}
+
+.popover-content {
+  font-size: 50px;
+}
+
+.seller-box-wrapper {
+  margin-top: -89px;
+  padding-left: 66px;
+}
+
+.seller-name > a {
+  color: #002539;
+  /* padding-left: 66px; */
+  display: block;
+  font-size: 18px;
+  border-bottom: none;
+  font-weight: 500;
+  letter-spacing: 0.35px;
+  padding-left: 10px;
+  margin-top: 170px;
+}
+
+.seller-member-since {
+  color: #66676c;
+  display: block;
+  font-size: 13px;
+  padding-left: -4px;
+}
+
+.seller-box-address {
+  left: 0;
+  transform: none;
+  width: 100%;
+}
+
+.seller-box-address-title {
+  display: block;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  color: #040711;
+  position: relative;
+  font-size: 16px;
+  left: 10px;
+  margin-top: 20px;
+}
+
+.seller-box-address-info {
+  display: inline-block;
+  color: #040711;
+  font-size: 14px;
+}
+
+#seller-box-address-info-icon {
+  padding-left: 65px;
+  margin-top: 17px;
+}
+
+.list-inline-item {
+  display: inline-block;
+  font-size: 13px;
+}
+
+.announce-metabar-value{
+  font-size: 13px;
+}
+
+hr.announce-photo-divider {
+  border-top: 1px solid #bbb;
+}
+
+hr.seller-divider {
+  border-top: 1px solid #bbb;
+  width: 110%;
+  margin-left: -60px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  padding-right: 17px;
+
+}
+
+img {
+  width: 100%;
+}
+.mw30-text {
+  max-height: 30px;
+  overflow: hidden;
+}
+.mh200-text {
+  min-height: 200px;
+  max-height: 200px;
+  overflow: hidden;
+}
+/*******************
+ SWIPPER 
+ ********************/
+.swiper-container {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+.gallery-top {
+  height: 80%;
+  width: 100%;
+}
+.gallery-thumbs {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+.gallery-thumbs .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+.gallery-thumbs .swiper-slide-active {
+  opacity: 1;
+}

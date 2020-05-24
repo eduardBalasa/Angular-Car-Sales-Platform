@@ -4,7 +4,7 @@
       [ngClass]="!photo.isApproved && 'not-approved'">
 
     <div class="text-center img-text" *ngIf="!photo.isApproved">
-        <span class="text-danger">Awaiting approval</span>
+        <span class="text-danger">In asteptarea aprobarii</span>
     </div>
 
     <div class="text-center">
@@ -23,7 +23,7 @@
 
     <div class="col-md-3">
 
-        <h3>Add Photos</h3>
+        <h3>Adauga poze</h3>
 
         <div ng2FileDrop
              [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
@@ -31,13 +31,13 @@
              [uploader]="uploader"
              class="card bg-faded p-3 text-center mb-3 my-drop-zone">
              <i class="fa fa-upload fa-3x"></i>
-            Drop Photos Here
+            Ataseaza poza aici
         </div>
 
-        Multiple
+        Mai multe poze
         <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
 
-        Single
+        Doar o poza
         <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
 
@@ -49,8 +49,8 @@
         <table class="table">
             <thead>
             <tr>
-                <th width="50%">Name</th>
-                <th>Size</th>
+                <th width="50%">Nume:</th>
+                <th>Marime:</th>
             </tr>
             </thead>
             <tbody>
@@ -63,22 +63,22 @@
 
         <div>
             <div>
-                Queue progress:
+                Progres:
                 <div class="progress mb-4">
                     <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
                 </div>
             </div>
             <button type="button" class="btn btn-success btn-s"
                     (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                <span class="fa fa-upload"></span> Upload
+                <span class="fa fa-upload"></span> Incarca
             </button>
             <button type="button" class="btn btn-warning btn-s"
                     (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-                <span class="fa fa-ban"></span> Cancel
+                <span class="fa fa-ban"></span> Anuleaza
             </button>
             <button type="button" class="btn btn-danger btn-s"
                     (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                <span class="fa fa-trash"></span> Remove
+                <span class="fa fa-trash"></span> Sterge
             </button>
         </div>
 

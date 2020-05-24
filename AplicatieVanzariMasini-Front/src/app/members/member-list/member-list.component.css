@@ -1,0 +1,48 @@
+#applyFilters{
+    /* margin-top: 20px; */
+    background-color: #18bc9c;
+    box-shadow: 0 1px 2px #267e6d;
+}
+
+#applyFilters:hover{
+    background-color: #267e6d;
+    color: #fff;
+}
+
+#resetFilters{
+    /* margin-top: 20px; */
+    background-color: #18bc9c;
+    box-shadow: 0 1px 2px #267e6d;
+
+}
+
+#resetFilters:hover{
+    background-color: #267e6d;
+    color: #fff;
+}
+
+#lastActive{
+    /* margin-top: 20px; */
+    background-color: #18bc9c;
+    box-shadow: 0 1px 2px #267e6d;
+}
+
+#lastActive:hover{
+    background-color: #267e6d;
+    color: #fff;
+}
+
+#newest{
+    /* margin-top: 20px; */
+    background-color: #18bc9c;
+    box-shadow: 0 1px 2px #267e6d;
+}
+
+#newest:hover{
+    background-color: #267e6d;
+    color: #fff;
+}
+
+.member-list-wrapper{
+  margin-top: 110px;
+}

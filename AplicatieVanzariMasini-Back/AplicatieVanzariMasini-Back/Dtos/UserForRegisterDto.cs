@@ -27,6 +27,8 @@ namespace AplicatieVanzariMasini_Back.Dtos
         public string City { get; set; }
         [Required]
         public string Country { get; set; }
+        [Required]
+        public string County { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
         public UserForRegisterDto()

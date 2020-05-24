@@ -12,6 +12,7 @@ export interface User {
     photoUrl: string;
     city: string;
     country: string;
+    county: string;
     photos?: Photo[];
     roles?: string[];
   }

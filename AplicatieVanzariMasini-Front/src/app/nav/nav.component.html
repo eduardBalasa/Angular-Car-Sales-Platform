@@ -1,17 +1,16 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<nav class="my-nav navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
     <a class="navbar-brand" [routerLink]="['/home']">
-      <!-- <img src="assets/car-logo.png" class="d-inline-block align-top"> -->
-      Masini
+      <img src="assets\small-car.png" width="50" height="50" >
+      doarAutomobile.ro
     </a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <!-- <ul class="navbar-nav mr-auto"> -->
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/members']">Matches </a>
+        <a class="nav-link" [routerLink]="['/members']">Utilizatori </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/lists']">Lists</a>
+        <a class="nav-link" [routerLink]="['/announce']">Announce</a>
       </li>
       <li *appHasRole="['Admin']" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/admin']">Admin</a>
@@ -19,14 +18,25 @@
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
-      <span class="mr-1">
+      <span id="imageSizer" class="mr-1">
         <img src="{{ photoUrl || '../../assets/user.png' }}" alt="" />
       </span>
       <a class="dropdown-toggle text-light" dropdownToggle>
         Bun venit, {{ authService.decodedToken.unique_name | titlecase }}
       </a>
 
-      <div class="dropdown-menu mt-3" *dropdownMenu>
+      <div
+        class="dropdown-menu mt-3"
+        *dropdownMenu
+        style="
+          left: 0px;
+          right: auto;
+          top: 70%;
+          transform: translateY(0px);
+          bottom: auto;
+          width: 100%;
+        "
+      >
         <a class="dropdown-item" [routerLink]="['/member/edit']"
           ><i class="fa fa-user"></i> Setari profil</a
         >
@@ -37,7 +47,13 @@
         <a class="dropdown-item" [routerLink]="['/']"
           ><i class="fa fa-table"></i> Anunturile mele</a
         >
+        <a class="dropdown-item" [routerLink]="['/lists']"
+          ><i class="fa fa-table"> </i> Notificari</a
+        >
         <div class="dropdown-divider"></div>
+        <a class="dropdown-item" [routerLink]="['/contact']"
+        ><i class="fa fa-address-card"></i> Contacteaza-ne</a
+      >
         <a class="dropdown-item" (click)="logout()"
           ><i class="fa fa-sign-out"></i> Deconectare</a
         >
@@ -74,12 +90,5 @@
         Autentificare
       </button>
     </form>
-    <button
-     mat-button 
-     class="btn btn-success my-2 my-sm-0"
-     type="submit"
-     (click)="announceModal()">
-      Adauga anunt
-    </button>
   </div>
 </nav>

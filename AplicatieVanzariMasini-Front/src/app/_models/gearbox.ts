@@ -1,7 +1,7 @@
 import { Car } from './car';
 
 export interface Gearbox {
-    gearboxId: number;
+    id: number;
     name: string;
     cars?: Car[];
 }

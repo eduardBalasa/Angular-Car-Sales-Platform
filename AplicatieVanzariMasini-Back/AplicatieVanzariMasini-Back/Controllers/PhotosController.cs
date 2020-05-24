@@ -23,12 +23,14 @@ namespace AplicatieVanzariMasini_Back.Controllers
         private readonly ICarRepository _repo;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
+        private readonly IAnnounceRepository _announceRepo;
         private Cloudinary _cloudinary;
 
-        public PhotosController(ICarRepository repo, IMapper mapper,
+        public PhotosController(ICarRepository repo, IAnnounceRepository announceRepo, IMapper mapper,
             IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _repo = repo;
+            _announceRepo = announceRepo;
             _mapper = mapper;
             _cloudinaryConfig = cloudinaryConfig;
 
@@ -43,7 +45,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
         [HttpGet("{id}", Name = "GetAnnouncePhoto")]
         public async Task<IActionResult> GetAnnouncePhoto(int id)
         {
-            var photoFromRepo = await _repo.GetAnnouncePhoto(id);
+            var photoFromRepo = await _announceRepo.GetAnnouncePhoto(id);
 
             var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
 
@@ -67,7 +69,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var announceFromRepo = await _repo.GetAnnounce(announceId, true);
+            var announceFromRepo = await _announceRepo.GetAnnounce(announceId);
 
             var file = photoForCreationDto.File;
 
@@ -95,7 +97,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             //if (!announceFromRepo.Photos.Any(u => u.IsMain))
             //    photo.IsMain = true;
 
-            announceFromRepo.PhotoForAnnounce.Add(photo);
+            announceFromRepo.PhotosForAnnounce.Add(photo);
 
 
             if (await _repo.SaveAll())
@@ -106,6 +108,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             return BadRequest("Eroare la adaugarea pozei.");
         }
+
 
 
         [HttpPost]
@@ -180,6 +183,42 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 return NoContent();
 
             return BadRequest("Eroare la setarea pozei de profil.");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAnnouncePhoto(int userId, int announceId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var announce = await _announceRepo.GetAnnounce(announceId);
+
+            if (!announce.PhotosForAnnounce.Any(p => p.Id == id))
+                return Unauthorized();
+
+            var announcePhotoFromRepo = await _announceRepo.GetAnnouncePhoto(id);
+
+            if (announcePhotoFromRepo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(announcePhotoFromRepo.PublicId);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _announceRepo.Delete(announcePhotoFromRepo);
+                }
+            }
+
+            if (announcePhotoFromRepo.PublicId == null)
+            {
+                _announceRepo.Delete(announcePhotoFromRepo);
+            }
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Eroare la stergerea pozei.");
         }
 
         [HttpDelete("{id}")]

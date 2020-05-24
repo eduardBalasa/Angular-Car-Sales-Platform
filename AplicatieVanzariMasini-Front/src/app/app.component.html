@@ -1,3 +1,77 @@
 <app-nav></app-nav>
 <router-outlet></router-outlet>
+<!-- Footer -->
+<section id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+        <ul class="list-unstyled list-inline social text-center">
+          <li class="list-inline-item">
+            <a href="http://ace.ucv.ro/"
+              ><i class="fa fa-facebook"></i
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="http://ace.ucv.ro/"
+              ><i class="fa fa-twitter"></i
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="http://ace.ucv.ro/"
+              ><i class="fa fa-instagram"></i
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="http://ace.ucv.ro/"
+              ><i class="fa fa-google-plus"></i
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="http://ace.ucv.ro/" target="_blank"
+              ><i class="fa fa-envelope"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+      <hr />
+    </div>
+    <div class="row">
+      <div
+        class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white"
+      >
+        <p>
+          <u
+            ><a href="/home"
+              >doarAutomobile.ro</a
+            ></u
+          >
+        </p>
+        <p>
+          Este o aplicatie de tip web-app(aplicatie de tip: web) dezvoltata personal in full-stack folosind urmatoarele tool-uri:
+        </p>
+        <p>
+           VistualStudio2019 - C# - Microsoft SQL Server 17 - PostMan - VistualStudioCode - HTML5 - CSS3 - BOOTSTRAP - ANGULAR9 - Typescript 
+        </p>
+        <a class="h6">
+          © Toate drepturile reservate.<a
+            class="text-green ml-2"
+            href="https://www.facebook.com/edibalasa20"
+            style="font-size: 14px;"
+            >BALASA EDUARD MARIAN</a
+          >
+        </a>
+      </div>
+      <hr />
+    </div>
+  </div>
+</section>
+<!-- ./Footer -->
 
+<div id="site-terms">
+  <i class="fa fa-info-circle fa-1x"></i>
+  Termenii si conditiile site-ului se vor gasi aici!
+</div>
+
+<button mat-raised-button *ngIf="isShow" (click)="gotoTop()" id="goToTop">
+  <i class="fa fa-arrow-circle-up fa-2x"></i>
+</button>

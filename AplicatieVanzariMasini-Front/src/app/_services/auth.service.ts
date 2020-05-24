@@ -6,11 +6,13 @@ import { environment } from "src/environments/environment";
 import { User } from "../_models/user";
 import { BehaviorSubject } from "rxjs";
 import { element } from "protractor";
+import { CarAnnounce } from '../_models/carAnnounce';
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
+  
   baseUrl = environment.apiUrl + "auth/";
   jwtHelper = new JwtHelperService();
   decodedToken: any;

@@ -3,7 +3,7 @@ import { AuthService } from "../_services/auth.service";
 import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { AddAnnounceModalComponent } from '../add-announce-modal/add-announce-modal.component';
+import { AddAnnounceModalComponent } from '../announce/add-announce-modal/add-announce-modal.component';
 import { Brand } from '../_models/brand';
 
 @Component({

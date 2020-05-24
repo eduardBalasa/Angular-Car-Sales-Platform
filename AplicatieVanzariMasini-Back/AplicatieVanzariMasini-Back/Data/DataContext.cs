@@ -20,19 +20,17 @@ namespace AplicatieVanzariMasini_Back.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Body> Bodies { get; set; }
-        public DbSet<CylindricalCapacity> CylindricalCapacities { get; set; }
         public DbSet<Fuel> Fuels { get; set; }
         public DbSet<Gearbox> Gearboxes { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<ModelVersion> ModelVersions { get; set; }
         public DbSet<PollutionRule> PollutionRules { get; set; }
-        public DbSet<Power> Powers { get; set; }
         public DbSet<Transmission> Transmissions { get; set; }
+        public DbSet<ManufacturingDate> ManufacturingDates { get; set; }
         public DbSet<Country> Countries { get; set; }
-        public DbSet<Km> Kms { get; set; }
-        public DbSet<Price> Prices { get; set; }
         public DbSet<Announce> Announce { get; set; }
         public DbSet<PhotoForAnnounce> PhotoForAnnounces{ get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
 
 

@@ -3,6 +3,7 @@ using AplicatieVanzariMasini_Back.Dtos;
 using AplicatieVanzariMasini_Back.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +19,37 @@ namespace AplicatieVanzariMasini_Back.Controllers
         private readonly IAnnounceRepository _announceRepository;
         private readonly IMapper _mapper;
         private readonly ICarRepository _repo;
+        private readonly DataContext _context;
 
-        public AnnounceController(IAnnounceRepository announceRepository, IMapper mapper,
+        public AnnounceController(DataContext context, IAnnounceRepository announceRepository, IMapper mapper,
             ICarRepository repo)
         {
             _announceRepository = announceRepository;
             _mapper = mapper;
             _repo = repo;
+            _context = context;
         }
-        
+
+        [HttpGet("{id}", Name="GetAnnounce")]
+        public async Task<IActionResult> GetAnnounce(int id)
+        {
+            var announce = await _announceRepository.GetAnnounce(id);
+
+            var announceToReturn = _mapper.Map<AnnounceForReturnDto>(announce);
+
+            return Ok(announceToReturn);
+        }
+
+        [HttpGet("GetAnnounces")]
+        public async Task<IActionResult> GetAnnounces()
+        {
+            var announceFromRepo = await _announceRepository.GetAnnounces();
+
+            var announces = _mapper.Map<List<AnnounceAndCarForReturnDto>>(announceFromRepo);
+
+            return Ok(announces);
+        }
+
 
         [HttpPost("{userId}")]
         public async Task<IActionResult> AddAnnounce(int userId, CarForAnnounceDto carAnnounceDto)
@@ -39,6 +62,10 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             var car = new Car()
             {
+                Km = carAnnounceDto.Km,
+                Price = carAnnounceDto.Price,
+                EnginePower = carAnnounceDto.EnginePower,
+                CylindricalCapacity = carAnnounceDto.CylindricalCapacity,
                 State = carAnnounceDto.State,
                 Damaged = carAnnounceDto.Damaged,
                 ParticleFilter = carAnnounceDto.ParticleFilter,
@@ -46,16 +73,12 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 BrandId = carAnnounceDto.BrandId,
                 BodyId = carAnnounceDto.BodyId,
                 ModelId = carAnnounceDto.ModelId,
-                ManufacturingDate = carAnnounceDto.ManufacturingDate,
                 FuelId = carAnnounceDto.FuelId,
-                CylindricalCapacityId = carAnnounceDto.CylindricalCapacityId,
                 CountryId = carAnnounceDto.CountryId,
                 GearboxId = carAnnounceDto.GearboxId,
                 TransmissionId = carAnnounceDto.TransmissionId,
-                PollutionRuleId = carAnnounceDto.PollutionRuleId,
-                PowerId = carAnnounceDto.PowerId,
-                PriceId = carAnnounceDto.PriceId,
-                KmId = carAnnounceDto.KmId
+                ManufacturingDateId = carAnnounceDto.ManufacturingDateId,
+                PollutionRuleId = carAnnounceDto.PollutionRuleId
 
             };
 
@@ -79,6 +102,34 @@ namespace AplicatieVanzariMasini_Back.Controllers
             }
             return BadRequest("A aparut o problema");
         }
+
+        //[HttpPost("{id}/like/{recipientId}")]
+        //public async Task<IActionResult> LikeAnnounce(int id, int recipientId)
+        //{
+        //    if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //        return Unauthorized();
+
+        //    var like = await _announceRepository.GetAnnounceLike(id, recipientId);
+
+        //    if (like != null)
+        //        return BadRequest("Ai apreciat deja acest anunt!");
+
+        //    if (await _announceRepository.GetAnnounce(recipientId) == null)
+        //        return NotFound();
+
+        //    like = new Like
+        //    {
+        //        LikerId = id,
+        //        LikeeId = recipientId
+        //    };
+
+        //    _repo.Add<Like>(like);
+
+        //    if (await _repo.SaveAll())
+        //        return Ok();
+
+        //    return BadRequest("Eroare la aprecierea anuntului");
+        //}
     }
 }
 

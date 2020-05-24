@@ -1,0 +1,62 @@
+img.img-thumbnail{
+    height: 100px;
+    min-width: 100px !important;
+    margin-bottom: 2px;
+}
+
+.nv-file-over {
+    border: dotted 3px red;
+}
+
+input[type=file] {
+    color: transparent;
+}
+
+.not-approved {
+    opacity: 0.2;
+}
+
+.img-wrapper {
+    position: relative;
+}
+
+.img-text {
+    position: absolute;
+    bottom: 30%;
+}
+
+.photo-button-upload{
+    color: #001d55;
+    font-size: 14px;
+    transition: all 0.15s ease;
+}
+
+#progress-handler{
+    margin-left: 93px;
+}
+
+.divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: -30px;
+    margin-bottom: 2px;
+}
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;   
+    z-index: 2;
+}
+
+.bg-light {
+    background-color: #fff!important;
+}
+
+#add-image-button-handler{
+    margin-left: 237px;
+    margin-top: 4px;
+}
+
+#upload-buttons-handler{
+    margin-top: -15px;
+}

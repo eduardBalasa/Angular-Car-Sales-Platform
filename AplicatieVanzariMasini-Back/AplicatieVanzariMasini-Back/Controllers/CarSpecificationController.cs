@@ -74,15 +74,25 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(transmission);
         }
 
-        [HttpGet("GetPowers")]
-        public async Task<IActionResult> GetPowers()
+        [HttpGet("GetManufacturingDates")]
+        public async Task<IActionResult> GetManufacturingDates()
         {
-            var powerFromRepo = await _repo.GetPowers();
+            var manufacturingDateFromRepo = await _repo.GetManufacturingDates();
 
-            var power = _mapper.Map<List<SpecificationForReturnDto>>(powerFromRepo);
+            var manufacturingDate = _mapper.Map<List<ManufacturingToReturnDto>>(manufacturingDateFromRepo);
 
-            return Ok(power);
+            return Ok(manufacturingDate);
         }
+
+        //[HttpGet("GetPowers")]
+        //public async Task<IActionResult> GetPowers()
+        //{
+        //    var powerFromRepo = await _repo.GetPowers();
+
+        //    var power = _mapper.Map<List<SpecificationForReturnDto>>(powerFromRepo);
+
+        //    return Ok(power);
+        //}
 
         [HttpGet("GetPollutionRules")]
         public async Task<IActionResult> GetPollutionRules()
@@ -114,15 +124,15 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(fuel);
         }
 
-        [HttpGet("GetCylindricalCapacities")]
-        public async Task<IActionResult> GetCylindricalCapacities()
-        {
-            var cylindricalCapacitiesFromRepo = await _repo.GetCylindricalCapacities();
+        //[HttpGet("GetCylindricalCapacities")]
+        //public async Task<IActionResult> GetCylindricalCapacities()
+        //{
+        //    var cylindricalCapacitiesFromRepo = await _repo.GetCylindricalCapacities();
 
-            var cylindricalCapacities = _mapper.Map<List<SpecificationForReturnDto>>(cylindricalCapacitiesFromRepo);
+        //    var cylindricalCapacities = _mapper.Map<List<SpecificationForReturnDto>>(cylindricalCapacitiesFromRepo);
 
-            return Ok(cylindricalCapacities);
-        }
+        //    return Ok(cylindricalCapacities);
+        //}
 
         [HttpGet("GetCountries")]
         public async Task<IActionResult> GetCountries()
@@ -134,25 +144,25 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(country);
         }
 
-        [HttpGet("GetKms")]
-        public async Task<IActionResult> GetKms()
-        {
-            var kmFromRepo = await _repo.GetKms();
+        //[HttpGet("GetKms")]
+        //public async Task<IActionResult> GetKms()
+        //{
+        //    var kmFromRepo = await _repo.GetKms();
 
-            var km = _mapper.Map<List<SpecificationForReturnDto>>(kmFromRepo);
+        //    var km = _mapper.Map<List<SpecificationForReturnDto>>(kmFromRepo);
 
-            return Ok(km);
-        }
+        //    return Ok(km);
+        //}
 
-        [HttpGet("GetPrices")]
-        public async Task<IActionResult> GetPrices()
-        {
-            var priceFromRepo = await _repo.GetPrices();
+        //[HttpGet("GetPrices")]
+        //public async Task<IActionResult> GetPrices()
+        //{
+        //    var priceFromRepo = await _repo.GetPrices();
 
-            var price = _mapper.Map<List<SpecificationForReturnDto>>(priceFromRepo);
+        //    var price = _mapper.Map<List<SpecificationForReturnDto>>(priceFromRepo);
 
-            return Ok(price);
-        }
+        //    return Ok(price);
+        //}
 
     }
 }

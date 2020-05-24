@@ -9,11 +9,14 @@ namespace AplicatieVanzariMasini_Back.Models
     public class Car
     {
         public int CarId { get; set; }
+        public string Km { get; set; }
+        public string Price { get; set; }
+        public string CylindricalCapacity { get; set; }
+        public string EnginePower { get; set; }
         public string State { get; set; }
         public string Damaged { get; set; }
         public string ParticleFilter { get; set; }
         public string RightHandDrive { get; set; }
-        public DateTime ManufacturingDate { get; set; }
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; }
         public int ModelId { get; set; }
@@ -22,22 +25,16 @@ namespace AplicatieVanzariMasini_Back.Models
         public virtual Body Body { get; set; }
         public int FuelId { get; set; }
         public virtual Fuel Fuel { get; set; }
-        public int CylindricalCapacityId { get; set; }
-        public virtual CylindricalCapacity CylindricalCapacity { get; set; }
         public int CountryId { get; set; }
         public virtual Country Country { get; set; }
         public int TransmissionId { get; set; }
         public virtual Transmission Transmission { get; set; }
+        public int ManufacturingDateId { get; set; }
+        public virtual ManufacturingDate ManufacturingDate { get; set; }
         public int GearboxId { get; set; }
         public virtual Gearbox Gearbox { get; set; }
         public int PollutionRuleId { get; set; }
         public virtual PollutionRule PollutionRule { get; set; }
-        public int PowerId { get; set; }
-        public virtual Power Power { get; set; }
-        public int KmId { get; set; }
-        public virtual Km Km { get; set; }
-        public int PriceId { get; set; }
-        public virtual Price Price { get; set; }
         public virtual ICollection<Announce> Announce { get; set; }
 
     }

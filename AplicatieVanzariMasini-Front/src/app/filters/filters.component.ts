@@ -8,11 +8,8 @@ import { Fuel } from '../_models/fuel';
 import { Transmission } from '../_models/transmission';
 import { Gearbox } from '../_models/gearbox';
 import { PollutionRule } from '../_models/pollutionRule';
-import { Power } from '../_models/power';
-import { CylindricalCapacity } from '../_models/cylindricalCapacity';
 import { Country } from '../_models/country';
-import { Km } from '../_models/km';
-import { Price } from '../_models/price';
+import { ManufacturingDate } from '../_models/manufacturingDate';
 
 @Component({
   selector: 'app-filters',
@@ -27,13 +24,10 @@ export class FiltersComponent implements OnInit {
   modelVersions: ModelVersion[];
   fuels: Fuel[];
   transmissions: Transmission[];
+  manufacturingDates: ManufacturingDate[];
   gearboxes: Gearbox[];
   pollutionrules: PollutionRule[];
-  powers: Power[];
-  cylindriCalcapacities: CylindricalCapacity[];
   countries: Country[];
-  kms: Km[];
-  prices: Price[];
 
   constructor(private filtersService: FiltersService) { }
 
@@ -44,14 +38,11 @@ export class FiltersComponent implements OnInit {
     this.getModelVersionsForCar();
     this.getFuelsForCar();
     this.getTransmissionsForCar();
+    this.getManufacturingDatesForCar();
     this.getGearboxesForCar();
-    this.getPowersForCar();
-    this.getCylindricalCapacitiesForCar();
+    // this.getPowersForCar();
+    // this.getCylindricalCapacitiesForCar();
     this.getCountriesForCar();
-    this.getKmsForCar();
-    console.log(this.kms);
-    this.getPricesForCar();
-    console.log(this.prices);
   
   }
 
@@ -109,6 +100,15 @@ export class FiltersComponent implements OnInit {
     });
   }
 
+  getManufacturingDatesForCar() {
+    this.filtersService.getManufacturingDateForCar().subscribe((manufacturingDates: ManufacturingDate[]) => {
+      this.manufacturingDates = manufacturingDates;
+      console.log(manufacturingDates);
+    }, error => {
+      console.log(error);
+    });
+  }
+
   getGearboxesForCar() {
     this.filtersService.getGearboxesForCar().subscribe((gearboxes: Gearbox[]) => {
       this.gearboxes = gearboxes;
@@ -118,23 +118,23 @@ export class FiltersComponent implements OnInit {
     });
   }
 
-  getPowersForCar() {
-    this.filtersService.getPowersForCar().subscribe((powers: Power[]) => {
-      this.powers = powers;
-      console.log(powers);
-    }, error => {
-      console.log(error);
-    });
-  }
+  // getPowersForCar() {
+  //   this.filtersService.getPowersForCar().subscribe((powers: Power[]) => {
+  //     this.powers = powers;
+  //     console.log(powers);
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
 
-  getCylindricalCapacitiesForCar() {
-    this.filtersService.getCylindricalCapacitiesForCar().subscribe((cylindriCalcapacities: CylindricalCapacity[]) => {
-      this.cylindriCalcapacities = cylindriCalcapacities;
-      console.log(cylindriCalcapacities);
-    }, error => {
-      console.log(error);
-    });
-  }
+  // getCylindricalCapacitiesForCar() {
+  //   this.filtersService.getCylindricalCapacitiesForCar().subscribe((cylindriCalcapacities: CylindricalCapacity[]) => {
+  //     this.cylindriCalcapacities = cylindriCalcapacities;
+  //     console.log(cylindriCalcapacities);
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
 
   getCountriesForCar() {
     this.filtersService.getCountriesForCar().subscribe((countries: Country[]) => {
@@ -145,25 +145,25 @@ export class FiltersComponent implements OnInit {
     });
   }
 
-  getKmsForCar(){
-    this.filtersService.getKmsForCar().subscribe((kms : Km[]) => {
-      this.kms = kms;
-      console.log(kms);
-      debugger;
-    }, error => {
-      console.log(error);
-    });
-  }
+  // getKmsForCar(){
+  //   this.filtersService.getKmsForCar().subscribe((kms : Km[]) => {
+  //     this.kms = kms;
+  //     console.log(kms);
+  //     debugger;
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
 
-  getPricesForCar(){
-    this.filtersService.getPricesForCar().subscribe((prices : Price[]) => {
-      this.prices = prices;
-      console.log(prices);
-      debugger;
-    }, error => {
-      console.log(error);
-    });
-  }
+  // getPricesForCar(){
+  //   this.filtersService.getPricesForCar().subscribe((prices : Price[]) => {
+  //     this.prices = prices;
+  //     console.log(prices);
+  //     debugger;
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
 
 
 }
