@@ -13,7 +13,6 @@ export interface Announce {
     cylindricalCapacity?: string;
     state?: string;
     damaged?: string;
-    descripion?: string;
     particleFilter?: string;
     rightHandDrive?: string;
     brand?: string;

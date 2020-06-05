@@ -89,6 +89,8 @@ import { AgmCoreModule, AgmMap, MouseEvent, MapsAPILoader } from '@agm/core';
 import { PollutionRulesResolver } from './_resolver/pollutionRules.resolver';
 import { TransmissionsResolver } from './_resolver/transmissions.resolver';
 import { GearboxesResolver } from './_resolver/gearboxes.resolver';
+import { AnnounceManagementComponent } from './admin/announce-management/announce-management.component';
+import { ContactService } from './_services/contact.service';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -113,6 +115,7 @@ export function tokenGetter() {
     HasRoleDirective,
     UserManagementComponent,
     PhotoManagementComponent,
+    AnnounceManagementComponent,
     RolesModalComponent,
     FiltersComponent,
     AnnouncesComponent,
@@ -191,7 +194,8 @@ export function tokenGetter() {
     CarDetailResolver,
     GearboxesResolver,
     PollutionRulesResolver,
-    TransmissionsResolver
+    TransmissionsResolver,
+    ContactService
   ],
   entryComponents: [RolesModalComponent, AddAnnounceModalComponent],
   bootstrap: [AppComponent],

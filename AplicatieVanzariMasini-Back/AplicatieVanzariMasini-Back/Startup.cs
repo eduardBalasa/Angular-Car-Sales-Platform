@@ -98,6 +98,7 @@ namespace AplicatieVanzariMasini_Back
             services.AddScoped<ICarSpecificationRepository, CarSpecificationRepository>();
             services.AddScoped<IAnnounceRepository, AnnounceRepository>();
             services.AddScoped<LogUserActivity>();
+            services.AddScoped<IEmailSender, EmailSender>();
         }
         //
 

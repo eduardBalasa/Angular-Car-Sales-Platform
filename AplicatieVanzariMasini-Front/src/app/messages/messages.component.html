@@ -1,97 +1,100 @@
-<link
-  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-  rel="stylesheet"
-  id="bootstrap-css"
-/>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="message-wrapper">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="btn-group">
+        <button
+          class="btn btn-primary"
+          [(ngModel)]="messageContainer"
+          btnRadio="Unread"
+          (click)="loadMessages()"
+        >
+          <i class="fa fa-envelope"></i> Necitite
+        </button>
+        <button
+          class="btn btn-primary"
+          [(ngModel)]="messageContainer"
+          btnRadio="Inbox"
+          (click)="loadMessages()"
+        >
+          <i class="fa fa-envelope-open"></i> Inbox
+        </button>
+        <button
+          class="btn btn-primary"
+          [(ngModel)]="messageContainer"
+          btnRadio="Outbox"
+          (click)="loadMessages()"
+        >
+          <i class="fa fa-paper-plane"></i> Trimise
+        </button>
+      </div>
+    </div>
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="btn-group">
-      <button
-        class="btn btn-primary"
-        [(ngModel)]="messageContainer"
-        btnRadio="Unread"
-        (click)="loadMessages()"
-      >
-        <i class="fa fa-envelope"></i> Necitite
-      </button>
-      <button
-        class="btn btn-primary"
-        [(ngModel)]="messageContainer"
-        btnRadio="Inbox"
-        (click)="loadMessages()"
-      >
-        <i class="fa fa-envelope-open"></i> Inbox
-      </button>
-      <button
-        class="btn btn-primary"
-        [(ngModel)]="messageContainer"
-        btnRadio="Outbox"
-        (click)="loadMessages()"
-      >
-        <i class="fa fa-paper-plane"></i> Trimise
-      </button>
+    <div class="row" *ngIf="messages.length == 0">
+      <h3>Niciun mesaj</h3>
+    </div>
+
+    <div class="row" *ngIf="messages.length > 0">
+      <table class="table table-hover" style="cursor: pointer;">
+        <tr>
+          <th style="width: 40%;">Mesaj</th>
+          <th style="width: 20%;">De la / Pentru</th>
+          <th style="width: 20%;">Trimis / Primit</th>
+          <th style="width: 20%;"></th>
+        </tr>
+        <tr
+          *ngFor="let message of messages"
+          [routerLink]="[
+            '/members',
+            messageContainer == 'Outbox'
+              ? message.recipientId
+              : message.senderId
+          ]"
+          [queryParams]="{ tab: 3 }"
+        >
+          <td>{{ message.content }}</td>
+          <td>
+            <div *ngIf="messageContainer != 'Outbox'">
+              <img
+                src="{{ message?.senderPhotoUrl }}"
+                class="img-circle rounded-circle mr-1"
+              />
+              <strong>{{ message.senderKnownAs }}</strong>
+            </div>
+            <div *ngIf="messageContainer == 'Outbox'">
+              <img
+                src="{{ message?.recipientPhotoUrl }}"
+                class="img-circle rounded-circle mr-1"
+              />
+              <strong>{{ message.recipientKnownAs }}</strong>
+            </div>
+          </td>
+          <td>{{ message.messageSent | timeAgo }}</td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="$event.stopPropagation()"
+              (click)="deleteMessage(message.id)"
+            >
+              Sterge
+            </button>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 
-  <div class="row" *ngIf="messages.length == 0">
-    <h3>Niciun mesaj</h3>
+  <div class="d-flex justify-content-center">
+    <pagination
+      [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+    >
+    </pagination>
   </div>
-
-  <div class="row" *ngIf="messages.length > 0">
-    <table class="table table-hover" style="cursor: pointer;">
-      <tr>
-        <th style="width: 40%;">Mesaj</th>
-        <th style="width: 20%;">De la / Pentru</th>
-        <th style="width: 20%;">Trimis / Primit</th>
-        <th style="width: 20%;"></th>
-      </tr>
-      <tr
-        *ngFor="let message of messages"
-        [routerLink]="[
-          '/members',
-          messageContainer == 'Outbox' ? message.recipientId : message.senderId
-          ]" [queryParams]="{tab: 3}"
-      >
-        <td>{{ message.content }}</td>
-        <td>
-          <div *ngIf="messageContainer != 'Outbox'">
-            <img
-              src="{{ message?.senderPhotoUrl }}"
-              class="img-circle rounded-circle mr-1"
-            />
-            <strong>{{ message.senderKnownAs }}</strong>
-          </div>
-          <div *ngIf="messageContainer == 'Outbox'">
-            <img
-              src="{{ message?.recipientPhotoUrl }}"
-              class="img-circle rounded-circle mr-1"
-            />
-            <strong>{{ message.recipientKnownAs }}</strong>
-          </div>
-        </td>
-        <td>{{ message.messageSent | timeAgo }}</td>
-        <td>
-          <button class="btn btn-danger"(click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Sterge</button>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="d-flex justify-content-center">
-  <pagination
-    [boundaryLinks]="true"
-    [totalItems]="pagination.totalItems"
-    [itemsPerPage]="pagination.itemsPerPage"
-    [(ngModel)]="pagination.currentPage"
-    (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;"
-    nextText="&rsaquo;"
-    firstText="&laquo;"
-    lastText="&raquo;"
-  >
-  </pagination>
 </div>

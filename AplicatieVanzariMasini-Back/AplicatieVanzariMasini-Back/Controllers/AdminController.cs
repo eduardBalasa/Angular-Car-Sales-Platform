@@ -2,6 +2,7 @@
 using AplicatieVanzariMasini_Back.Dtos;
 using AplicatieVanzariMasini_Back.Helpers;
 using AplicatieVanzariMasini_Back.Models;
+using AutoMapper;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
@@ -43,6 +44,23 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             _cloudinary = new Cloudinary(acc);
         }
+
+        //[Authorize(Policy = "RequireAdminRole")]
+        //[HttpGet("GetAnnounces")]
+        //public async Task<IActionResult> GetAnnounces()
+        //{
+        //    var announceList = await (from announce in _context.Announce
+        //                              orderby announce.Title
+        //                              select new
+        //                              {
+        //                                  Id = announce.AnnounceId,
+        //                                  Title = announce.Title
+        //                              }).ToListAsync();
+
+        //    return Ok(announceList);
+        //}
+
+
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("usersWithRoles")]

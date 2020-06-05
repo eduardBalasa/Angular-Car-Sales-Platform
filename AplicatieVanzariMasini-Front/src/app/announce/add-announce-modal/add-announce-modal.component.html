@@ -173,11 +173,47 @@
               [items]="gearboxesName"
               [active]="[gearboxesName]"
               (data)="refreshValue($event)"
-              (selected)="selectedCountry($event)"
+              (selected)="selectedGearbox($event)"
               (removed)="removed($event)"
               (typed)="typed($event)"
               formControlName="gearboxes"
               placeholder="cutia de viteze"
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Transmisie</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="transmissionsName"
+              [active]="[transmissionsName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedTransmission($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="transmissions"
+              placeholder="transmisie"
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div>
+            <h3 style="font-size: small;">Norma de poluare</h3>
+            <ng-select
+              [multiple]="false"
+              [allowClear]="true"
+              [items]="pollutionRulesName"
+              [active]="[pollutionRulesName]"
+              (data)="refreshValue($event)"
+              (selected)="selectedPollutionRule($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              formControlName="pollutionRules"
+              placeholder="norma de poluare"
             >
             </ng-select>
           </div>

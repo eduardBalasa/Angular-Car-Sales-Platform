@@ -13,8 +13,6 @@ namespace AplicatieVanzariMasini_Back.Models
         public DateTime CreatedDate { get; set; }
         public int CarId { get; set; }
         public virtual Car Car { get; set; }
-        public virtual ICollection<Like> AnnounceLikers { get; set; }
-        public virtual ICollection<Like> AnnounceLikees { get; set; }
         public virtual ICollection<PhotoForAnnounce> PhotosForAnnounce { get; set; }
 
     }

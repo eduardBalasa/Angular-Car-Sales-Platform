@@ -27,16 +27,16 @@
         </button>
       </li>
       <li>
-        <!-- [routerLink]="['/members/', user.id]"
-        [queryParams]="{ tab: 3 }" -->
         <button
           matTooltip="Vezi anuntul"
+          [routerLink]="['announce/', announce.announceId]"
         >
           <i class="fa fa-car"></i>
         </button>
       </li>
       <li>
-        <button matTooltip="Salveaza anuntul" (click)="sendLike(user.id)">
+        <button matTooltip="Salveaza anuntul">
+          <!-- <button matTooltip="Salveaza anuntul" (click)="sendLike(user.id)"> -->
           <i class="fa fa-save"></i>
         </button>
       </li>

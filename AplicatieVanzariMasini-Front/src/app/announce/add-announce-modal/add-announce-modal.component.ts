@@ -53,6 +53,12 @@ export class AddAnnounceModalComponent implements OnInit {
   public gearboxes: Gearbox[];
   public gearboxesName: Array<any> = [];
   gearboxId;
+  public pollutionRules: PollutionRule[];
+  public pollutionRulesName: Array<any> = [];
+  pollutionRuleId;
+  public transmissions: Transmission[];
+  public transmissionsName: Array<any> = [];
+  transmissionId;
 
   constructor(
     private announceService: AnnounceService,
@@ -75,7 +81,8 @@ export class AddAnnounceModalComponent implements OnInit {
     this.getFuelsNames();
     this.getCountriesNames();
     this.getGearboxesNames();
-
+    this.getPollutionRulesNames();
+    this.getTransmissionsNames();
     this.createAnnounceForm();
   }
 
@@ -89,9 +96,12 @@ export class AddAnnounceModalComponent implements OnInit {
       this.carAnnounce.countryId = this.brandId;
       this.carAnnounce.manufacturingDateId = this.manufacturingDateId;
       this.carAnnounce.bodyId = this.bodyId;
+      this.carAnnounce.gearboxId = this.gearboxId;
+      this.carAnnounce.pollutionRuleId = this.pollutionRuleId;
+      this.carAnnounce.transmissionId = this.transmissionId;
 
       this.announceService.createAnnounce(this.carAnnounce, this.authService.decodedToken.nameid).subscribe(() => {
-        this.alertify.success("anunt adaugat cu succes");
+        this.alertify.success("Anunt adaugat cu succes");
       }, error => {
         this.alertify.error(error);
       });
@@ -118,6 +128,8 @@ export class AddAnnounceModalComponent implements OnInit {
         particleFilter: ["", Validators.required],
         rightHandDrive: ["", Validators.required],
         gearboxes: ["", Validators.required],
+        pollutionRules: ["", Validators.required],
+        transmissions: ["", Validators.required],
         description: [
           "",
           [
@@ -147,7 +159,12 @@ export class AddAnnounceModalComponent implements OnInit {
   selectedGearbox(value: any): void {
     this.gearboxId = value.id;
   }
-
+  selectedPollutionRule(value: any): void {
+    this.pollutionRuleId = value.id;
+  }
+  selectedTransmission(value: any): void {
+    this.transmissionId = value.id;
+  }
   selectedBody(value: any): void {
     this.bodyId = value.id;
   }
@@ -167,6 +184,24 @@ export class AddAnnounceModalComponent implements OnInit {
       this.gearboxesName.push({
         id: gearbox.id,
         text: gearbox.name
+      });
+    });
+  }
+
+  getPollutionRulesNames():any {
+    this.pollutionRules.forEach((pollutionRule) => {
+      this.pollutionRulesName.push({
+        id: pollutionRule.id,
+        text: pollutionRule.name
+      });
+    });
+  }
+
+  getTransmissionsNames():any {
+    this.transmissions.forEach((transmission) => {
+      this.transmissionsName.push({
+        id: transmission.id,
+        text: transmission.name
       });
     });
   }

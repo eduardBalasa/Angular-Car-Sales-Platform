@@ -9,11 +9,8 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/members']">Utilizatori </a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/announce']">Announce</a>
-      </li>
       <li *appHasRole="['Admin']" class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+        <a class="nav-link" [routerLink]="['/admin']">Panou Administrator</a>
       </li>
     </ul>
 

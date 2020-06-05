@@ -101,7 +101,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Model :
                 </li>
-                <li class="list-inline-item">Golf</li>
+                <li class="list-inline-item">{{announce.model}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -110,7 +110,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Versiune :
                 </li>
-                <li class="list-inline-item">8</li>
+                <li class="list-inline-item">{{announce.modelVersion}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -119,7 +119,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Tara
                   de origine :
                 </li>
-                <li class="list-inline-item">Olanda</li>
+                <li class="list-inline-item">{{announce.country}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -128,7 +128,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Accident in istoric :
                 </li>
-                <li class="list-inline-item">Nu</li>
+                <li class="list-inline-item">{{announce.damaged}}</li>
               </ul>
             </div>
 
@@ -138,7 +138,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Kilometraj :
                 </li>
-                <li class="list-inline-item">24000 km</li>
+                <li class="list-inline-item">{{announce.km}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -147,7 +147,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Anul
                   fabricatiei :
                 </li>
-                <li class="list-inline-item">2010</li>
+                <li class="list-inline-item">{{announce.manufacturingDate}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -156,7 +156,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Combustibil :
                 </li>
-                <li class="list-inline-item">Diesel</li>
+                <li class="list-inline-item">{{announce.fuel}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -165,7 +165,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Transmisie :
                 </li>
-                <li class="list-inline-item">Automata</li>
+                <li class="list-inline-item">{{announce.transmission}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -174,7 +174,7 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Stare :
                 </li>
-                <li class="list-inline-item">Folosita</li>
+                <li class="list-inline-item">{{announce.state}}</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -183,29 +183,29 @@
                   <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
                   Caroserie :
                 </li>
-                <li class="list-inline-item">Hatchback</li>
+                <li class="list-inline-item">{{announce.body}}</li>
               </ul>
             </div>
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1"></i> Caroserie :
+                  <i class="fa fa-circle pr-1"></i> Cutie de viteze :
                 </li>
-                <li class="list-inline-item">Hatchback</li>
+                <li class="list-inline-item">{{announce.gearbox}}</li>
               </ul>
             </div>
           </div>
         </div>
 
         <accordion [isAnimated]="true">
+          <accordion-group heading="Descriere">
+            {{announce.description}}
+          </accordion-group>
           <accordion-group heading="Dotari">
             ABS CD Geamuri fata electrice Servodirectie Aer conditionat doua
             zone Airbag-uri cortina Camera parcare spate Faruri automate
             Interior din piele Oglinzi retrovizoare ajustabile electric
             Proiectoare ceata Suspensie reglabila
-          </accordion-group>
-          <accordion-group heading="Descriere">
-            <p>Some content</p>
           </accordion-group>
         </accordion>
       </div>

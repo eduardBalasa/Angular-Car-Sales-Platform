@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Announce } from '../../_models/announce';
-import { Car } from '../../_models/car';
 import { User } from '../../_models/user';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -19,7 +18,8 @@ export class AnnounceCardComponent implements OnInit {
 
 
   constructor(private  authService: AuthService, private userService: UserService,
-    private alertify: AlertifyService) { }
+    private alertify: AlertifyService,
+    private router: Router) { }
 
   ngOnInit() {
     // this.route.data.subscribe(data => {
@@ -31,12 +31,11 @@ export class AnnounceCardComponent implements OnInit {
 
   }
 
-  sendLike(id: number){
-    this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(data => {
-      this.alertify.success('Ai salvat anuntul: ' + this.announce.title);
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
-
+  // sendLike(id: number){
+  //   this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(data => {
+  //     this.alertify.success('Ai salvat anuntul: ' + this.announce.title);
+  //   }, error => {
+  //     this.alertify.error(error);
+  //   });
+  // }
 }
