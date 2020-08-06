@@ -35,12 +35,20 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Features")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("AnnounceId");
 
                     b.HasIndex("CarId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Announce");
                 });
@@ -163,8 +171,8 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreatedAt")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -305,6 +313,9 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ModelVersionId")
                         .HasColumnType("int");
 
@@ -387,6 +398,9 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
@@ -442,6 +456,21 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.SaveAnnounce", b =>
+                {
+                    b.Property<int>("AnnounceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnnounceId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SaveAnnounces");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Transmission", b =>
@@ -673,6 +702,12 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.User", "User")
+                        .WithMany("Announces")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Car", b =>
@@ -785,6 +820,21 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.HasOne("AplicatieVanzariMasini_Back.Models.Announce", "Announce")
                         .WithMany("PhotosForAnnounce")
                         .HasForeignKey("AnnounceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.SaveAnnounce", b =>
+                {
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Announce", "Announce")
+                        .WithMany("SaveAnnounces")
+                        .HasForeignKey("AnnounceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.User", "User")
+                        .WithMany("SaveAnnounces")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

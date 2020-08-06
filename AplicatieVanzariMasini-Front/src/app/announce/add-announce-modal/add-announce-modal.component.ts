@@ -93,7 +93,7 @@ export class AddAnnounceModalComponent implements OnInit {
       this.carAnnounce.modelId = this.modelId;
       // this.carAnnounce. = this.modelVersionId;
       this.carAnnounce.fuelId = this.fuelId;
-      this.carAnnounce.countryId = this.brandId;
+      this.carAnnounce.countryId = this.countryId;
       this.carAnnounce.manufacturingDateId = this.manufacturingDateId;
       this.carAnnounce.bodyId = this.bodyId;
       this.carAnnounce.gearboxId = this.gearboxId;
@@ -101,7 +101,7 @@ export class AddAnnounceModalComponent implements OnInit {
       this.carAnnounce.transmissionId = this.transmissionId;
 
       this.announceService.createAnnounce(this.carAnnounce, this.authService.decodedToken.nameid).subscribe(() => {
-        this.alertify.success("Anunt adaugat cu succes");
+        this.alertify.success("Anunt adaugat cu succes");  
       }, error => {
         this.alertify.error(error);
       });
@@ -130,6 +130,7 @@ export class AddAnnounceModalComponent implements OnInit {
         gearboxes: ["", Validators.required],
         pollutionRules: ["", Validators.required],
         transmissions: ["", Validators.required],
+        features: ["", Validators.required],
         description: [
           "",
           [

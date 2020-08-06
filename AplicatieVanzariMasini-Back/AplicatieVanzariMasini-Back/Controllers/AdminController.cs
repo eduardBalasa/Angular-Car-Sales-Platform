@@ -126,12 +126,46 @@ namespace AplicatieVanzariMasini_Back.Controllers
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpGet("announcePhotosForModeration")]
+        public async Task<IActionResult> GetAnnouncePhotoForModeration()
+        {
+            var announcePhotos = await _context.PhotoForAnnounces
+              .Include(a => a.Announce)
+              .IgnoreQueryFilters()
+              .Where(p => p.IsApproved == false)
+              .Select(u => new
+              {
+                  Id = u.Id,
+                  UserName = u.Announce.Title,
+                  Url = u.Url,
+                  IsApproved = u.IsApproved
+              }).ToListAsync();
+
+            return Ok(announcePhotos);
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
         [HttpPost("approvePhoto/{photoId}")]
         public async Task<IActionResult> ApprovePhoto(int photoId)
         {
             var photo = await _context.Photos
                 .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(p => p.Id == photoId);
+
+            photo.IsApproved = true;
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("approveAnnouncePhoto/{announcePhotoId}")]
+        public async Task<IActionResult> ApproveAnnouncePhoto(int announcePhotoId)
+        {
+            var photo = await _context.PhotoForAnnounces
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p => p.Id == announcePhotoId);
 
             photo.IsApproved = true;
 
@@ -149,7 +183,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 .FirstOrDefaultAsync(p => p.Id == photoId);
 
             if (photo.IsMain)
-                return BadRequest("Nu poti sterge o poza principala");
+                return BadRequest("Nu poti sterge o imagine principala");
 
             if (photo.PublicId != null)
             {
@@ -166,6 +200,39 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (photo.PublicId == null)
             {
                 _context.Photos.Remove(photo);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("rejectAnnouncePhoto/{announcePhotoId}")]
+        public async Task<IActionResult> RejectAnnouncePhoto(int announcePhotoId)
+        {
+            var photo = await _context.PhotoForAnnounces
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p => p.Id == announcePhotoId);
+
+            if (photo.IsMain)
+                return BadRequest("Nu poti sterge o imagine principala");
+
+            if (photo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photo.PublicId);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _context.PhotoForAnnounces.Remove(photo);
+                }
+            }
+
+            if (photo.PublicId == null)
+            {
+                _context.PhotoForAnnounces.Remove(photo);
             }
 
             await _context.SaveChangesAsync();

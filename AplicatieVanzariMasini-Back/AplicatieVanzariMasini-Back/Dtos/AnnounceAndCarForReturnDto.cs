@@ -9,10 +9,12 @@ namespace AplicatieVanzariMasini_Back.Dtos
     public class AnnounceAndCarForReturnDto
     {
         public int CarId { get; set; }
+        public int UserId { get; set; }
         public int AnnounceId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string Features { get; set; }
         public string Km { get; set; }
         public string Price { get; set; }
         public string CylindricalCapacity { get; set; }
@@ -28,9 +30,10 @@ namespace AplicatieVanzariMasini_Back.Dtos
         public string Country { get; set; }
         public string Transmission { get; set; }
         public string ManufacturingDate { get; set; }
+        public string MainPhotoUrl { get; set; }
         public string Gearbox { get; set; }
         public string PollutionRule { get; set; }
-        //public ICollection<PhotoForAnnounce> PhotosForAnnounce { get; set; }
+        public string UserMainPhotoUrl { get; set; }
         public AnnounceAndCarForReturnDto()
         {
             CreatedDate = DateTime.Now;

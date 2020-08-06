@@ -91,6 +91,8 @@ import { TransmissionsResolver } from './_resolver/transmissions.resolver';
 import { GearboxesResolver } from './_resolver/gearboxes.resolver';
 import { AnnounceManagementComponent } from './admin/announce-management/announce-management.component';
 import { ContactService } from './_services/contact.service';
+import { AddAnnouncePhotoModalComponent } from './announce/add-announce-photo-modal/add-announce-photo-modal.component';
+import { SavedAnnouncesResolver } from './_resolver/saved-announces.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -125,6 +127,7 @@ export function tokenGetter() {
     AnnounceDetailsPageComponent,
     AnnounceCardComponent,
     CarsComponent,
+    AddAnnouncePhotoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -183,6 +186,7 @@ export function tokenGetter() {
     CountriesResolver,
     AnnouncesResolver,
     PreventUnsavedChanges,
+    SavedAnnouncesResolver,
     ListResolver,
     MessagesResolver,
     AdminService,
@@ -195,9 +199,9 @@ export function tokenGetter() {
     GearboxesResolver,
     PollutionRulesResolver,
     TransmissionsResolver,
-    ContactService
+    ContactService,
   ],
-  entryComponents: [RolesModalComponent, AddAnnounceModalComponent],
+  entryComponents: [RolesModalComponent, AddAnnounceModalComponent, AddAnnouncePhotoModalComponent, AnnouncePhotoEditorComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

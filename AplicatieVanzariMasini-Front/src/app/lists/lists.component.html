@@ -2,9 +2,10 @@
   <div class="text-center mt-3">
     <h2>
       {{
-        likesParam === "Likers" ? "Persoane interesate" : "Anunturi salvate"
+        announceParams === "All" ? "Anunțuri salvate" : "Anunțurile mele"
       }}
-      : {{ pagination.totalItems }}
+      : {{ savedAnnounces.length }}
+
     </h2>
   </div>
 
@@ -13,31 +14,30 @@
       <div class="btn-group">
         <button
           class="btn btn-primary"
-          [(ngModel)]="likesParam"
-          btnRadio="Likers"
-          (click)="loadUsers()"
+          [(ngModel)]="announceParams"
+          btnRadio="All"
+          (click)="loadSavedAnnounces()"
         >
-          Persoane interesate
+        Anunțuri salvate
         </button>
         <button
           class="btn btn-primary"
-          [(ngModel)]="likesParam"
+          [(ngModel)]="announceParams"
           btnRadio="Likees"
-          (click)="loadUsers()"
+          
         >
-          Anunturi salvate
+        Anunțurile mele
         </button>
       </div>
     </div>
 
     <br />
-
     <div class="row">
       <div
-        *ngFor="let user of users"
-        class="col-sm-6 col-md-4 col-lg-4 col-xl-2"
+        *ngFor="let announce of savedAnnounces"
+        
       >
-        <app-member-card [user]="user"></app-member-card>
+        <app-announce-card [announce]="announce"></app-announce-card>
       </div>
     </div>
   </div>

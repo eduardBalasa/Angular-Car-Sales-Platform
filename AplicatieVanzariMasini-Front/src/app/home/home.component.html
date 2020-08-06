@@ -28,7 +28,7 @@
             )
           "
         >
-          Adauga anunt
+          Adaugă anunț
           <i class="fa fa-plus"></i>
         </button>
       </div>
@@ -63,7 +63,7 @@
                   [allowClear]="true"
                   [items]="brandsName"
                   (data)="refreshValue($event)"
-                  (selected)="selected($event)"
+                  (selected)="selectedBrand($event)"
                   (removed)="removed($event)"
                   (typed)="typed($event)"
                   placeholder="Alege marca"
@@ -78,9 +78,10 @@
                   [allowClear]="true"
                   [items]="modelsName"
                   (data)="refreshValue($event)"
-                  (selected)="selected($event)"
+                  (selected)="selectedModel($event)"
                   (removed)="removed($event)"
                   (typed)="typed($event)"
+                  [disabled]="!brandSelected"
                   placeholder="Alege model"
                 >
                 </ng-select>
@@ -93,9 +94,10 @@
                   [allowClear]="true"
                   [items]="modelVersionsName"
                   (data)="refreshValue($event)"
-                  (selected)="selected($event)"
+                  (selected)="selectedVersion($event)"
                   (removed)="removed($event)"
                   (typed)="typed($event)"
+                  [disabled]="!modelSelected"
                   placeholder="Alege versiune model"
                 >
                 </ng-select>
@@ -209,6 +211,18 @@
               </div>
             </div>
 
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              
+                
+                  <button mat-raised-button class="submitButton">
+                    Caută
+                    <mat-icon>
+                      search
+                    </mat-icon>
+                  </button>
+            
+            </div>
+
             <!-- <div class="col-xs-12 col-sm-4 col-md-4">
               <div style="width: 175px; margin-bottom: 20px;">
                 <h3 style="font-size: small;">Gearbox</h3>
@@ -227,14 +241,14 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-end">
+        <!-- <div class="d-flex justify-content-end">
           <button mat-raised-button class="submitButton">
-            Cauta
+            Caută
             <mat-icon>
               search
             </mat-icon>
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -243,10 +257,42 @@
 <div id="subheader-bar">
   <a class="subheader-bar-container" title="">
     <i class="fa fa-bullhorn fa-1x"></i>
-    Anunturile afisate in rubrica de mai jos sunt preluate in ordinea adaugarii
+    Anunțurile afișate in rubrica de mai jos sunt preluate in ordinea adaugării
     lor pe site!
   </a>
 </div>
+
+<!-- <div style="margin-top: 40px; background-color: #f3f3f3;"></div> -->
+<div class="carousel-spacer">
+  <carousel>
+    <slide>
+      <div class="text-center py-5 bg-dark text-white">
+        <h2>Reclama 1</h2>
+        <div class="lead">
+          <h3>Reclama ta aici!</h3>
+        </div>
+      </div>
+    </slide>
+    <slide>
+      <div class="text-center py-5 bg-dark text-white">
+        <h2>Reclama 2</h2>
+        <div class="lead">
+          <h3>Reclama ta aici!</h3>
+        </div>
+      </div>
+    </slide>
+    <slide>
+      <div class="text-center py-5 bg-dark text-white">
+        <h2>Reclama 3</h2>
+        <div class="lead">
+          <h3>Reclama ta aici!</h3>
+        </div>
+      </div>
+    </slide>
+  </carousel>
+</div>
+
+<div style="margin-bottom: 20px;"></div>
 
 <div *ngIf="registerMode" class="container">
   <div class="row justify-content-center">
@@ -256,6 +302,21 @@
       ></app-register>
     </div>
   </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [(ngModel)]="pagination.currentPage"
+    [itemsPerPage]="pagination.itemsPerPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
 </div>
 
 <div *ngIf="!loggedIn() || loggedIn()">
@@ -271,6 +332,21 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [(ngModel)]="pagination.currentPage"
+    [itemsPerPage]="pagination.itemsPerPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
 </div>
 
 <!-- <form>

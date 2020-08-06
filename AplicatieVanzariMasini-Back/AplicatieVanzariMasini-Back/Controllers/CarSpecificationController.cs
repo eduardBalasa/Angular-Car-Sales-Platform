@@ -144,25 +144,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(country);
         }
 
-        //[HttpGet("GetKms")]
-        //public async Task<IActionResult> GetKms()
-        //{
-        //    var kmFromRepo = await _repo.GetKms();
-
-        //    var km = _mapper.Map<List<SpecificationForReturnDto>>(kmFromRepo);
-
-        //    return Ok(km);
-        //}
-
-        //[HttpGet("GetPrices")]
-        //public async Task<IActionResult> GetPrices()
-        //{
-        //    var priceFromRepo = await _repo.GetPrices();
-
-        //    var price = _mapper.Map<List<SpecificationForReturnDto>>(priceFromRepo);
-
-        //    return Ok(price);
-        //}
 
     }
 }

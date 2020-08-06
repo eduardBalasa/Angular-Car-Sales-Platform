@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
         return true;
       } else {
         this.router.navigate(['members']);
-        this.alertify.error('You are not authorized to acces this area');
+        this.alertify.error('Eroare de autorizare');
       }
     }
     
@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    this.alertify.error('You shall not pas!!!');
+    this.alertify.error('Eroare de autorizare');
     this.router.navigate(['/home']);
     return false;
   }

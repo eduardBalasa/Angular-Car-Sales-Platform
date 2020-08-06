@@ -38,7 +38,7 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 .ForMember(m => m.Model, opt => opt
                 .MapFrom(u => u.Car.Model.Name))
                 .ForMember(m => m.Model, opt => opt
-                .MapFrom(u => u.Car.Model.ModelVersion.Name))
+                .MapFrom(u => u.Car.Model.Name))
                 .ForMember(m => m.PollutionRule, opt => opt
                 .MapFrom(u => u.Car.PollutionRule.Name))
                 .ForMember(m => m.Transmission, opt => opt
@@ -62,7 +62,11 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 .ForMember(m => m.ParticleFilter, opt => opt
                 .MapFrom(u => u.Car.ParticleFilter))
                 .ForMember(m => m.RightHandDrive, opt => opt
-                .MapFrom(u => u.Car.RightHandDrive));                
+                .MapFrom(u => u.Car.RightHandDrive))
+                .ForMember(m => m.UserMainPhotoUrl, opt => opt
+                .MapFrom(u => u.User.Photos.FirstOrDefault(a => a.IsMain).Url))
+                .ForMember(m => m.MainPhotoUrl, opt => opt
+                .MapFrom(u => u.PhotosForAnnounce.Where(a => a.AnnounceId == u.AnnounceId).FirstOrDefault().Url));
 
 
             CreateMap<Car, AnnounceAndCarForReturnDto>()
@@ -87,14 +91,43 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 .ForMember(m => m.Fuel, opt => opt
                 .MapFrom(u => u.Fuel.Name))
                 .ForMember(m => m.Country, opt => opt
-                .MapFrom(u => u.Country.Name)); 
+                .MapFrom(u => u.Country.Name));
 
+            CreateMap<Car, CarForReturnedAnnounce>()
+                .ForMember(m => m.BrandName, opt => opt
+                .MapFrom(u => u.Brand.Name))
+                .ForMember(m => m.BodyName, opt => opt
+                .MapFrom(u => u.Body.Name))
+                .ForMember(m => m.Gearbox, opt => opt
+                .MapFrom(u => u.Gearbox.Name))
+                .ForMember(m => m.ManufacturingDate, opt => opt
+                .MapFrom(u => u.ManufacturingDate.Year))
+                .ForMember(m => m.ModelName, opt => opt
+                .MapFrom(u => u.Model.Name))
+                .ForMember(m => m.Version, opt => opt
+                .MapFrom(u => u.Model.ModelVersion.Name))
+                .ForMember(m => m.PollutionRule, opt => opt
+                .MapFrom(u => u.PollutionRule.Name))
+                .ForMember(m => m.TransmissionType, opt => opt
+                .MapFrom(u => u.Transmission.Name))
+                .ForMember(m => m.FuelType, opt => opt
+                .MapFrom(u => u.Fuel.Name))
+                .ForMember(m => m.CountryName, opt => opt
+                .MapFrom(u => u.Country.Name));
 
-            CreateMap<Announce, AnnounceForReturnDto>();
+            CreateMap<Announce, AnnounceForReturnDto>()
+                .ForMember(m => m.UserName, opt => opt
+                .MapFrom(a => a.User.UserName))
+                .ForMember(m => m.UserCreated, opt => opt
+                .MapFrom(a => a.User.Created))
+                .ForMember(m => m.Location, opt => opt
+                .MapFrom(a => a.User.City + " , Jud. " + a.User.County));
 
             CreateMap<Car, CarForReturnDto>();
 
             CreateMap<Photo, PhotoForDetailedDto>();
+
+            CreateMap<PhotoForAnnounce, PhotoForAnnounceToReturnDto>();
 
             CreateMap<UserForUpdateDto, User>();
 

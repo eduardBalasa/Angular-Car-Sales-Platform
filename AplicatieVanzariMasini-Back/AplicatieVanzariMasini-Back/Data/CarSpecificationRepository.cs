@@ -36,11 +36,6 @@ namespace AplicatieVanzariMasini_Back.Data
             return await _context.Brands.ToListAsync();
         }
 
-        //public async Task<List<CylindricalCapacity>> GetCylindricalCapacities()
-        //{
-        //    return await _context.CylindricalCapacities.ToListAsync();
-        //}
-
         public async Task<List<Fuel>> GetFuels()
         {
             return await _context.Fuels.ToListAsync();
@@ -65,11 +60,6 @@ namespace AplicatieVanzariMasini_Back.Data
             return await _context.ManufacturingDates.ToListAsync();
         }
 
-        //public async Task<List<Power>> GetPowers()
-        //{
-        //    return await _context.Powers.ToListAsync();
-        //}
-
         public async Task<List<Country>> GetCountries()
         {
             return await _context.Countries.ToListAsync();
@@ -85,14 +75,5 @@ namespace AplicatieVanzariMasini_Back.Data
             return await _context.ModelVersions.ToListAsync();
         }
 
-        //public async Task<List<Km>> GetKms()
-        //{
-        //    return await _context.Kms.ToListAsync();
-        //}
-
-        //public async Task<List<Price>> GetPrices()
-        //{
-        //    return await _context.Prices.ToListAsync();
-        //}
     }
 }

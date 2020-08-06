@@ -11,10 +11,6 @@ export class AdminService {
 
   constructor(private http: HttpClient) {}
 
-  // getAnnounces() {
-  //   return this.http.get(this.baseUrl + 'admin/getannounces')
-  // }
-
   getUsersWithRoles() {
     return this.http.get(this.baseUrl + 'admin/userswithroles');
   }
@@ -27,11 +23,23 @@ export class AdminService {
     return this.http.get(this.baseUrl + 'admin/photosForModeration');
   }
 
+  getAnnouncePhotosForApproval() {
+    return this.http.get(this.baseUrl + 'admin/announcePhotosForModeration');
+  }
+
   approvePhoto(photoId) {
     return this.http.post(this.baseUrl + 'admin/approvePhoto/' + photoId, {});
   }
 
+  approveAnnouncePhoto(announcePhotoId) {
+    return this.http.post(this.baseUrl + 'admin/approveAnnouncePhoto/' + announcePhotoId, {});
+  }
+
   rejectPhoto(photoId) {
     return this.http.post(this.baseUrl + 'admin/rejectPhoto/' + photoId, {});
+  }
+
+  rejectAnnouncePhoto(announcePhotoId) {
+    return this.http.post(this.baseUrl + 'admin/rejectAnnouncePhoto/' + announcePhotoId, {});
   }
 }

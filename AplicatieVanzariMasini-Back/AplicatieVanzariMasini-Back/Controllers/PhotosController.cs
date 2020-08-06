@@ -82,7 +82,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
                     var uploadParams = new ImageUploadParams()
                     {
                         File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+                        //Transformation = new Transformation().Width(500).Height(500)
 
                     };
 
@@ -185,7 +185,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return BadRequest("Eroare la setarea pozei de profil.");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{announceId}/announcePhoto/{id}")]
         public async Task<IActionResult> DeleteAnnouncePhoto(int userId, int announceId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

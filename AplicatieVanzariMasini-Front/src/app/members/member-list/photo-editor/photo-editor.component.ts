@@ -80,12 +80,12 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   deletePhoto(id: number){
-    this.alertify.confirm('Are you sure you want to delete this photo?', () => {
+    this.alertify.confirm('Esti sigur ca vrei sa stergi imaginea?', () => {
       this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
         this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
-        this.alertify.success('Photo has been deleted');
+        this.alertify.success('Imaginea a fost stearsa');
       }, error => {
-        this.alertify.error('Failed to delete the photo');
+        this.alertify.error('Eroare la stergerea pozei');
       });
     });
   }

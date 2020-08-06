@@ -31,6 +31,7 @@ namespace AplicatieVanzariMasini_Back.Data
         public DbSet<Announce> Announce { get; set; }
         public DbSet<PhotoForAnnounce> PhotoForAnnounces{ get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<SaveAnnounce> SaveAnnounces { get; set; }
 
 
 
@@ -52,6 +53,22 @@ namespace AplicatieVanzariMasini_Back.Data
                 .HasForeignKey(ur => ur.UserId)
                 .IsRequired();
             });
+
+            builder.Entity<SaveAnnounce>(saveAnnounce =>
+            {
+                saveAnnounce.HasKey(sa => new { sa.AnnounceId, sa.UserId });
+
+                saveAnnounce.HasOne(a => a.Announce)
+                .WithMany(sa => sa.SaveAnnounces)
+                .HasForeignKey(sa => sa.AnnounceId)
+                .IsRequired();
+
+                saveAnnounce.HasOne(ur => ur.User)
+                .WithMany(u => u.SaveAnnounces)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+            });
+
             builder.Entity<Like>()
                 .HasKey(k => new { k.LikerId, k.LikeeId });
 

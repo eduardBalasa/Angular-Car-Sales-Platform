@@ -13,8 +13,9 @@ import { UserService } from "../../_services/user.service";
   styleUrls: ["./announce-photo-editor.component.css"],
 })
 export class AnnouncePhotoEditorComponent implements OnInit {
-  @Input() announcePhotos: PhotoForAnnounce[];
   @Output() getMemberPhotoChange = new EventEmitter<string>();
+  @Input() announcePhotos: PhotoForAnnounce[];
+  @Input() announceId: number;
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
@@ -28,6 +29,8 @@ export class AnnouncePhotoEditorComponent implements OnInit {
 
   ngOnInit() {
     this.initializeUploader();
+    console.log(this.announceId);
+    console.log(this.announcePhotos);
   }
 
   fileOverBase(e: any): void {
@@ -40,8 +43,8 @@ export class AnnouncePhotoEditorComponent implements OnInit {
         this.baseUrl +
         "users/" +
         this.authService.decodedToken.nameid +
-        "/photos/" + 
-        this.announceService.announceId + 
+        "/photos/" +
+        this.announceId +
         "/announcephotos",
       authToken: "Bearer " + localStorage.getItem("token"),
       isHTML5: true,
@@ -63,17 +66,19 @@ export class AnnouncePhotoEditorComponent implements OnInit {
           url: res.url,
           dateAdded: res.dateAdded,
           description: res.description,
+          isMain: res.isMain,
           isApproved: res.isApproved,
+          announceId: res.announceId
         };
         this.announcePhotos.push(photo);
       }
     };
   }
 
-  deletePhoto(id: number) {
+  deleteAnnouncePhoto(announceId: number, id: number) {
     this.alertify.confirm("Esti sigur ca vrei sa stergi imaginea?", () => {
-      this.userService
-        .deletePhoto(this.authService.decodedToken.nameid, id)
+      this.announceService
+        .deleteAnnouncePhoto(this.authService.decodedToken.nameid, announceId, id)
         .subscribe(
           () => {
             this.announcePhotos.splice(
@@ -83,7 +88,7 @@ export class AnnouncePhotoEditorComponent implements OnInit {
             this.alertify.success("Imaginea a fost stearsa");
           },
           (error) => {
-            this.alertify.error("Eroare la stergerea poze");
+            this.alertify.error("Eroare la stergerea imaginii");
           }
         );
     });

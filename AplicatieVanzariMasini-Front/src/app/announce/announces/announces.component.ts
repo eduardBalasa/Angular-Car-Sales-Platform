@@ -4,6 +4,7 @@ import { AnnounceService } from '../../_services/announce.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'protractor';
+import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-announces',
@@ -13,6 +14,7 @@ import { error } from 'protractor';
 export class AnnouncesComponent implements OnInit {
   announces: Announce[];
   announce: Announce;
+  pagination: Pagination;
   id: number;
 
   constructor(private announceService: AnnounceService, private alertify: AlertifyService,
@@ -43,8 +45,9 @@ export class AnnouncesComponent implements OnInit {
     });
   }
   getAnnounces(){
-    this.announceService.getAnnounces().subscribe((announces: Announce[]) => {
-      this.announces = announces;
+    this.announceService.getAnnounces().subscribe((res: PaginatedResult<Announce[]>) => {
+      this.announces = res.result;
+      this.pagination= res.pagination;
       console.log(this.announces);
     }, error => {
       console.log(error);

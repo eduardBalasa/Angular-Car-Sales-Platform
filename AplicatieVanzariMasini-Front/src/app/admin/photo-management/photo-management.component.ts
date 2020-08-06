@@ -13,10 +13,19 @@ export class PhotoManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getPhotosForApproval();
+    this.getAnnouncePhotosForApproval();
   }
 
   getPhotosForApproval() {
     this.adminService.getPhotosForApproval().subscribe((photos) => {
+      this.photos = photos;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getAnnouncePhotosForApproval() {
+    this.adminService.getAnnouncePhotosForApproval().subscribe((photos) => {
       this.photos = photos;
     }, error => {
       console.log(error);
@@ -31,6 +40,14 @@ export class PhotoManagementComponent implements OnInit {
     });
   }
 
+  approveAnnouncePhoto(announcePhotoId) {
+    this.adminService.approveAnnouncePhoto(announcePhotoId).subscribe(() => {
+      this.photos.splice(this.photos.findIndex(p => p.id === announcePhotoId), 1);
+    }, error => {
+      console.log(error);
+    });
+  }
+
   rejectPhoto(photoId) {
     this.adminService.rejectPhoto(photoId).subscribe(() => {
       this.photos.splice(this.photos.findIndex(p => p.id === photoId), 1);
@@ -39,4 +56,11 @@ export class PhotoManagementComponent implements OnInit {
     });
   }
 
+  rejectAnnouncePhoto(announcePhotoId) {
+    this.adminService.rejectAnnouncePhoto(announcePhotoId).subscribe(() => {
+      this.photos.splice(this.photos.findIndex(p => p.id === announcePhotoId), 1);
+    }, error => {
+      console.log(error);
+    });
+  }
 }

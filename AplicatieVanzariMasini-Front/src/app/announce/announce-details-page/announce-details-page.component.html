@@ -1,264 +1,74 @@
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.min.css"
-/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.min.js"></script>
-<link
-  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
-  rel="stylesheet"
-  integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
-  crossorigin="anonymous"
-/>
-
 <div class="announce-wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
-        <div class="cars-gallery">
-          <div class="swiper-container gallery-top">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                  <img
-                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
-                  />
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                  <img
-                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
-                  />
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                  <img
-                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
-                  />
-                </div>
-              </div>
-            </div>
-            <!-- Add Arrows -->
-            <div class="swiper-button-next swiper-button-white"></div>
-            <div class="swiper-button-prev swiper-button-white"></div>
-          </div>
-          <div class="swiper-container gallery-thumbs">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                  <img
-                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
-                  />
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                  <img
-                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
-                  />
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                  <img
-                    src="https://gaadicdn.com/usedcar_image/gallery/VCC_851965_1_1522909196739_22_649825_8_1522909575.jpg"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="announce-metabar">
-          <span class="announce-metabar-value" title="Data adaugarii anuntului"
-            >{{announce.createdDate | date: "mediumDate" }}</span
-          >
-        </div>
-        <hr class="announce-photo-divider" />
-
-        <div
-          class="cars-overview card-body pt-3 border mt-2"
-          style="background-color: white;"
-        >
-          <div class="row">
-            <div class="col-md-12">
-              <h4>Detalii</h4>
-            </div>
-          </div>
-          <div class="row pt-2">
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Marca :
-                </li>
-                <li class="list-inline-item">{{announce.brand}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Model :
-                </li>
-                <li class="list-inline-item">{{announce.model}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Versiune :
-                </li>
-                <li class="list-inline-item">{{announce.modelVersion}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Tara
-                  de origine :
-                </li>
-                <li class="list-inline-item">{{announce.country}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Accident in istoric :
-                </li>
-                <li class="list-inline-item">{{announce.damaged}}</li>
-              </ul>
-            </div>
-
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Kilometraj :
-                </li>
-                <li class="list-inline-item">{{announce.km}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Anul
-                  fabricatiei :
-                </li>
-                <li class="list-inline-item">{{announce.manufacturingDate}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Combustibil :
-                </li>
-                <li class="list-inline-item">{{announce.fuel}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Transmisie :
-                </li>
-                <li class="list-inline-item">{{announce.transmission}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Stare :
-                </li>
-                <li class="list-inline-item">{{announce.state}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
-                  Caroserie :
-                </li>
-                <li class="list-inline-item">{{announce.body}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1"></i> Cutie de viteze :
-                </li>
-                <li class="list-inline-item">{{announce.gearbox}}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <accordion [isAnimated]="true">
-          <accordion-group heading="Descriere">
-            {{announce.description}}
-          </accordion-group>
-          <accordion-group heading="Dotari">
-            ABS CD Geamuri fata electrice Servodirectie Aer conditionat doua
-            zone Airbag-uri cortina Camera parcare spate Faruri automate
-            Interior din piele Oglinzi retrovizoare ajustabile electric
-            Proiectoare ceata Suspensie reglabila
-          </accordion-group>
-        </accordion>
+      <div class="col-8">
+        <ngx-gallery
+          [options]="galleryOptions"
+          [images]="galleryImages"
+          class="ngx-gallery"
+        ></ngx-gallery>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-4">
         <div class="d-flex justify-content-center">
           <div class="announce-summary">
-            <h3 style="padding-left: 30px;">Volkswagen</h3>
-            <h4 style="padding-left: 85px;">Golf 8</h4>
+            <h3>{{ announce.car.brandName }}</h3>
+            <h4>{{ announce.car.modelName }} {{ announce.car.version }}</h4>
             <ul style="color: #66676c;" class="list-unstyled list-inline">
-              <li class="list-inline-item">255.000 km</li>
+              <li class="list-inline-item">{{ announce.car.km }} km</li>
               <li class="list-inline-item">|</li>
-              <li class="list-inline-item">2016</li>
+              <li class="list-inline-item">
+                {{ announce.car.manufacturingDate }}
+              </li>
               <li class="list-inline-item">|</li>
-              <li class="list-inline-item">Diesel</li>
+              <li class="list-inline-item">{{ announce.car.fuelType }}</li>
               <li class="list-inline-item">|</li>
-              <li class="list-inline-item">Berlină</li>
+              <li class="list-inline-item">{{ announce.car.bodyName }}</li>
             </ul>
             <div class="announce-price-wrapper">
               <div class="price-wrapper">
-                <span class="announce-price-number">10 000</span>
+                <span class="announce-price-number">{{
+                  announce.car.price
+                }}</span>
                 <span class="announce-price-currency">EUR</span>
               </div>
               <hr class="seller-divider" />
               <span class="announce-price-details">Pretul este negociabil</span>
               <hr class="seller-divider" />
             </div>
-            <button mat-raised-button class="messageButton">
+            <button
+              mat-raised-button
+              class="messageButton"
+              [routerLink]="['/members/', announce.userId]"
+              [queryParams]="{ tab: 1 }"
+            >
               <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
               Trimite mesaj vanzătorului
             </button>
-            <accordion [isAnimated]="true">
-              <button
-                mat-raised-button
-                class="phoneButton"
-                popover="+40762903876"
-              >
-                <i
-                  class="fa fa-phone fa-2x"
-                  style="color: black;"
-                  aria-hidden="true"
-                ></i>
-                Vezi numarul de telefon
-              </button>
-              
-            </accordion>
+            <button
+              mat-raised-button
+              class="phoneButton"
+              popover="+40762903876"
+            >
+              <i
+                class="fa fa-phone fa-2x"
+                style="color: black;"
+                aria-hidden="true"
+              ></i>
+              Vezi numarul de telefon
+            </button>
 
             <div class="seller-box-wrapper">
               <div class="seller-name">
-                <a href="/home" title="Marian Vadim">Marian Vadim</a>
+                <a href="/home" title="Vizitează profilul">
+                  {{ announce.userName }}</a
+                >
                 <hr class="seller-divider" />
               </div>
-              <span class="seller-member-since">Vanzator pe site din 2020</span>
+              <p class="seller-member-since">
+                Vanzator pe site din
+                {{ announce.userCreated | date: "mediumDate" }}
+              </p>
               <hr class="seller-divider" />
               <div class="seller-box-address">
                 <span class="seller-box-address-title">
@@ -273,7 +83,7 @@
                 ></i>
                 <br />
                 <span class="seller-box-address-info">
-                  Caracal, Jud. Olt
+                  {{ announce.location }}
                 </span>
               </div>
             </div>
@@ -281,122 +91,157 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row mt-3">
-    <div class="col-md-12">
-      <h3>Find Similar Products</h3>
-      <p>Listopia - Directory, Community Theme</p>
+    <div class="row">
+      <div class="col-8">
+        <div class="text-center">
+          <button
+            style="text-align: center;"
+            mat-button
+            id="add-announce-button"
+            class="btn btn-success my-2 my-sm-0"
+            type="submit"
+            (click)="
+              announcePhotoModal(
+                announce.announceId,
+                announce.photosForAnnounce
+              )
+            "
+          >
+            Adauga imagini
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="announce-metabar">
+          <span
+            class="announce-metabar-value"
+            title="Data adaugarii anuntului"
+            >{{ announce.createdDate | date: "medium" }}</span
+          >
+        </div>
+        <hr class="announce-photo-divider" />
+      </div>
     </div>
-  </div>
-  <div class="row mt-2">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row py-2">
-            <div class="col-md-3 vertical-box">
-              <div class="card">
-                <img
-                  class="card-img-top mh200-text"
-                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
-                  alt="Card image"
-                />
-                <div class="card-body">
-                  <h4 class="card-title mw30-text">
-                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
-                    2.5 V Diesel 7-se
-                  </h4>
-                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
-
-                  <ul class="list-inline">
-                    <li class="list-inline-item">44,114 Km</li>
-                    <li class="list-inline-item">Petrol</li>
-                    <li class="list-inline-item">Gurugram</li>
-                  </ul>
-                  <button type="button" class="btn btn-outline-danger">
-                    Contact Sellers
-                  </button>
-                </div>
-              </div>
+    <div class="row">
+      <div class="col-8">
+        <div
+          class="cars-overview card-body pt-3 border mt-2"
+          style="background-color: white;"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Detalii</h4>
             </div>
-            <div class="col-md-3 vertical-box">
-              <div class="card">
-                <img
-                  class="card-img-top mh200-text"
-                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
-                  alt="Card image"
-                />
-                <div class="card-body">
-                  <h4 class="card-title mw30-text">
-                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
-                    2.5 V Diesel 7-se
-                  </h4>
-                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
-
-                  <ul class="list-inline">
-                    <li class="list-inline-item">44,114 Km</li>
-                    <li class="list-inline-item">Petrol</li>
-                    <li class="list-inline-item">Gurugram</li>
-                  </ul>
-                  <button type="button" class="btn btn-outline-danger">
-                    Contact Sellers
-                  </button>
-                </div>
-              </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Marca : {{ announce.car.brandName }}
+                </li>
+              </ul>
             </div>
-            <div class="col-md-3 vertical-box">
-              <div class="card">
-                <img
-                  class="card-img-top mh200-text"
-                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
-                  alt="Card image"
-                />
-                <div class="card-body">
-                  <h4 class="card-title mw30-text">
-                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
-                    2.5 V Diesel 7-se
-                  </h4>
-                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
-
-                  <ul class="list-inline">
-                    <li class="list-inline-item">44,114 Km</li>
-                    <li class="list-inline-item">Petrol</li>
-                    <li class="list-inline-item">Gurugram</li>
-                  </ul>
-                  <button type="button" class="btn btn-outline-danger">
-                    Contact Sellers
-                  </button>
-                </div>
-              </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Model : {{ announce.car.modelName }}
+                </li>
+              </ul>
             </div>
-            <div class="col-md-3 vertical-box">
-              <div class="card">
-                <img
-                  class="card-img-top mh200-text"
-                  src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg"
-                  alt="Card image"
-                />
-                <div class="card-body">
-                  <h4 class="card-title mw30-text">
-                    2006 Toyota Innova 2.5 V Diesel 7-seater 2006 Toyota Innova
-                    2.5 V Diesel 7-se
-                  </h4>
-                  <h5 class="card-text">Rs. 25.32 Lac*</h5>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Versiune : {{ announce.car.version }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Tara
+                  de origine : {{ announce.car.countryName }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Accident in istoric : {{ announce.car.damaged }}
+                </li>
+              </ul>
+            </div>
 
-                  <ul class="list-inline">
-                    <li class="list-inline-item">44,114 Km</li>
-                    <li class="list-inline-item">Petrol</li>
-                    <li class="list-inline-item">Gurugram</li>
-                  </ul>
-                  <button type="button" class="btn btn-outline-danger">
-                    Contact Sellers
-                  </button>
-                </div>
-              </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Kilometraj : {{ announce.car.km }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Anul
+                  fabricatiei : {{ announce.car.manufacturingDate }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Combustibil : {{ announce.car.fuelType }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Transmisie : {{ announce.car.transmissionType }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Stare : {{ announce.car.state }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  Caroserie : {{ announce.car.bodyName }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                  <i class="fa fa-circle pr-1"></i> Cutie de viteze :
+                  {{ announce.car.gearbox }}
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+        <accordion [isAnimated]="true">
+          <accordion-group heading="Dotari">
+            {{ announce.features }}
+          </accordion-group>
+          <accordion-group heading="Descriere">
+            {{ announce.description }}
+          </accordion-group>
+        </accordion>
       </div>
     </div>
   </div>

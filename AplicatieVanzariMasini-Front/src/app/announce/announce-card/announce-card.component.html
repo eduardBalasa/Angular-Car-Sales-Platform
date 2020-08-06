@@ -1,6 +1,13 @@
 <mat-card class="announce-card">
   <mat-card-header>
-    <div mat-card-avatar class="announce-card-header-image"></div>
+    <div mat-card-avatar class="announce-card-header-image">
+      <!-- <img mat-card-avatar src="{{announce.mainPhotoUrl}}" /> -->
+      <img
+        mat-card-avatar
+        src="{{ announce.userMainPhotoUrl || '../../assets/user.png' }}"
+        alt=""
+      />
+    </div>
     <mat-card-title>{{ announce.brand }}</mat-card-title>
     <mat-card-subtitle
       >{{ announce.model }}{{ announce.modelVersion }}</mat-card-subtitle
@@ -16,11 +23,15 @@
   </mat-card-header>
 
   <div class="announce-card-img-wrapper">
-    <img mat-card-image src="\assets\audi.jpg" alt="audi" />
+    <img
+      mat-card-image
+      style="width: 300px; height: 200px;"
+      src="{{ announce.mainPhotoUrl }}"
+    />
     <ul class="social">
       <li>
-        <!-- [routerLink]="['/members/', user.id]" -->
         <button
+          [routerLink]="['/members/', announce.userId]"
           matTooltip="Vezi profilul"
         >
           <i class="fa fa-user"></i>
@@ -35,8 +46,7 @@
         </button>
       </li>
       <li>
-        <button matTooltip="Salveaza anuntul">
-          <!-- <button matTooltip="Salveaza anuntul" (click)="sendLike(user.id)"> -->
+        <button matTooltip="Salveaza anuntul" (click)="saveAnnounce(announce.announceId)">
           <i class="fa fa-save"></i>
         </button>
       </li>

@@ -3,5 +3,7 @@ export interface PhotoForAnnounce {
     url: string;
     description: string;
     dateAdded: Date;
+    isMain: boolean;
     isApproved: boolean;
+    announceId: number;
 }

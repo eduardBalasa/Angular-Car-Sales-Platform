@@ -12,6 +12,16 @@ export interface Car {
     particleFilter: string;
     rightHandDrive: string;
     brandId: number;
+    brandName?: string;
+    modelName?: string;
+    version?: string;
+    bodyName?: string;
+    countryName?: string;
+    fuelType?: string;
+    transmissionType?: string;
+    manufacturingDate?: string;
+    gearbox?: string;
+    pollutionRule?: string;
     modelId: number;
     bodyId: number;
     fuelId: number;

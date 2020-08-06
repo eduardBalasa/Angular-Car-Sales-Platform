@@ -8,7 +8,7 @@ export class PreventUnsavedChanges
   canDeactivate(component: MemberEditComponent) {
     if (component.editForm.dirty) {
       return confirm(
-        "Are you sure you want to continue? Any unsaved changes will be lost!"
+        "Ești sigur ca dorești să continui? Orice modificare ar putea fi pierdută!"
       );
     }
     return true;

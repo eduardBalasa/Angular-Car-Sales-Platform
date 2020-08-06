@@ -15,10 +15,15 @@
       <!-- <button type="button" class="btn btn-sm mr-1"
           [ngClass]="photo.isMain ? 'btn-success active' : 'btn-secondary'"
           (click)="setMainPhoto(photo)"
-          [disabled]="photo.isMain || !photo.isApproved">Main</button>
-        <button type="button" class="btn btn-sm btn-danger"
-          [disabled]="photo.isMain"
-          (click)="deletePhoto(photo.id)"><i class="fa fa-trash-o"></i></button> -->
+          [disabled]="photo.isMain || !photo.isApproved">Main</button> -->
+      <button
+        type="button"
+        class="btn btn-sm btn-danger"
+        [disabled]="photo.isMain"
+        (click)="deleteAnnouncePhoto(photo.announceId , photo.id)"
+      >
+        <i class="fa fa-trash-o"></i>
+      </button>
     </div>
   </div>
 </div>
@@ -76,7 +81,9 @@
 
     <div>
       <div>
-        <p  style="margin-left: 12px; margin-bottom: 5px; margin-top: 11px;">Progres:</p>
+        <p style="margin-left: 12px; margin-bottom: 5px; margin-top: 11px;">
+          Progres:
+        </p>
         <div class="progress mb-4">
           <div
             class="progress-bar"

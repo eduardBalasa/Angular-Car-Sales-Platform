@@ -1,5 +1,6 @@
 ﻿using AplicatieVanzariMasini_Back.Data;
 using AplicatieVanzariMasini_Back.Dtos;
+using AplicatieVanzariMasini_Back.Helpers;
 using AplicatieVanzariMasini_Back.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +31,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             _context = context;
         }
 
-        [HttpGet("{id}", Name="GetAnnounce")]
+        [HttpGet("{id}", Name = "GetAnnounce")]
         public async Task<IActionResult> GetAnnounce(int id)
         {
             var announce = await _announceRepository.GetAnnounce(id);
@@ -41,15 +42,19 @@ namespace AplicatieVanzariMasini_Back.Controllers
         }
 
         [HttpGet("GetAnnounces")]
-        public async Task<IActionResult> GetAnnounces()
+        public async Task<IActionResult> GetAnnounces([FromQuery]AnnounceParams announceParams)
         {
-            var announceFromRepo = await _announceRepository.GetAnnounces();
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var announces = _mapper.Map<List<AnnounceAndCarForReturnDto>>(announceFromRepo);
+            var announceFromRepo = await _announceRepository.GetAnnounces(announceParams, currentUserId);
+
+            var announces = _mapper.Map<IEnumerable<AnnounceAndCarForReturnDto>>(announceFromRepo);
+
+            Response.AddPagination(announceFromRepo.CurrentPage, announceFromRepo.PageSize,
+                announceFromRepo.TotalCount, announceFromRepo.TotalPages);
 
             return Ok(announces);
         }
-
 
         [HttpPost("{userId}")]
         public async Task<IActionResult> AddAnnounce(int userId, CarForAnnounceDto carAnnounceDto)
@@ -91,7 +96,9 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 Title = carAnnounceDto.Title,
                 Description = carAnnounceDto.Description,
                 CreatedDate = carAnnounceDto.CreatedDate,
-                CarId = car.CarId
+                Features = carAnnounceDto.Features,
+                CarId = car.CarId,
+                UserId = userId
             });
 
             if (await _repo.SaveAll())
@@ -103,33 +110,33 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return BadRequest("A aparut o problema");
         }
 
-        //[HttpPost("{id}/like/{recipientId}")]
-        //public async Task<IActionResult> LikeAnnounce(int id, int recipientId)
-        //{
-        //    if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-        //        return Unauthorized();
+        [HttpPost("{userId}/save/{announceId}")]
+        public async Task<IActionResult> SaveAnnounce(int userId, int announceId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
-        //    var like = await _announceRepository.GetAnnounceLike(id, recipientId);
+            var save = await _announceRepository.GetAnnounceSaved(userId, announceId);
 
-        //    if (like != null)
-        //        return BadRequest("Ai apreciat deja acest anunt!");
+            if (save != null)
+                return BadRequest("Ai salvat deja acest anunt!");
 
-        //    if (await _announceRepository.GetAnnounce(recipientId) == null)
-        //        return NotFound();
+            if (await _announceRepository.GetAnnounce(announceId) == null)
+                return NotFound();
 
-        //    like = new Like
-        //    {
-        //        LikerId = id,
-        //        LikeeId = recipientId
-        //    };
+            save = new SaveAnnounce
+            {
+                UserId = userId,
+                AnnounceId = announceId
+            };
 
-        //    _repo.Add<Like>(like);
+            _repo.Add<SaveAnnounce>(save);
 
-        //    if (await _repo.SaveAll())
-        //        return Ok();
+            if (await _repo.SaveAll())
+                return Ok();
 
-        //    return BadRequest("Eroare la aprecierea anuntului");
-        //}
+            return BadRequest("Eroare la salvarea anuntului");
+        }
     }
 }
 

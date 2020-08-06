@@ -18,8 +18,10 @@ import { AgmMap, MouseEvent, MapsAPILoader } from "@agm/core";
 import { Transmission } from "../_models/transmission";
 import { Gearbox } from "../_models/gearbox";
 import { PollutionRule } from "../_models/pollutionRule";
-import { AuthService } from '../_services/auth.service';
-import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from "../_services/auth.service";
+import { AlertifyService } from "../_services/alertify.service";
+import { Pagination, PaginatedResult } from "src/app/_models/pagination";
+import { AnnounceService } from "../_services/announce.service";
 
 @Component({
   selector: "app-home",
@@ -29,7 +31,7 @@ import { AlertifyService } from '../_services/alertify.service';
   providers: [
     {
       provide: CarouselConfig,
-      useValue: { interval: 3000, noPause: true, showIndicators: true },
+      useValue: { interval: 7000, noPause: true },
     },
   ],
 })
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
   // currentLocation: string;
 
   registerMode = false;
-
+  pagination: Pagination;
   public announces: Announce[];
   announce: Announce;
 
@@ -81,6 +83,8 @@ export class HomeComponent implements OnInit {
   public countries: Country[];
   public countriesName: string[] = [];
 
+  brandSelected: boolean = false;
+  modelSelected: boolean = false;
   public gearboxes: Gearbox[];
   public gearboxesNames: string[] = [];
 
@@ -92,7 +96,7 @@ export class HomeComponent implements OnInit {
 
   public value: any = {};
   bsModalRef: BsModalRef;
-
+  announceParams: any = {};
 
   constructor(
     private authService: AuthService,
@@ -100,7 +104,9 @@ export class HomeComponent implements OnInit {
     private filtersService: FiltersService,
     private route: ActivatedRoute,
     private modalService: BsModalService,
-    private apiloader: MapsAPILoader
+    private apiloader: MapsAPILoader,
+    private announceService: AnnounceService,
+    private alertify: AlertifyService
   ) {}
 
   ngOnInit() {
@@ -134,10 +140,9 @@ export class HomeComponent implements OnInit {
     // this.zoom = 16;
   }
 
-  loggedIn(){
+  loggedIn() {
     return this.authService.loggedIn();
   }
-
 
   announceModal(
     brands: Brand,
@@ -171,8 +176,28 @@ export class HomeComponent implements OnInit {
 
   getAnnounces() {
     this.route.data.subscribe((data) => {
-      this.announces = data.announces;
+      this.announces = data["announces"].result;
+      this.pagination = data["announces"].pagination;
     });
+  }
+
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadAnnounces();
+  }
+
+  loadAnnounces() {
+    this.announceService
+      .getAnnounces(this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe(
+        (res: PaginatedResult<Announce[]>) => {
+          this.announces = res.result;
+          this.pagination = res.pagination;
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
   }
 
   getCars() {
@@ -312,6 +337,20 @@ export class HomeComponent implements OnInit {
   }
 
   public selected(value: any): void {
+    console.log("Selected value is: ", value);
+  }
+
+  public selectedBrand(value: any): void {
+    console.log("Selected value is: ", value);
+    this.brandSelected = !this.brandSelected;
+  }
+
+  public selectedModel(value: any): void {
+    console.log("Selected value is: ", value);
+      this.modelSelected = !this.modelSelected;
+  }
+
+  public selectedVersion(value: any): void {
     console.log("Selected value is: ", value);
   }
 

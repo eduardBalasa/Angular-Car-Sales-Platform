@@ -1,12 +1,12 @@
 <nav class="my-nav navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
     <a class="navbar-brand" [routerLink]="['/home']">
-      <img src="assets\small-car.png" width="50" height="50" >
+      <img src="assets\logo_licenta1.png" width="100" height="100" >
       doarAutomobile.ro
     </a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
+      <li *appHasRole="['Admin']" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/members']">Utilizatori </a>
       </li>
       <li *appHasRole="['Admin']" class="nav-item" routerLinkActive="active">
@@ -41,11 +41,8 @@
           ><i class="fa fa-comments"></i> Mesaje</a
         >
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/']"
-          ><i class="fa fa-table"></i> Anunturile mele</a
-        >
         <a class="dropdown-item" [routerLink]="['/lists']"
-          ><i class="fa fa-table"> </i> Notificari</a
+          ><i class="fa fa-table"> </i> Anunțuri</a
         >
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" [routerLink]="['/contact']"

@@ -142,21 +142,6 @@ namespace AplicatieVanzariMasini_Back.Data
 
         }
 
-        //private async Task<IEnumerable<int>> GetAnnounceLikes(int id, bool likers)
-        //{
-        //    var announce = await _context.Announce.FirstOrDefaultAsync(u => u.AnnounceId == id);
-
-        //    if (likers)
-        //    {
-        //        return announce.AnnounceLikers.Where(u => u.AnnounceLikeeId == id).Select(i => i.AnnounceLikeeId);
-        //    }
-        //    else
-        //    {
-        //        return announce.AnnounceLikees.Where(u => u.AnnounceLikerId == id).Select(i => i.AnnounceLikerId);
-        //    }
-
-        //}
-
         public async Task<Message> GetMessage(int id)
         {
             return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);

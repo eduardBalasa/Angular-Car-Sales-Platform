@@ -1,0 +1,53 @@
+<!-- <div class="expander"> -->
+<div class="modal-content">
+  <div class="modal-header">
+    <div id="headline-holder" class="shadow">
+      <h1 class="modal-title">
+        Adaugă imagini cu autoturismul tău
+      </h1>
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="bsModalRef.hide()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div
+    class="alert alert-info"
+    style="
+      background-color: #66ccff;
+      margin-left: 29px;
+      margin-right: 29px;
+      margin-top: 10px;
+      margin-bottom: -8px;
+    "
+    role="alert"
+  >
+    <i class="fa fa-info-circle"></i> Prima imagine adăugată va fi setată
+    automat ca imagine principală pentru card!
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <app-announce-photo-editor
+            [announceId]="announceId"
+            [announcePhotos]="announcePhotos"
+          ></app-announce-photo-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">
+      Anuleaza
+    </button>
+    <!-- <button type="submit" class="btn btn-success" (click)="addAnnouncePhoto()">
+      Adauga
+    </button> -->
+  </div>
+</div>
+<!-- </div> -->

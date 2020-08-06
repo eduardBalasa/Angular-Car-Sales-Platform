@@ -24,10 +24,11 @@ import { AnnouncesResolver } from "./_resolver/announces.resolver";
 import { AnnounceDetailsPageComponent } from "./announce/announce-details-page/announce-details-page.component";
 import { CarsResolver } from "./_resolver/cars.resolver";
 import { AnnounceDetailResolver } from "./_resolver/announce-detail.resolver";
-import { ContactComponent } from './contact/contact.component';
-import { GearboxesResolver } from './_resolver/gearboxes.resolver';
-import { PollutionRulesResolver } from './_resolver/pollutionRules.resolver';
-import { TransmissionsResolver } from './_resolver/transmissions.resolver';
+import { ContactComponent } from "./contact/contact.component";
+import { GearboxesResolver } from "./_resolver/gearboxes.resolver";
+import { PollutionRulesResolver } from "./_resolver/pollutionRules.resolver";
+import { TransmissionsResolver } from "./_resolver/transmissions.resolver";
+import { SavedAnnouncesResolver } from "./_resolver/saved-announces.resolver";
 
 export const appRoutes: Routes = [
   {
@@ -45,7 +46,7 @@ export const appRoutes: Routes = [
       pollutionRules: PollutionRulesResolver,
       countries: CountriesResolver,
       gearboxes: GearboxesResolver,
-      transmissions: TransmissionsResolver
+      transmissions: TransmissionsResolver,
     },
   },
   {
@@ -77,7 +78,7 @@ export const appRoutes: Routes = [
       {
         path: "lists",
         component: ListsComponent,
-        resolve: { users: ListResolver },
+        resolve: { users: ListResolver, announces: SavedAnnouncesResolver },
       },
       {
         path: "admin",
@@ -92,7 +93,6 @@ export const appRoutes: Routes = [
         path: "announce",
         component: AnnounceDetailsPageComponent,
         resolve: { announceDetail: AnnounceDetailResolver },
-
       },
       {
         path: "announce/:id",

@@ -1,4 +1,5 @@
-﻿using AplicatieVanzariMasini_Back.Models;
+﻿using AplicatieVanzariMasini_Back.Helpers;
+using AplicatieVanzariMasini_Back.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,8 @@ namespace AplicatieVanzariMasini_Back.Data
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveAll();
         Task<Announce> GetAnnounce(int id);
-        Task<List<Announce>> GetAnnounces();
+        Task<PagedList<Announce>> GetAnnounces(AnnounceParams announceParams, int userId);
         Task<PhotoForAnnounce> GetAnnouncePhoto(int id);
-        //Task<Like> GetAnnounceLike(int announceId, int recipientId);
-        //Task<IEnumerable<int>> GetAnnounceLikes(int id, bool likers);
-
+        Task<SaveAnnounce> GetAnnounceSaved(int userId, int announceId);
     }
 }
