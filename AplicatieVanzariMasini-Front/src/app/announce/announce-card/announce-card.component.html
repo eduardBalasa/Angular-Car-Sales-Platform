@@ -40,13 +40,16 @@
       <li>
         <button
           matTooltip="Vezi anuntul"
-          [routerLink]="['announce/', announce.announceId]"
+          [routerLink]="['/announce/', announce.announceId]"
         >
           <i class="fa fa-car"></i>
         </button>
       </li>
       <li>
-        <button matTooltip="Salveaza anuntul" (click)="saveAnnounce(announce.announceId)">
+        <button
+          matTooltip="Salveaza anuntul"
+          (click)="saveAnnounce(announce.announceId)"
+        >
           <i class="fa fa-save"></i>
         </button>
       </li>
@@ -82,10 +85,22 @@
       </span>
       {{ announce.country }}
     </div>
-    <!-- <hr class="solid" />
-    <div class="lastActive">
-      <span>Anunt creat:</span>
-      <p>{{ announce.createdDate | timeAgo }}</p>
-    </div> -->
+    <hr class="solid" />
+    <div *ngIf="loggedIn()">
+      <div
+        class="delete-announce"
+        *ngIf="
+          announce.userId == authService.decodedToken.nameid ||
+          authService.decodedToken.role == 'Admin'
+        "
+        (click)="deleteAnnounce()"
+      >
+        <button mat-button>
+          <span class="material-icons">
+            delete
+          </span>
+        </button>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>

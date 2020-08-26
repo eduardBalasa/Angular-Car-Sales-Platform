@@ -13,6 +13,7 @@ namespace AplicatieVanzariMasini_Back.Dtos
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Features { get; set; }
+        public string UserPhoneNumber { get; set; }
         public string UserName { get; set; }
         public string UserCreated { get; set; }
         public string Location { get; set; }

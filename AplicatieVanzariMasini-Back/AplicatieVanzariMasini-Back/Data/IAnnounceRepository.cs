@@ -13,6 +13,7 @@ namespace AplicatieVanzariMasini_Back.Data
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveAll();
         Task<Announce> GetAnnounce(int id);
+        Task<PagedList<Announce>> GetAnnouncesByUser(int userId, AnnounceParams announceParams);
         Task<PagedList<Announce>> GetAnnounces(AnnounceParams announceParams, int userId);
         Task<PhotoForAnnounce> GetAnnouncePhoto(int id);
         Task<SaveAnnounce> GetAnnounceSaved(int userId, int announceId);

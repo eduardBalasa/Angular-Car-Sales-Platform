@@ -14,6 +14,7 @@ export interface Car {
     brandId: number;
     brandName?: string;
     modelName?: string;
+    modelVersionName?: string;
     version?: string;
     bodyName?: string;
     countryName?: string;
@@ -23,6 +24,7 @@ export interface Car {
     gearbox?: string;
     pollutionRule?: string;
     modelId: number;
+    modelVersionId: number;
     bodyId: number;
     fuelId: number;
     countryId: number;

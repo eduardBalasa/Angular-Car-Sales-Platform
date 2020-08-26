@@ -49,12 +49,6 @@ namespace AplicatieVanzariMasini_Back.Data
             u.LikerId == userId && u.LikeeId == recipientId);
         }
 
-        //public async Task<Like> GetAnnounceLike(int announceId, int recipientId)
-        //{
-        //    return await _context.Likes.FirstOrDefaultAsync(u =>
-        //    u.LikerId == announceId && u.LikeeId == recipientId);
-        //}
-
         public Task<Photo> GetMainPhotoForUser(int userId)
         {
             return _context.Photos.Where(u => u.UserId == userId).
@@ -184,5 +178,16 @@ namespace AplicatieVanzariMasini_Back.Data
 
             return messages;
         }
+
+        public async Task<List<Model>> GetModelsForBrand(int brandId)
+        {
+            return await _context.Models.Where(m => m.BrandId == brandId).ToListAsync();
+        }
+
+        public async Task<List<ModelVersion>> GetVersionsForModel(int modelId)
+        {
+            return await _context.ModelVersions.Where(m => m.ModelId == modelId).ToListAsync();
+        }
+
     }
 }

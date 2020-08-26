@@ -37,7 +37,7 @@ export class AddAnnounceModalComponent implements OnInit {
   modelId;
   public modelVersions: ModelVersion[];
   public modelVersionsName:  Array<any> = [];
-
+  modelVersionId;
   public bodies: Body[];
   public bodiesName: Array<any> = [];
   bodyId;
@@ -91,7 +91,7 @@ export class AddAnnounceModalComponent implements OnInit {
       this.carAnnounce = Object.assign({}, this.announceForm.value);
       this.carAnnounce.brandId = this.brandId;
       this.carAnnounce.modelId = this.modelId;
-      // this.carAnnounce. = this.modelVersionId;
+      this.carAnnounce.modelVersionId = this.modelVersionId;
       this.carAnnounce.fuelId = this.fuelId;
       this.carAnnounce.countryId = this.countryId;
       this.carAnnounce.manufacturingDateId = this.manufacturingDateId;
@@ -156,6 +156,9 @@ export class AddAnnounceModalComponent implements OnInit {
   }
   selectedModel(value: any): void {
     this.modelId = value.id;
+  }
+  selectedModelVersion(value: any): void {
+    this.modelVersionId = value.id;
   }
   selectedGearbox(value: any): void {
     this.gearboxId = value.id;

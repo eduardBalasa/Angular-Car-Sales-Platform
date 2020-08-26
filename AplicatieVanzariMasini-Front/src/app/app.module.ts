@@ -93,6 +93,7 @@ import { AnnounceManagementComponent } from './admin/announce-management/announc
 import { ContactService } from './_services/contact.service';
 import { AddAnnouncePhotoModalComponent } from './announce/add-announce-photo-modal/add-announce-photo-modal.component';
 import { SavedAnnouncesResolver } from './_resolver/saved-announces.resolver';
+import { UserAnnouncesResolver } from './_resolver/user-announces.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -200,6 +201,7 @@ export function tokenGetter() {
     PollutionRulesResolver,
     TransmissionsResolver,
     ContactService,
+    UserAnnouncesResolver
   ],
   entryComponents: [RolesModalComponent, AddAnnounceModalComponent, AddAnnouncePhotoModalComponent, AnnouncePhotoEditorComponent],
   bootstrap: [AppComponent],

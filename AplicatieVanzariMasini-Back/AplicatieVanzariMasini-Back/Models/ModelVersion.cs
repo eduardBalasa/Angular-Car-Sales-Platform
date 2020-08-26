@@ -9,6 +9,9 @@ namespace AplicatieVanzariMasini_Back.Models
     {
         public int ModelVersionId { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Model> Models { get; set; }
+        public int ModelId { get; set; }
+        public virtual Model Model{ get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
+
     }
 }

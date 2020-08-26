@@ -3,6 +3,7 @@ using AplicatieVanzariMasini_Back.Dtos;
 using AplicatieVanzariMasini_Back.Helpers;
 using AplicatieVanzariMasini_Back.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,10 +42,30 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(announceToReturn);
         }
 
+        [HttpGet("GetAnnouncesByUser/{userId}")]
+        public async Task<IActionResult> GetAnnouncesByUser(int userId, [FromQuery] AnnounceParams announceParams)
+        {
+            //var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var announce = await _announceRepository.GetAnnouncesByUser(userId, announceParams);
+
+            var announceToReturn = _mapper.Map<IEnumerable<AnnounceAndCarForReturnDto>>(announce);
+
+            Response.AddPagination(announce.CurrentPage, announce.PageSize,
+               announce.TotalCount, announce.TotalPages);
+
+            return Ok(announceToReturn);
+
+        }
+        [AllowAnonymous]
         [HttpGet("GetAnnounces")]
         public async Task<IActionResult> GetAnnounces([FromQuery]AnnounceParams announceParams)
         {
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var currentUserId = 1;
+            if (!announceParams.All)
+            {
+                currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            }
 
             var announceFromRepo = await _announceRepository.GetAnnounces(announceParams, currentUserId);
 
@@ -78,6 +99,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 BrandId = carAnnounceDto.BrandId,
                 BodyId = carAnnounceDto.BodyId,
                 ModelId = carAnnounceDto.ModelId,
+                ModelVersionId = carAnnounceDto.ModelVersionId,
                 FuelId = carAnnounceDto.FuelId,
                 CountryId = carAnnounceDto.CountryId,
                 GearboxId = carAnnounceDto.GearboxId,
@@ -136,6 +158,25 @@ namespace AplicatieVanzariMasini_Back.Controllers
                 return Ok();
 
             return BadRequest("Eroare la salvarea anuntului");
+        }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> DeleteAnnounce(Announce announce)
+        {
+            if (announce.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) && User.FindFirst(ClaimTypes.Role).Value != "Admin")
+            {
+                return Unauthorized();
+            }
+
+            _repo.Delete(announce);
+            var carForDelete = await _repo.GetCar(announce.CarId);
+            _repo.Delete(carForDelete);
+
+            if (await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+            return BadRequest("Stergerea a esuat!");
         }
     }
 }

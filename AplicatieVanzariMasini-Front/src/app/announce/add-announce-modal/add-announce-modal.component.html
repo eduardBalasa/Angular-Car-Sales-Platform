@@ -92,7 +92,7 @@
               [items]="modelVersionsName"
               [active]="[modelVersionsName]"
               (data)="refreshValue($event)"
-              (selected)="selected($event)"
+              (selected)="selectedModelVersion($event)"
               (removed)="removed($event)"
               (typed)="typed($event)"
               formControlName="modelVersions"
@@ -184,7 +184,7 @@
         </div>
         <div class="col-sm">
           <div>
-            <h3 style="font-size: small;">Transmisie</h3>
+            <h3 style="font-size: small;">Tracțiune</h3>
             <ng-select
               [multiple]="false"
               [allowClear]="true"

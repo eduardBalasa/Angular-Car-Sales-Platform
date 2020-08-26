@@ -37,8 +37,8 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 .MapFrom(u => u.Car.ManufacturingDate.Year))
                 .ForMember(m => m.Model, opt => opt
                 .MapFrom(u => u.Car.Model.Name))
-                .ForMember(m => m.Model, opt => opt
-                .MapFrom(u => u.Car.Model.Name))
+                .ForMember(m => m.ModelVersion, opt => opt
+                .MapFrom(u => u.Car.ModelVersion.Name))
                 .ForMember(m => m.PollutionRule, opt => opt
                 .MapFrom(u => u.Car.PollutionRule.Name))
                 .ForMember(m => m.Transmission, opt => opt
@@ -82,8 +82,8 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 .MapFrom(u => u.ManufacturingDate.Year))
                 .ForMember(m => m.Model, opt => opt
                 .MapFrom(u => u.Model.Name))
-                .ForMember(m => m.Model, opt => opt
-                .MapFrom(u => u.Model.ModelVersion.Name))
+                .ForMember(m => m.ModelVersion, opt => opt
+                .MapFrom(u => u.ModelVersion.Name))
                 .ForMember(m => m.PollutionRule, opt => opt
                 .MapFrom(u => u.PollutionRule.Name))
                 .ForMember(m => m.Transmission, opt => opt
@@ -104,8 +104,8 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 .MapFrom(u => u.ManufacturingDate.Year))
                 .ForMember(m => m.ModelName, opt => opt
                 .MapFrom(u => u.Model.Name))
-                .ForMember(m => m.Version, opt => opt
-                .MapFrom(u => u.Model.ModelVersion.Name))
+                .ForMember(m => m.ModelVersionName, opt => opt
+                .MapFrom(u => u.ModelVersion.Name))
                 .ForMember(m => m.PollutionRule, opt => opt
                 .MapFrom(u => u.PollutionRule.Name))
                 .ForMember(m => m.TransmissionType, opt => opt
@@ -118,6 +118,8 @@ namespace AplicatieVanzariMasini_Back.Helpers
             CreateMap<Announce, AnnounceForReturnDto>()
                 .ForMember(m => m.UserName, opt => opt
                 .MapFrom(a => a.User.UserName))
+                .ForMember(m => m.UserPhoneNumber, opt => opt
+                .MapFrom(a => a.User.PhoneNumber))
                 .ForMember(m => m.UserCreated, opt => opt
                 .MapFrom(a => a.User.Created))
                 .ForMember(m => m.Location, opt => opt
@@ -140,6 +142,14 @@ namespace AplicatieVanzariMasini_Back.Helpers
             CreateMap<PhotoForCreationDto, PhotoForAnnounce>();
 
             CreateMap<UserForRegisterDto, User>();
+
+            CreateMap<Model, ModelForBrandDto>()
+                .ForMember(m => m.Id, opt => opt
+                .MapFrom(u => u.ModelId));
+
+            CreateMap<ModelVersion, VersionForModelDto>()
+                .ForMember(m => m.Id, opt => opt
+                .MapFrom(u => u.ModelVersionId));
 
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
 

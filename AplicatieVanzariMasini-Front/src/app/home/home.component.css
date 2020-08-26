@@ -1,3 +1,9 @@
+#mapid {
+  height: 300px;
+  width: 600px;
+  margin-bottom: 20px;
+}
+
 .ui-select-choices.dropdown-menu {
   display: block;
 }
@@ -13,7 +19,7 @@
   font-size: 13px;
 }
 .bg-dark {
-  background-color: #343A40 !important;
+  background-color: #343a40 !important;
 }
 
 .btn-secondary {
@@ -66,7 +72,7 @@
   margin-top: 35px;
 }
 
-.carousel-spacer{
+.carousel-spacer {
   margin-top: 50px;
   margin-left: 205px;
   margin-right: 232px;
@@ -95,7 +101,7 @@
   top: 10px;
 }
 
-#registerButton{
+#registerButton {
   height: 35px;
   width: 195px;
   top: 10px;
@@ -104,8 +110,6 @@
 #registerButton > a {
   font-size: 10px;
 }
-
-
 
 .submitButton {
   height: 35px;

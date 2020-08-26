@@ -21,10 +21,14 @@ namespace AplicatieVanzariMasini_Back.Helpers
         }
         public string Brand { get; set; }
         public string Model { get; set; }
-        //public string ModelVersion { get; set; }
+        public string ModelVersion { get; set; }
         public string Fuel { get; set; }
-        public string Km { get; set; }
-        public string ManufacturingDate { get; set; }
-        public string Price { get; set; }
+        public string userAnnounces { get; set; }
+        public string MinKm { get; set; }
+        public string MaxKm { get; set; }
+        public string MinManufacturingDate { get; set; }
+        public string MaxManufacturingDate { get; set; }
+        public string MinPrice { get; set; }
+        public string MaxPrice { get; set; }
     }
 }

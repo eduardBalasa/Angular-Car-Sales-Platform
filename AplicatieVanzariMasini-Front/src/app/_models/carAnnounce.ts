@@ -14,6 +14,7 @@ export interface CarAnnounce{
     rightHandDrive: string;
     brandId: number;
     modelId: number;
+    modelVersionId: number;
     bodyId: number;
     fuelId: number;
     countryId: number;

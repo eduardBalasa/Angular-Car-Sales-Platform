@@ -16,8 +16,11 @@ import { Announce } from "../_models/announce";
 export class ListsComponent implements OnInit {
   users: User[];
   savedAnnounces: Announce[];
+  announcesByUser: Announce[];
   pagination: Pagination;
+  userAnnouncesPagination: Pagination;
   announceParams: any = {};
+  isUserAnnounces = false;
 
   constructor(
     private authService: AuthService,
@@ -28,8 +31,9 @@ export class ListsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loadAnnouncesFromRouter();
+    console.log(this.announcesByUser);
     console.log(this.savedAnnounces);
-    this.loadSavedAnnounces();
     this.announceParams.all = false;
   }
 
@@ -52,16 +56,62 @@ export class ListsComponent implements OnInit {
   //     );
   // }
 
-  loadSavedAnnounces() {
+  loadAnnouncesFromRouter() {
     this.route.data.subscribe((data) => {
       this.savedAnnounces = data["announces"].result;
+      this.announcesByUser = data["announcesByUser"].result;
       this.pagination = data["announces"].pagination;
+      this.userAnnouncesPagination = data["announcesByUser"].pagination;
     });
+  }
+
+  changeAnnounces() {
+    this.isUserAnnounces = !this.isUserAnnounces
+  }
+
+  loadSavedAnnounces() {
+    this.announceService
+      .getAnnounces(this.pagination.currentPage, this.pagination.itemsPerPage, this.announceParams)
+      .subscribe(
+        (res: PaginatedResult<Announce[]>) => {
+          this.savedAnnounces = res.result;
+          this.pagination = res.pagination;
+          if(this.isUserAnnounces) {
+            this.changeAnnounces();
+          }
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
+  }
+
+  loadUserAnnounces() {
+    this.announceService
+      .getAnnouncesByUser(this.authService.decodedToken.nameid, this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe(
+        (res: PaginatedResult<Announce[]>) => {
+          this.announcesByUser = res.result;
+          this.pagination = res.pagination;
+          if(!this.isUserAnnounces) {
+            this.changeAnnounces();
+          }
+          console.log("User announces:", this.announcesByUser);
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
   }
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadAnnounces();
+    this.loadSavedAnnounces();
+  }
+
+  userPageChanged(event: any): void {
+    this.userAnnouncesPagination.currentPage = event.page;
+    this.loadUserAnnounces();
   }
 
   loadAnnounces() {
@@ -74,6 +124,7 @@ export class ListsComponent implements OnInit {
       .subscribe(
         (res: PaginatedResult<Announce[]>) => {
           this.savedAnnounces = res.result;
+          this.announcesByUser = res.result;
           this.pagination = res.pagination;
         },
         (error) => {

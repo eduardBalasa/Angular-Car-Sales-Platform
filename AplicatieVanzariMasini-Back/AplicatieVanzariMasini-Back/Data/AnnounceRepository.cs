@@ -41,6 +41,8 @@ namespace AplicatieVanzariMasini_Back.Data
 
         }
 
+    
+
         public async Task<PagedList<Announce>> GetAnnounces(AnnounceParams announceParams, int userId)
         {
             var announces = _context.Announce.AsQueryable();
@@ -52,9 +54,14 @@ namespace AplicatieVanzariMasini_Back.Data
                 announces = announces.Where(a => a.Car.Brand.Name == announceParams.Brand);
             }
 
-            if(announceParams.Model != "undefined" && announceParams.Model != null)
+            if (announceParams.Model != "undefined" && announceParams.Model != null)
             {
                 announces = announces.Where(a => a.Car.Model.Name == announceParams.Model);
+            }
+
+            if (announceParams.ModelVersion != "undefined" && announceParams.ModelVersion != null)
+            {
+                announces = announces.Where(a => a.Car.ModelVersion.Name == announceParams.ModelVersion);
             }
 
             if (announceParams.Fuel != "undefined" && announceParams.Fuel != null)
@@ -62,26 +69,84 @@ namespace AplicatieVanzariMasini_Back.Data
                 announces = announces.Where(a => a.Car.Fuel.Name == announceParams.Fuel);
             }
 
-            if (announceParams.Km != "undefined" && announceParams.Km != null)
+            //Kilometers
+            if (announceParams.MinKm != "undefined" && announceParams.MaxKm != "undefined" && announceParams.MinKm != null && announceParams.MaxKm != null)
             {
-                announces = announces.Where(a => a.Car.Km == announceParams.Km);
+                int minKm = Convert.ToInt32(announceParams.MinKm);
+                int maxKm = Convert.ToInt32(announceParams.MaxKm);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.Km) >= minKm && Convert.ToInt32(a.Car.Km) <= maxKm);
+
             }
 
-            if (announceParams.ManufacturingDate != "undefined" && announceParams.ManufacturingDate != null)
+            if (announceParams.MinKm != "undefined" && announceParams.MinKm != null)
             {
-                announces = announces.Where(a => a.Car.ManufacturingDate.Year == announceParams.ManufacturingDate);
+                int minKm = Convert.ToInt32(announceParams.MinKm);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.Km) >= minKm);
+            }
+            else if (announceParams.MaxKm != "undefined" && announceParams.MaxKm != null)
+            {
+                int maxKm = Convert.ToInt32(announceParams.MaxKm);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.Km) <= maxKm);
+
             }
 
-            if (announceParams.Price != "undefined" && announceParams.Price != null)
+            //ManufacturingDate
+            if (announceParams.MinManufacturingDate != "undefined" && announceParams.MinManufacturingDate != null && announceParams.MaxManufacturingDate != "undefined" && announceParams.MaxManufacturingDate != null)
             {
-                announces = announces.Where(a => a.Car.Price == announceParams.Price);
+                int minManufacturingDate = Convert.ToInt32(announceParams.MinManufacturingDate);
+                int maxManufacturingDate = Convert.ToInt32(announceParams.MaxManufacturingDate);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.ManufacturingDate.Year) >= minManufacturingDate && Convert.ToInt32(a.Car.ManufacturingDate.Year) <= maxManufacturingDate);
+            }
+
+            if (announceParams.MinManufacturingDate != "undefined" && announceParams.MinManufacturingDate != null)
+            {
+                int minManufacturingDate = Convert.ToInt32(announceParams.MinManufacturingDate);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.ManufacturingDate.Year) >= minManufacturingDate);
+            }
+            else if (announceParams.MaxManufacturingDate != "undefined" && announceParams.MaxManufacturingDate != null)
+            {
+                int maxManufacturingDate = Convert.ToInt32(announceParams.MaxManufacturingDate);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.ManufacturingDate.Year) <= maxManufacturingDate);
+            }
+
+            //Prices
+            if (announceParams.MinPrice != "undefined" && announceParams.MinPrice != null && announceParams.MaxPrice != "undefined" && announceParams.MaxPrice != null)
+            {
+                int minPrice = Convert.ToInt32(announceParams.MinPrice);
+                int maxPrice = Convert.ToInt32(announceParams.MaxPrice);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.Price) >= minPrice && Convert.ToInt32(a.Car.Price) <= maxPrice);
+            }
+
+            if (announceParams.MinPrice != "undefined" && announceParams.MinPrice != null)
+            {
+                int minPrice = Convert.ToInt32(announceParams.MinPrice);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.Price) >= minPrice);
+
+            }
+            else if (announceParams.MaxPrice != "undefined" && announceParams.MaxPrice != null)
+            {
+                int maxPrice = Convert.ToInt32(announceParams.MaxPrice);
+
+                announces = announces.Where(a => Convert.ToInt32(a.Car.Price) <= maxPrice);
             }
 
             if (!announceParams.All)
             {
-                 announces = announces.Where(a => a.SaveAnnounces.Any(sa => sa.UserId == userId) == true).AsQueryable();
+                announces = announces.Where(a => a.SaveAnnounces.Any(sa => sa.UserId == userId) == true).AsQueryable();
             }
 
+            if(announceParams.userAnnounces != "undefined" && announceParams.userAnnounces != null)
+            {
+                announces = announces.Where(a => a.UserId == userId).AsQueryable();
+            }
 
             return await PagedList<Announce>.CreateAsync(announces, announceParams.PageNumber, announceParams.PageSize);
         }
@@ -89,8 +154,6 @@ namespace AplicatieVanzariMasini_Back.Data
 
         public async Task<PhotoForAnnounce> GetAnnouncePhoto(int id)
         {
-            //var photo = await _context.PhotoForAnnounces.IgnoreQueryFilters()
-            //    .FirstOrDefaultAsync(p => p.AnnounceId == id);
             var photo = await _context.PhotoForAnnounces.Where(p => p.Id == id).FirstOrDefaultAsync();
             return photo;
         }
@@ -99,6 +162,13 @@ namespace AplicatieVanzariMasini_Back.Data
         {
             return await _context.SaveAnnounces.FirstOrDefaultAsync(u =>
             u.AnnounceId == announceId && u.UserId == userId);
+        }
+
+        public async Task<PagedList<Announce>> GetAnnouncesByUser(int userId, AnnounceParams announceParams)
+        {
+            var announces = _context.Announce.Where(a => a.UserId == userId).AsQueryable();
+
+            return await PagedList<Announce>.CreateAsync(announces, announceParams.PageNumber, announceParams.PageSize);
         }
     }
 }

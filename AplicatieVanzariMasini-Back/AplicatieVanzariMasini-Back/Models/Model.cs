@@ -10,9 +10,8 @@ namespace AplicatieVanzariMasini_Back.Models
         public int ModelId { get; set; }
         public string Name { get; set; }
         public int BrandId { get; set; }
-        //public virtual Brand Brand{ get; set; }
-        public int ModelVersionId { get; set; }
-        public virtual ModelVersion ModelVersion { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual ICollection<ModelVersion> ModelVersions { get; set; }
         public virtual ICollection<Car> Cars { get; set; }
     }
 }

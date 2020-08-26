@@ -2,6 +2,7 @@
 using AplicatieVanzariMasini_Back.Dtos;
 using AplicatieVanzariMasini_Back.Helpers;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(carToReturn);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetCars")]
         public async Task<IActionResult> GetCars()
         {
@@ -44,6 +46,25 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(carsToReturn);
         }
 
-     
+        [HttpGet("GetModelsForBrand/{brandId}")]
+        public async Task<IActionResult> GetModelsForBrand(int brandId)
+        {
+            var modelsForBrand = await _carRepo.GetModelsForBrand(brandId);
+
+            var modelsToReturn = _mapper.Map<List<ModelForBrandDto>>(modelsForBrand);
+
+            return Ok(modelsToReturn);
+        }
+
+        [HttpGet("GetVersionsForModel/{modelId}")]
+        public async Task<IActionResult> GetVersionsForModel(int modelId)
+        {
+            var versionsForModel = await _carRepo.GetVersionsForModel(modelId);
+
+            var modelsToReturn = _mapper.Map<List<VersionForModelDto>>(versionsForModel);
+
+            return Ok(modelsToReturn);
+        }
+
     }
 }

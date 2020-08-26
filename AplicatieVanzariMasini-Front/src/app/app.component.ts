@@ -14,10 +14,6 @@ export class AppComponent implements OnInit {
 
   isShow: boolean;
   topPosToStartShowing = 100;
-  // cookieMessage: " [qfno[iqwnfd[oqwndoi[a joida no[da";
-  // cookieDismiss: any;
-  // cookieLinkText: any;
-  
   constructor(private authService: AuthService) {}
   
   ngOnInit() {
@@ -32,26 +28,6 @@ export class AppComponent implements OnInit {
       this.authService.changeMemberPhoto(user.photoUrl);
       // console.log(user);
     }
-
-    // let cc = window as any;
-    //    cc.cookieconsent.initialise({
-    //      palette: {
-    //        popup: {
-    //          background: "#164969"
-    //        },
-    //        button: {
-    //          background: "#ffe000",
-    //          text: "#164969"
-    //        }
-    //      },
-    //      theme: "classic",
-    //      content: {
-    //        message: this.cookieMessage,
-    //        dismiss: this.cookieDismiss,
-    //        link: this.cookieLinkText,
-    //        href: environment.apiUrl + "/dataprivacy" 
-    //      }
-    //    });
   }
   
   @HostListener("window:scroll")

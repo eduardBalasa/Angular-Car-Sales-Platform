@@ -21,6 +21,8 @@ namespace AplicatieVanzariMasini_Back.Models
         public virtual Brand Brand { get; set; }
         public int ModelId { get; set; }
         public virtual Model Model { get; set; }
+        public int ModelVersionId { get; set; }
+        public virtual ModelVersion ModelVersion { get; set; }
         public int BodyId { get; set; }
         public virtual Body Body { get; set; }
         public int FuelId { get; set; }

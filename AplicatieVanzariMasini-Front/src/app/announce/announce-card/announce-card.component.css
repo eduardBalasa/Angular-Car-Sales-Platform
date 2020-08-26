@@ -1,5 +1,5 @@
 .announce-card {
-  max-width: 323px;
+  max-width: 393px;
 }
 
 .announce-card:hover {
@@ -62,7 +62,7 @@
 .mat-card-header {
   display: flex;
   flex-direction: row;
-  margin-bottom: -12px;
+  
 }
 
 .mat-card-header .mat-card-subtitle:not(:first-child) {

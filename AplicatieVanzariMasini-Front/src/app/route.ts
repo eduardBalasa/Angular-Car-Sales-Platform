@@ -29,6 +29,7 @@ import { GearboxesResolver } from "./_resolver/gearboxes.resolver";
 import { PollutionRulesResolver } from "./_resolver/pollutionRules.resolver";
 import { TransmissionsResolver } from "./_resolver/transmissions.resolver";
 import { SavedAnnouncesResolver } from "./_resolver/saved-announces.resolver";
+import { UserAnnouncesResolver } from './_resolver/user-announces.resolver';
 
 export const appRoutes: Routes = [
   {
@@ -78,7 +79,9 @@ export const appRoutes: Routes = [
       {
         path: "lists",
         component: ListsComponent,
-        resolve: { users: ListResolver, announces: SavedAnnouncesResolver },
+        resolve: { users: ListResolver, 
+                   announces: SavedAnnouncesResolver,
+                   announcesByUser: UserAnnouncesResolver },
       },
       {
         path: "admin",

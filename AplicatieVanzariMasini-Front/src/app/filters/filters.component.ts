@@ -118,24 +118,6 @@ export class FiltersComponent implements OnInit {
     });
   }
 
-  // getPowersForCar() {
-  //   this.filtersService.getPowersForCar().subscribe((powers: Power[]) => {
-  //     this.powers = powers;
-  //     console.log(powers);
-  //   }, error => {
-  //     console.log(error);
-  //   });
-  // }
-
-  // getCylindricalCapacitiesForCar() {
-  //   this.filtersService.getCylindricalCapacitiesForCar().subscribe((cylindriCalcapacities: CylindricalCapacity[]) => {
-  //     this.cylindriCalcapacities = cylindriCalcapacities;
-  //     console.log(cylindriCalcapacities);
-  //   }, error => {
-  //     console.log(error);
-  //   });
-  // }
-
   getCountriesForCar() {
     this.filtersService.getCountriesForCar().subscribe((countries: Country[]) => {
       this.countries = countries;
@@ -144,26 +126,5 @@ export class FiltersComponent implements OnInit {
       console.log(error);
     });
   }
-
-  // getKmsForCar(){
-  //   this.filtersService.getKmsForCar().subscribe((kms : Km[]) => {
-  //     this.kms = kms;
-  //     console.log(kms);
-  //     debugger;
-  //   }, error => {
-  //     console.log(error);
-  //   });
-  // }
-
-  // getPricesForCar(){
-  //   this.filtersService.getPricesForCar().subscribe((prices : Price[]) => {
-  //     this.prices = prices;
-  //     console.log(prices);
-  //     debugger;
-  //   }, error => {
-  //     console.log(error);
-  //   });
-  // }
-
 
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AplicatieVanzariMasini_Back.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200503161009_newCarAnnounceRelation")]
-    partial class newCarAnnounceRelation
+    [Migration("20200807090724_ReverseAllDatas")]
+    partial class ReverseAllDatas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CarId")
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -37,12 +37,20 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Features")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("AnnounceId");
 
                     b.HasIndex("CarId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Announce");
                 });
@@ -93,10 +101,13 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CylindricalCapacityId")
-                        .HasColumnType("int");
+                    b.Property<string>("CylindricalCapacity")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Damaged")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnginePower")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FuelId")
@@ -105,13 +116,16 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<int>("GearboxId")
                         .HasColumnType("int");
 
-                    b.Property<int>("KmId")
+                    b.Property<string>("Km")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ManufacturingDateId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ManufacturingDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModelVersionId")
                         .HasColumnType("int");
 
                     b.Property<string>("ParticleFilter")
@@ -120,11 +134,8 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<int>("PollutionRuleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PowerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PriceId")
-                        .HasColumnType("int");
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RightHandDrive")
                         .HasColumnType("nvarchar(max)");
@@ -143,25 +154,48 @@ namespace AplicatieVanzariMasini_Back.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("CylindricalCapacityId");
-
                     b.HasIndex("FuelId");
 
                     b.HasIndex("GearboxId");
 
-                    b.HasIndex("KmId");
+                    b.HasIndex("ManufacturingDateId");
 
                     b.HasIndex("ModelId");
 
+                    b.HasIndex("ModelVersionId");
+
                     b.HasIndex("PollutionRuleId");
-
-                    b.HasIndex("PowerId");
-
-                    b.HasIndex("PriceId");
 
                     b.HasIndex("TransmissionId");
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Country", b =>
@@ -177,21 +211,6 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.HasKey("CountryId");
 
                     b.ToTable("Countries");
-                });
-
-            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.CylindricalCapacity", b =>
-                {
-                    b.Property<int>("CylindricalCapacityId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CylindricalCapacityId");
-
-                    b.ToTable("CylindricalCapacities");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Fuel", b =>
@@ -224,21 +243,6 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.ToTable("Gearboxes");
                 });
 
-            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Km", b =>
-                {
-                    b.Property<int>("KmId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("KmId");
-
-                    b.ToTable("Kms");
-                });
-
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Like", b =>
                 {
                     b.Property<int>("LikerId")
@@ -252,6 +256,21 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.HasIndex("LikeeId");
 
                     b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.ManufacturingDate", b =>
+                {
+                    b.Property<int>("ManufacturingDateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Year")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ManufacturingDateId");
+
+                    b.ToTable("ManufacturingDates");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Message", b =>
@@ -301,7 +320,7 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ModelVersionId")
+                    b.Property<int>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -309,7 +328,7 @@ namespace AplicatieVanzariMasini_Back.Migrations
 
                     b.HasKey("ModelId");
 
-                    b.HasIndex("ModelVersionId");
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Models");
                 });
@@ -321,10 +340,15 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ModelVersionId");
+
+                    b.HasIndex("ModelId");
 
                     b.ToTable("ModelVersions");
                 });
@@ -383,6 +407,9 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
@@ -409,36 +436,6 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.HasKey("PollutionRuleId");
 
                     b.ToTable("PollutionRules");
-                });
-
-            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Power", b =>
-                {
-                    b.Property<int>("PowerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PowerId");
-
-                    b.ToTable("Powers");
-                });
-
-            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Price", b =>
-                {
-                    b.Property<int>("PriceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PriceId");
-
-                    b.ToTable("Prices");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Role", b =>
@@ -468,6 +465,21 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.SaveAnnounce", b =>
+                {
+                    b.Property<int>("AnnounceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnnounceId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SaveAnnounces");
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Transmission", b =>
@@ -503,6 +515,9 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("County")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
@@ -693,7 +708,15 @@ namespace AplicatieVanzariMasini_Back.Migrations
                 {
                     b.HasOne("AplicatieVanzariMasini_Back.Models.Car", "Car")
                         .WithMany("Announce")
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.User", "User")
+                        .WithMany("Announces")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Car", b =>
@@ -716,12 +739,6 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.CylindricalCapacity", "CylindricalCapacity")
-                        .WithMany("Cars")
-                        .HasForeignKey("CylindricalCapacityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("AplicatieVanzariMasini_Back.Models.Fuel", "Fuel")
                         .WithMany("Cars")
                         .HasForeignKey("FuelId")
@@ -734,9 +751,9 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.Km", "Km")
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.ManufacturingDate", "ManufacturingDate")
                         .WithMany("Cars")
-                        .HasForeignKey("KmId")
+                        .HasForeignKey("ManufacturingDateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -746,21 +763,15 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.ModelVersion", "ModelVersion")
+                        .WithMany()
+                        .HasForeignKey("ModelVersionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AplicatieVanzariMasini_Back.Models.PollutionRule", "PollutionRule")
                         .WithMany("Cars")
                         .HasForeignKey("PollutionRuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.Power", "Power")
-                        .WithMany("Cars")
-                        .HasForeignKey("PowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.Price", "Price")
-                        .WithMany("Cars")
-                        .HasForeignKey("PriceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -803,9 +814,18 @@ namespace AplicatieVanzariMasini_Back.Migrations
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Model", b =>
                 {
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.ModelVersion", "ModelVersion")
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Brand", "Brand")
                         .WithMany("Models")
-                        .HasForeignKey("ModelVersionId")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.ModelVersion", b =>
+                {
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Model", "Model")
+                        .WithMany("ModelVersions")
+                        .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -822,8 +842,23 @@ namespace AplicatieVanzariMasini_Back.Migrations
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.PhotoForAnnounce", b =>
                 {
                     b.HasOne("AplicatieVanzariMasini_Back.Models.Announce", "Announce")
-                        .WithMany("PhotoForAnnounce")
+                        .WithMany("PhotosForAnnounce")
                         .HasForeignKey("AnnounceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.SaveAnnounce", b =>
+                {
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Announce", "Announce")
+                        .WithMany("SaveAnnounces")
+                        .HasForeignKey("AnnounceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.User", "User")
+                        .WithMany("SaveAnnounces")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

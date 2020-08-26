@@ -38,10 +38,13 @@ export class AnnounceService {
       params = params.append('brand', announceParams.brand);
       params = params.append('model', announceParams.model);
       params = params.append('modelVersion', announceParams.modelVersion);
-      params = params.append('fuel', announceParams.fuel);
-      params = params.append('km', announceParams.km);
-      params = params.append('manufacturingDate', announceParams.manufacturingDate);
-      params = params.append('price', announceParams.price);
+      params = params.append('Fuel', announceParams.Fuel);
+      params = params.append('MinKm', announceParams.MinKm);
+      params = params.append('MaxKm', announceParams.MaxKm);
+      params = params.append('MinManufacturingDate', announceParams.MinManufacturingDate);
+      params = params.append('MaxManufacturingDate', announceParams.MaxManufacturingDate);
+      params = params.append('MinPrice', announceParams.MinPrice);
+      params = params.append('MaxPrice', announceParams.MaxPrice);
     }
 
     return this.http.get<Announce[]>(this.baseUrl + 'announce/getannounces', { observe: 'response', params})
@@ -63,17 +66,45 @@ export class AnnounceService {
   getAnnouncePhoto(userId: number, announceId: number){
     return this.http.get(this.baseUrl + 'users/' + userId + '/photos/' + announceId + '/announcephotos');
   }
+  
+  getSavedAnnounces(userId: number): Observable<Announce[]>{
+    return this.http.get<Announce[]>(this.baseUrl + 'announce/GetSavedAnnounces/' + userId);
+  }
 
-  deleteAnnouncePhoto(userId: number, announceId: number, id: number) {
-    return this.http.delete(this.baseUrl + "users/" + userId + "/photos/" + announceId + '/announcephoto/' + id);
+  getAnnouncesByUser(userId: number, page?, itemsPerPage?, announceParams?): Observable<PaginatedResult<Announce[]>>{
+
+    const paginatedResult: PaginatedResult<Announce[]> = new PaginatedResult<Announce[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append("pageNumber", page);
+      params = params.append("pageSize", itemsPerPage);
+    }
+
+    return this.http.get<Announce[]>(this.baseUrl + 'announce/GetAnnouncesByUser/' + userId, { observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
+        }
+        return paginatedResult;
+      })
+    );
   }
 
   saveAnnounce(userId: number, announceId: number){
     return this.http.post(this.baseUrl + 'announce/' + userId + '/save/' + announceId, {});
   }
 
-  getSavedAnnounces(userId: number): Observable<Announce[]>{
-    return this.http.get<Announce[]>(this.baseUrl + 'announce/GetSavedAnnounces/' + userId)
+  deleteAnnouncePhoto(userId: number, announceId: number, id: number) {
+    return this.http.delete(this.baseUrl + "users/" + userId + "/photos/" + announceId + '/announcephoto/' + id);
   }
+
+  deleteAnnounce(carAnnounce: Announce){
+    return this.http.post(this.baseUrl + 'announce/delete', carAnnounce);
+  }
+
 
 }

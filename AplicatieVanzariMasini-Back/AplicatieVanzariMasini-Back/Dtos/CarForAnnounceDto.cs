@@ -21,6 +21,7 @@ namespace AplicatieVanzariMasini_Back.Dtos
         public string RightHandDrive { get; set; }
         public int BrandId { get; set; }
         public int ModelId { get; set; }
+        public int ModelVersionId { get; set; }
         public int BodyId { get; set; }
         public int FuelId { get; set; }
         public int CountryId { get; set; }

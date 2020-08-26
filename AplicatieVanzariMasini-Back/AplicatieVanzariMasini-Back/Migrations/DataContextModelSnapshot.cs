@@ -123,6 +123,9 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<int>("ModelId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ModelVersionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ParticleFilter")
                         .HasColumnType("nvarchar(max)");
 
@@ -156,6 +159,8 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.HasIndex("ManufacturingDateId");
 
                     b.HasIndex("ModelId");
+
+                    b.HasIndex("ModelVersionId");
 
                     b.HasIndex("PollutionRuleId");
 
@@ -316,15 +321,12 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ModelVersionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ModelId");
 
-                    b.HasIndex("ModelVersionId");
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Models");
                 });
@@ -336,10 +338,15 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ModelVersionId");
+
+                    b.HasIndex("ModelId");
 
                     b.ToTable("ModelVersions");
                 });
@@ -754,6 +761,12 @@ namespace AplicatieVanzariMasini_Back.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.ModelVersion", "ModelVersion")
+                        .WithMany()
+                        .HasForeignKey("ModelVersionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AplicatieVanzariMasini_Back.Models.PollutionRule", "PollutionRule")
                         .WithMany("Cars")
                         .HasForeignKey("PollutionRuleId")
@@ -799,9 +812,18 @@ namespace AplicatieVanzariMasini_Back.Migrations
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Model", b =>
                 {
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.ModelVersion", "ModelVersion")
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Brand", "Brand")
                         .WithMany("Models")
-                        .HasForeignKey("ModelVersionId")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.ModelVersion", b =>
+                {
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.Model", "Model")
+                        .WithMany("ModelVersions")
+                        .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

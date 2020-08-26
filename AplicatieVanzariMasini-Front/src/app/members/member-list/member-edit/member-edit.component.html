@@ -1,103 +1,123 @@
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-sm-4">
-      <h1>Profilul tau</h1>
-    </div>
-    <div class="col-sm-8">
-      <div *ngIf="editForm.dirty" class="alert alert-info">
-        <strong>Information:</strong> Ai facut modificari. Unele modificari
-         nesalvate ar putea fi pierdute!
+<div class="lists-wrapper">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-sm-4">
+        <h1>Profilul tau</h1>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="card">
-        <img
-          class="card-img-top img-thumbnail"
-          src="{{ photoUrl || '../../assets/user.png' }}"
-          alt="{{ user.knownAs }}"
-        />
-        <div class="card-body">
-          <div>
-            <strong>Locatie:</strong>
-            <p>{{ user.city }}, {{ user.country }}</p>
-          </div>
-          <div>
-            <strong>Varsta:</strong>
-            <p>{{ user.age }}</p>
-          </div>
-          <div>
-            <strong>Ultima Conectare:</strong>
-            <p>{{user.lastActive | timeAgo}}</p>
-          </div>
-          <div>
-            <strong>Membru din:</strong>
-            <p>{{ user.created | date: 'mediumDate'}}</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <button
-            [disabled]="!editForm.dirty"
-            form="editForm"
-            class="btn btn-success btn-block"
-          >
-            Salveaza modificarile
-          </button>
+      <div class="col-sm-8">
+        <div *ngIf="editForm.dirty" class="alert alert-info">
+          <strong>Information:</strong> Ai facut modificari. Unele modificari
+          nesalvate ar putea fi pierdute!
         </div>
       </div>
     </div>
-    <div class="col-sm-8">
-      <div class="tab-panel">
-        <tabset class="member-tabset">
-          <tab heading="Editeaza Profilul">
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-              <h4>Description</h4>
-              <textarea
-                name="introduction"
-                rows="6"
-                class="form-control"
-                [(ngModel)]="user.introduction"
-              ></textarea>
-              <h4>Looking For</h4>
-              <textarea
-                name="lookingFor"
-                rows="6"
-                class="form-control"
-                [(ngModel)]="user.lookingFor"
-              ></textarea>
-              <h4>Interests</h4>
-              <textarea
-                name="interests"
-                rows="6"
-                class="form-control"
-                [(ngModel)]="user.interests"
-              ></textarea>
-              <div class="form-inline">
-                <label for="city">City</label>
-                <input
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+          <img
+            class="card-img-top img-thumbnail"
+            src="{{ photoUrl || '../../assets/user.png' }}"
+            alt="{{ user.knownAs }}"
+          />
+          <div class="card-body">
+            <div>
+              <strong>Locatie:</strong>
+              <p>{{ user.city }}, {{ user.county }}, {{ user.country }}</p>
+            </div>
+            <div>
+              <strong>Varsta:</strong>
+              <p>{{ user.age }}</p>
+            </div>
+            <div>
+              <strong>Ultima Conectare:</strong>
+              <p>{{ user.lastActive | timeAgo }}</p>
+            </div>
+            <div>
+              <strong>Membru din:</strong>
+              <p>{{ user.created | date: "mediumDate" }}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button
+              [disabled]="!editForm.dirty"
+              form="editForm"
+              class="btn btn-success btn-block"
+            >
+              Salveaza modificarile
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="tab-panel">
+          <tabset class="member-tabset">
+            <tab heading="Editeaza Profilul">
+              <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+                <h5>Nume:</h5>
+                <textarea
+                  name="userName"
+                  rows="1"
                   class="form-control"
-                  type="text"
-                  name="city"
-                  [(ngModel)]="user.city"
-                />
-                <label for="country">Country</label>
-                <input
+                  [(ngModel)]="user.userName"
+                ></textarea>
+                <br/>
+                <h5>Cunoscut/a ca:</h5>
+                <textarea
+                  name="knownAs"
+                  rows="1"
                   class="form-control"
-                  type="text"
-                  name="country"
-                  [(ngModel)]="user.country"
-                />
-              </div>
-            </form>
-          </tab>
-          <tab heading="Editeaza pozele">
-            <app-photo-editor
-              [photos]="user.photos"
-              (getMemberPhotoChange)="updateMainPhoto($event)"
-            ></app-photo-editor>
-          </tab>
-        </tabset>
+                  [(ngModel)]="user.knownAs"
+                ></textarea>
+                <br/>
+                <h5>Varsta:</h5>
+                <textarea
+                  name="age"
+                  rows="1"
+                  class="form-control"
+                  [(ngModel)]="user.age"
+                ></textarea>
+                <br/>
+                <h5>Telefon:</h5>
+                <textarea
+                  name="phoneNumber"
+                  rows="1"
+                  class="form-control"
+                  [(ngModel)]="user.phoneNumber"
+                ></textarea>
+                <br />
+                <div class="form-inline">
+                  <label for="city">Oras:</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="city"
+                    [(ngModel)]="user.city"
+                  />
+                  <label for="county">Judet:</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="county"
+                    [(ngModel)]="user.county"
+                  />
+                  <label for="country">Tara:</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="country"
+                    [(ngModel)]="user.country"
+                  />
+                </div>
+              </form>
+            </tab>
+            <tab heading="Editeaza pozele">
+              <app-photo-editor
+                [photos]="user.photos"
+                (getMemberPhotoChange)="updateMainPhoto($event)"
+              ></app-photo-editor>
+            </tab>
+          </tabset>
+        </div>
       </div>
     </div>
   </div>

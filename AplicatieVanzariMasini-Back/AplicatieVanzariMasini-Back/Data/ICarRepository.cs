@@ -15,15 +15,16 @@ namespace AplicatieVanzariMasini_Back.Data
         Task<Car> GetCar(int id);
         Task<List<Car>> GetCars();
         Task<PagedList<User>> GetUsers(UserParams userParams);
-        //Task<Announce> GetAnnounce(int id, bool isCurrentAnnounce);
         Task<User> GetUser(int id, bool isCurrentUser);
         Task<Photo> GetPhoto(int id);
-        //Task<PhotoForAnnounce> GetAnnouncePhoto(int id);
         Task<Photo> GetMainPhotoForUser(int userId);
         Task<Like> GetLike(int userId, int recipientId);
-        //Task<Like> GetAnnounceLike(int announceId, int recipientId);
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
+        Task<List<Model>> GetModelsForBrand(int brandId);
+        Task<List<ModelVersion>> GetVersionsForModel(int modelId);
+
+
     }
 }

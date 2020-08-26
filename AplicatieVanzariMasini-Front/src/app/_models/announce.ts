@@ -20,6 +20,7 @@ export interface Announce {
     rightHandDrive?: string;
     userId?: number;
     userName?: string;
+    userPhoneNumber?: string;
     userMainPhotoUrl?: string;
     userCreated?: string;
     brand?: string;

@@ -22,6 +22,11 @@ import { AuthService } from "../_services/auth.service";
 import { AlertifyService } from "../_services/alertify.service";
 import { Pagination, PaginatedResult } from "src/app/_models/pagination";
 import { AnnounceService } from "../_services/announce.service";
+import { CarService } from "../_services/car.service";
+import { FormControl } from "@angular/forms";
+import { watch } from "fs";
+
+declare const L: any;
 
 @Component({
   selector: "app-home",
@@ -36,17 +41,15 @@ import { AnnounceService } from "../_services/announce.service";
   ],
 })
 export class HomeComponent implements OnInit {
-  // @ViewChild(AgmMap, { static: true }) public agmMap: AgmMap;
-  // zoom;
-  // lat;
-  // lng;
-  // getAddress;
-  // longitude;
-  // latitude;
-  // currentLocation: string;
-
   registerMode = false;
   pagination: Pagination;
+  brandControl: FormControl = new FormControl();
+  modelControl: FormControl = new FormControl();
+  versionControl: FormControl = new FormControl();
+  manufacturingDateControl: FormControl = new FormControl();
+  fuelControl: FormControl = new FormControl();
+  priceControl: FormControl = new FormControl();
+  kmControl: FormControl = new FormControl();
   public announces: Announce[];
   announce: Announce;
 
@@ -54,19 +57,21 @@ export class HomeComponent implements OnInit {
   car: Car;
 
   public brands: Brand[];
-  public brandsName: string[] = [];
+  public brandsName: any[] = [];
 
   public bodies: Brand[];
   public bodiesName: string[] = [];
 
   public models: Model[];
-  public modelsName: string[] = [];
+  public modelsName: any[] = [];
 
   public modelVersions: ModelVersion[];
   public modelVersionsName: string[] = [];
 
-  public pricesValues: string[] = [];
-  public kmsValues: string[] = [];
+  public minPrice: any[] = [];
+  public maxPrice: any[] = [];
+  public minKm: any[] = [];
+  public maxKm: any[] = [];
   public enginePowerValues: string[] = [];
   public cylindricalCapacityValues: string[] = [];
   public stateValues: string[] = [];
@@ -75,10 +80,11 @@ export class HomeComponent implements OnInit {
   public rightHandDriveValues: string[] = [];
 
   public manufacturingDates: ManufacturingDate[];
-  public manufacturingDatesValues: string[] = [];
+  public minManufacturingDate: any[] = [];
+  public maxManufacturingDate: any[] = [];
 
   public fuels: Fuel[];
-  public fuelsName: string[] = [];
+  public fuelsName: any[] = [];
 
   public countries: Country[];
   public countriesName: string[] = [];
@@ -99,14 +105,15 @@ export class HomeComponent implements OnInit {
   announceParams: any = {};
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private http: HttpClient,
     private filtersService: FiltersService,
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private apiloader: MapsAPILoader,
     private announceService: AnnounceService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private carService: CarService
   ) {}
 
   ngOnInit() {
@@ -135,9 +142,57 @@ export class HomeComponent implements OnInit {
     this.getTransmissionsForCar();
     console.log(this.transmissions);
 
-    // this.get();
-    // this.agmMap.triggerResize(true);
-    // this.zoom = 16;
+    if (!navigator.geolocation) {
+      console.log("location is not supported");
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      const coords = position.coords;
+      const latLong = [coords.latitude, coords.longitude];
+      console.log(
+        `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
+      );
+      let mymap = L.map("mapid").setView(latLong, 13);
+      L.tileLayer(
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZWJsczIyIiwiYSI6ImNrZTl2NDl1djA2ajkyc3Qwc2R2amxucDIifQ.FAFzrPSdhDuXQ4ZXEXrUZg",
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: "mapbox/streets-v11",
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken: "your.mapbox.access.token",
+        }
+      ).addTo(mymap);
+
+      let marker = L.marker(latLong).addTo(mymap);
+      marker.bindPopup('<b>Te afli aici</b>').openPopup();
+    });
+
+    this.watchPosition();
+  }
+
+  watchPosition() {
+    let desLat = 0;
+    let desLon = 0;
+    let id = navigator.geolocation.watchPosition(
+      (position) => {
+        console.log(
+          `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
+        );
+        if (position.coords.latitude === desLat) {
+          navigator.geolocation.clearWatch(id);
+        }
+      },
+      (err) => {
+        console.log(err);
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 30000,
+        maximumAge: 0,
+      }
+    );
   }
 
   loggedIn() {
@@ -265,9 +320,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getBrandsNames() {
+  getBrandsNames(): any {
     this.brands.forEach((brand) => {
-      this.brandsName.push(brand.name);
+      this.brandsName.push({
+        id: brand.id,
+        text: brand.name,
+      });
     });
   }
 
@@ -278,9 +336,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getModelsNames() {
+  getModelsNames(): any {
     this.models.forEach((model) => {
-      this.modelsName.push(model.name);
+      this.modelsName.push({
+        id: model.id,
+        text: model.name,
+      });
     });
   }
 
@@ -300,13 +361,26 @@ export class HomeComponent implements OnInit {
   getManufacturingDatesForCar() {
     this.route.data.subscribe((data) => {
       this.manufacturingDates = data.manufacturingDates;
-      this.getManufacturingDatesValues();
+      this.getMinManufacturingDates();
+      this.getMaxManufacturingDates();
     });
   }
 
-  getManufacturingDatesValues() {
-    this.manufacturingDates.forEach((manufacturingDates) => {
-      this.manufacturingDatesValues.push(manufacturingDates.year);
+  getMinManufacturingDates(): any {
+    this.manufacturingDates.forEach((manDate) => {
+      this.minManufacturingDate.push({
+        id: manDate.id,
+        text: manDate.year,
+      });
+    });
+  }
+
+  getMaxManufacturingDates(): any {
+    this.manufacturingDates.forEach((manDate) => {
+      this.maxManufacturingDate.push({
+        id: manDate.id,
+        text: manDate.year,
+      });
     });
   }
 
@@ -330,11 +404,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getFuelsNames() {
+  getFuelsNames(): any {
     this.fuels.forEach((fuel) => {
-      this.fuelsName.push(fuel.name);
+      this.fuelsName.push({
+        id: fuel.id,
+        text: fuel.name,
+      });
     });
   }
+  // getFuelsNames() {
+  //   this.fuels.forEach((fuel) => {
+  //     this.fuelsName.push(fuel.name);
+  //   });
+  // }
 
   public selected(value: any): void {
     console.log("Selected value is: ", value);
@@ -342,16 +424,108 @@ export class HomeComponent implements OnInit {
 
   public selectedBrand(value: any): void {
     console.log("Selected value is: ", value);
-    this.brandSelected = !this.brandSelected;
+    this.carService.getBrandModels(value.id).subscribe(
+      (data) => {
+        this.models = data;
+        console.log("Models:", this.models);
+        this.modelsName = [];
+        this.getModelsNames();
+        console.log("Model Names:", this.modelsName);
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+    this.modelControl.reset();
+    this.versionControl.reset();
+    if (!this.brandSelected) {
+      this.brandSelected = !this.brandSelected;
+    }
+    this.announceParams.brand = value.text;
+    this.announceParams.model = "undefined";
+    this.announceParams.ModelVersion = "undefined";
+    this.announceParams.all = true;
+    this.searchAnnounces();
   }
 
   public selectedModel(value: any): void {
     console.log("Selected value is: ", value);
+    this.carService.GetModelVersions(value.id).subscribe(
+      (data) => {
+        this.modelVersions = data;
+        console.log("Models:", this.models);
+        this.modelVersionsName = [];
+        this.getModelVerionsNames();
+        console.log("Model Names:", this.modelsName);
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+    this.versionControl.reset();
+    if (!this.modelSelected) {
       this.modelSelected = !this.modelSelected;
+    }
+    this.announceParams.model = value.text;
+    this.announceParams.ModelVersion = "undefined";
+    this.announceParams.all = true;
+    this.searchAnnounces();
   }
 
   public selectedVersion(value: any): void {
     console.log("Selected value is: ", value);
+    this.announceParams.ModelVersion = value.text;
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
+
+  public selectedFuel(value: any): void {
+    console.log("Selected value is: ", value);
+    this.announceParams.Fuel = value.text;
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
+
+  public selectedMinManufacturingDate(value: any): void {
+    console.log("Selected value is: ", value);
+    this.announceParams.MinManufacturingDate = value.text;
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
+
+  public selectedMaxManufacturingDate(value: any): void {
+    console.log("Selected value is: ", value);
+    this.announceParams.MaxManufacturingDate = value.text;
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
+
+  public selectedMinKm(value: any): void {
+    console.log("Selected value is: ", value);
+    this.announceParams.MinKm = value;
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
+
+  public selectedMaxKm(value: any): void {
+    console.log("Selected value is: ", value);
+    this.announceParams.MaxKm = value;
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
+
+  public selectedMinPrice(value: any): void {
+    console.log("Selected value is: ", value);
+    this.announceParams.MinPrice = value;
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
+
+  public selectedMaxPrice(value: any): void {
+    console.log("Selected value is: ", value);
+    this.announceParams.MaxPrice = value;
+    this.announceParams.all = true;
+    this.searchAnnounces();
   }
 
   public removed(value: any): void {
@@ -374,54 +548,28 @@ export class HomeComponent implements OnInit {
     this.registerMode = registerMode;
   }
 
-  // get() {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition((position: Position) => {
-  //       if (position) {
-  //         this.lat = position.coords.latitude;
-  //         this.lng = position.coords.longitude;
-  //         this.getAddress = (this.lat, this.lng);
-  //         console.log(position);
-  //         this.apiloader.load().then(() => {
-  //           let geocoder = new google.maps.Geocoder();
-  //           let latlng = {
-  //             lat: this.lat,
-  //             lng: this.lng,
-  //           };
-  //           geocoder.geocode(
-  //             {
-  //               location: latlng,
-  //             },
-  //             function (results) {
-  //               if (results[0]) {
-  //                 this.currentLocation = results[0].formatted_address;
-  //                 console.log(this.assgin);
-  //               } else {
-  //                 console.log("Not found");
-  //               }
-  //             }
-  //           );
-  //         });
-  //       }
-  //     });
-  //   }
-  // }
+  searchAnnounces() {
+    this.announceService.getAnnounces(1, 15, this.announceParams).subscribe(
+      (data) => {
+        this.announces = data.result;
+        this.pagination = data.pagination;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+  }
 
-  // mapClicked($event: MouseEvent) {
-  //   (this.latitude = $event.coords.lat), (this.longitude = $event.coords.lng);
-
-  //   this.apiloader.load().then(() => {
-  //     let geocoder = new google.maps.Geocoder();
-  //     let latlng = { lat: this.latitude, lng: this.longitude };
-
-  //     geocoder.geocode({ location: latlng }, function (results) {
-  //       if (results[0]) {
-  //         this.currentLocation = results[0].formatted_address;
-  //         console.log(this.currentLocation);
-  //       } else {
-  //         console.log("Not found");
-  //       }
-  //     });
-  //   });
-  // }
+  resetFilters() {
+    this.brandControl.reset();
+    this.modelControl.reset();
+    this.versionControl.reset();
+    this.fuelControl.reset();
+    this.manufacturingDateControl.reset();
+    this.kmControl.reset();
+    this.priceControl.reset();
+    this.announceParams = {};
+    this.announceParams.all = true;
+    this.searchAnnounces();
+  }
 }
