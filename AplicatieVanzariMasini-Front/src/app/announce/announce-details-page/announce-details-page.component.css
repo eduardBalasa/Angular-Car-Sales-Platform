@@ -1,3 +1,9 @@
+#mapid {
+  height: 230px;
+  width: 452px;
+  left: 15px;
+}
+
 .announce-wrapper {
   margin-top: 110px;
 }
@@ -131,6 +137,17 @@
   margin-top: 17px;
 }
 
+.user-box-address-title{
+  display: block;
+  font-weight: 600;
+  line-height: 42px;
+  color: #040711;
+  position: relative;
+  font-size: 16px;
+  left: 150px;
+  margin-top: 20px;
+}
+
 .list-inline-item {
   display: inline-block;
   font-size: 13px;
@@ -140,8 +157,13 @@
   font-size: 13px;
 }
 
+#cars-overview-spacer{
+  bottom: 240px;
+}
+
 hr.announce-photo-divider {
   border-top: 1px solid #bbb;
+  margin-right: -67px;
 }
 
 hr.seller-divider {
@@ -151,7 +173,6 @@ hr.seller-divider {
   margin-top: 5px;
   margin-bottom: 2px;
   padding-right: 17px;
-
 }
 
 img {
@@ -166,9 +187,7 @@ img {
   max-height: 200px;
   overflow: hidden;
 }
-/*******************
- SWIPPER 
- ********************/
+
 .swiper-container {
   width: 100%;
   height: 300px;
@@ -198,9 +217,9 @@ img {
 }
 
 .carousel-spacer{
-  margin-top: 32px;
+  margin-top: -105px;
   margin-left: 205px;
   margin-right: 232px;
-  margin-bottom: 32px;
+  margin-bottom: 50px;
   opacity: 0.9;
 }

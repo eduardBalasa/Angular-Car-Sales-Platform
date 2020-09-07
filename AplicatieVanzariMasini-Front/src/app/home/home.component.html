@@ -4,7 +4,6 @@
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
   crossorigin=""
 />
-
 <script
   src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
@@ -13,15 +12,17 @@
 
 <div class="jumbotron parallax" id="parallax-static">
   <div class="container">
-    <h1 style="text-align: center; color: white;">Alege masina inteligent</h1>
-    <p class="lead" style="text-align: center; color: white;">
-      Dai un ban, da da-l cu cap...
+    <h2 style="margin-top:30px; text-align: center; color: white">
+      Alege inteligent noua ta mașină!
+    </h2>
+    <p class="lead" style="text-align: center; color: white">
+      doarAutomobile.ro - Vânzări automobile noi si second hand
     </p>
 
     <div *ngIf="loggedIn()">
       <div class="text-center">
         <button
-          style="text-align: center;"
+          style="text-align: center"
           mat-button
           id="add-announce-button"
           class="btn btn-success my-2 my-sm-0"
@@ -47,7 +48,7 @@
       </div>
     </div>
     <div *ngIf="!loggedIn()">
-      <div *ngIf="!registerMode" style="text-align: center;">
+      <div *ngIf="!registerMode" style="text-align: center">
         <div class="text-center">
           <button
             mat-button
@@ -70,8 +71,8 @@
             class="row text-center text-xs-center text-sm-center text-md-center"
           >
             <div class="col-xs-12 col-sm-4 col-md-4">
-              <div style="width: 175px; margin-bottom: 20px;">
-                <h3 style="font-size: small;">Marca</h3>
+              <div style="width: 175px; margin-bottom: 20px">
+                <h3 style="font-size: small">Marca</h3>
                 <ng-select
                   [allowClear]="true"
                   [items]="brandsName"
@@ -86,8 +87,8 @@
               </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
-              <div style="width: 175px; margin-bottom: 20px;">
-                <h3 style="font-size: small;">Model</h3>
+              <div style="width: 175px; margin-bottom: 20px">
+                <h3 style="font-size: small">Model</h3>
                 <ng-select
                   [allowClear]="true"
                   [items]="modelsName"
@@ -103,8 +104,8 @@
               </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
-              <div style="width: 175px; margin-bottom: 20px;">
-                <h3 style="font-size: small;">Versiune model</h3>
+              <div style="width: 175px; margin-bottom: 20px">
+                <h3 style="font-size: small">Versiune model</h3>
                 <ng-select
                   [allowClear]="true"
                   [items]="modelVersionsName"
@@ -121,8 +122,8 @@
             </div>
 
             <div class="col-xs-12 col-sm-4 col-md-4">
-              <div style="width: 175px; margin-bottom: 20px;">
-                <h3 style="font-size: small;">Combustibil</h3>
+              <div style="width: 175px; margin-bottom: 20px">
+                <h3 style="font-size: small">Combustibil</h3>
                 <ng-select
                   [allowClear]="true"
                   [items]="fuelsName"
@@ -138,8 +139,8 @@
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
               <div class="d-flex flex-sm-wrap">
-                <div style="width: 90px;">
-                  <h3 style="font-size: small;">Kilometraj</h3>
+                <div style="width: 90px">
+                  <h3 style="font-size: small">Kilometraj</h3>
                   <input
                     type="text"
                     class="form-control"
@@ -148,8 +149,8 @@
                     [formControl]="kmControl"
                   />
                 </div>
-                <div style="width: 90px;">
-                  <h3 style="font-size: small;">.</h3>
+                <div style="width: 90px">
+                  <h3 style="font-size: small">.</h3>
                   <input
                     type="text"
                     class="form-control"
@@ -162,8 +163,8 @@
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
               <div class="d-flex flex-sm-wrap">
-                <div style="width: 90px;">
-                  <h3 style="font-size: small;">Anul fabricației</h3>
+                <div style="width: 90px">
+                  <h3 style="font-size: small">Anul fabricației</h3>
                   <ng-select
                     [allowClear]="true"
                     [items]="minManufacturingDate"
@@ -176,8 +177,8 @@
                   >
                   </ng-select>
                 </div>
-                <div style="width: 90px;">
-                  <h3 style="font-size: small;">.</h3>
+                <div style="width: 90px">
+                  <h3 style="font-size: small">.</h3>
                   <ng-select
                     [allowClear]="true"
                     [items]="maxManufacturingDate"
@@ -195,8 +196,8 @@
 
             <div class="col-xs-12 col-sm-4 col-md-4">
               <div class="d-flex flex-sm-wrap">
-                <div style="width: 90px;">
-                  <h3 style="font-size: small;">Preț</h3>
+                <div style="width: 90px">
+                  <h3 style="font-size: small">Preț</h3>
                   <input
                     type="text"
                     class="form-control"
@@ -205,8 +206,8 @@
                     (input)="selectedMinPrice($event.target.value)"
                   />
                 </div>
-                <div style="width: 90px;">
-                  <h3 style="font-size: small;">.</h3>
+                <div style="width: 90px">
+                  <h3 style="font-size: small">.</h3>
                   <input
                     type="text"
                     class="form-control"
@@ -228,33 +229,8 @@
                 <i class="fa fa-refresh"></i>
               </button>
             </div>
-
-            <!-- <div class="col-xs-12 col-sm-4 col-md-4">
-              <div style="width: 175px; margin-bottom: 20px;">
-                <h3 style="font-size: small;">Gearbox</h3>
-                <ng-select
-                  [allowClear]="true"
-                  [items]="gearboxesNames"
-                  (data)="refreshValue($event)"
-                  (selected)="selected($event)"
-                  (removed)="removed($event)"
-                  (typed)="typed($event)"
-                  placeholder="gearbox"
-                >
-                </ng-select>
-              </div>
-            </div> -->
           </div>
         </div>
-
-        <!-- <div class="d-flex justify-content-end">
-          <button mat-raised-button class="submitButton">
-            Caută
-            <mat-icon>
-              search
-            </mat-icon>
-          </button>
-        </div> -->
       </div>
     </div>
   </div>
@@ -310,7 +286,7 @@
   </carousel>
 </div>
 
-<div style="margin-bottom: 20px;"></div>
+<div style="margin-bottom: 20px"></div>
 
 <div *ngIf="registerMode" class="container">
   <div class="row justify-content-center">
@@ -320,6 +296,14 @@
       ></app-register>
     </div>
   </div>
+</div>
+
+<div class="icon-bar">
+  <a href="http://ace.ucv.ro/" class="facebook"><i class="fa fa-facebook"></i></a> 
+  <a href="http://ace.ucv.ro/" class="twitter"><i class="fa fa-twitter"></i></a> 
+  <a href="http://ace.ucv.ro/" class="google"><i class="fa fa-google"></i></a> 
+  <a href="http://ace.ucv.ro/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="http://ace.ucv.ro/" class="youtube"><i class="fa fa-youtube"></i></a> 
 </div>
 
 <div class="d-flex justify-content-center">
@@ -340,19 +324,23 @@
 <div>
   <div class="announce-card-holder">
     <div class="container">
-      <div class="row text-center text-xs-center text-sm-center text-md-center">
+      <div class="promoted-announce">
+        <i class="fa fa-refresh" style="color: #18bc9c; font-size: 25px"></i>
+        Cele mai recente anunturi
         <div
-          *ngFor="let announce of announces"
-          class="col-xs-12 col-sm-4 col-md-4"
+          class="row text-center text-xs-center text-sm-center text-md-center"
         >
-          <app-announce-card [announce]="announce"></app-announce-card>
+          <div
+            *ngFor="let announce of announces"
+            class="col-xs-12 col-sm-4 col-md-4"
+          >
+            <app-announce-card [announce]="announce"></app-announce-card>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="d-flex justify-content-center" *ngIf="authService.decodedToken.nameid != null"></div> -->
 
 <div class="d-flex justify-content-center">
   <pagination
@@ -369,5 +357,15 @@
   </pagination>
 </div>
 <div class="d-flex justify-content-center">
-  <div id="mapid"></div>
+  <div class="your-location">
+    <!-- <i class="fas fa-map-marker-alt"></i> -->
+    <img
+      src="../../assets/loc-map.png"
+      width="60px"
+      height="58px"
+      style="margin-bottom: 10px"
+    />
+    Locatia ta in timp real
+    <div id="mapid"></div>
+  </div>
 </div>

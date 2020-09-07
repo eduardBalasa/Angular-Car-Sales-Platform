@@ -76,7 +76,6 @@ namespace AplicatieVanzariMasini_Back.Data
 
         }
 
-
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             var users = _context.Users.OrderByDescending(u => u.LastActive).AsQueryable();

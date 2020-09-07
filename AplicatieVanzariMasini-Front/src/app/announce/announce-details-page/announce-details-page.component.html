@@ -12,9 +12,12 @@
       <div class="col-4">
         <div class="d-flex justify-content-center">
           <div class="announce-summary">
-            <h3>{{ announce.car.brandName }} {{ announce.car.modelName }} {{ announce.car.modelVersionName }}</h3>
+            <h3>
+              {{ announce.car.brandName }} {{ announce.car.modelName }}
+              {{ announce.car.modelVersionName }}
+            </h3>
             <!-- <h4>{{ announce.car.modelName }} {{ announce.car.modelVersionName }}</h4> -->
-            <ul style="color: #66676c;" class="list-unstyled list-inline">
+            <ul style="color: #66676c" class="list-unstyled list-inline">
               <li class="list-inline-item">{{ announce.car.km }} km</li>
               <li class="list-inline-item">|</li>
               <li class="list-inline-item">
@@ -52,7 +55,7 @@
             >
               <i
                 class="fa fa-phone fa-2x"
-                style="color: black;"
+                style="color: black"
                 aria-hidden="true"
               ></i>
               Vezi numarul de telefon
@@ -77,7 +80,7 @@
 
                 <i
                   class="fa fa-map-marker fa-2x"
-                  style="color: #18bc9c;"
+                  style="color: #18bc9c"
                   id="seller-box-address-info-icon"
                   aria-hidden="true"
                 ></i>
@@ -91,11 +94,12 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-8">
         <div class="text-center">
           <button
-            style="text-align: center;"
+            style="text-align: center"
             mat-button
             id="add-announce-button"
             class="btn btn-success my-2 my-sm-0"
@@ -122,12 +126,22 @@
         </div>
         <hr class="announce-photo-divider" />
       </div>
+      <div class="col-4">
+        <hr class="seller-divider" />
+        <div class="seller-box-address">
+          <span class="user-box-address-title"> Localizare utilizator </span>
+          <div class="your-location">
+            <div id="mapid"></div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div class="row">
-      <div class="col-8">
+      <div class="col-8" id="cars-overview-spacer">
         <div
           class="cars-overview card-body pt-3 border mt-2"
-          style="background-color: white;"
+          style="background-color: white"
         >
           <div class="row">
             <div class="col-md-12">
@@ -138,7 +152,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Marca : {{ announce.car.brandName }}
                 </li>
               </ul>
@@ -146,7 +160,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Model : {{ announce.car.modelName }}
                 </li>
               </ul>
@@ -154,7 +168,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Versiune : {{ announce.car.modelVersionName }}
                 </li>
               </ul>
@@ -162,7 +176,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Tara
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i> Tara
                   de origine : {{ announce.car.countryName }}
                 </li>
               </ul>
@@ -170,7 +184,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Accident in istoric : {{ announce.car.damaged }}
                 </li>
               </ul>
@@ -179,7 +193,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Kilometraj : {{ announce.car.km }}
                 </li>
               </ul>
@@ -187,7 +201,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Anul
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i> Anul
                   fabricatiei : {{ announce.car.manufacturingDate }}
                 </li>
               </ul>
@@ -195,7 +209,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Combustibil : {{ announce.car.fuelType }}
                 </li>
               </ul>
@@ -203,7 +217,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Tacțiune : {{ announce.car.transmissionType }}
                 </li>
               </ul>
@@ -211,7 +225,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Stare : {{ announce.car.state }}
                 </li>
               </ul>
@@ -219,7 +233,7 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i>
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i>
                   Caroserie : {{ announce.car.bodyName }}
                 </li>
               </ul>
@@ -227,7 +241,8 @@
             <div class="col-md-4">
               <ul class="list-inline list-unstyled">
                 <li class="list-inline-item">
-                  <i class="fa fa-circle pr-1" style="color: #18bc9c;"></i> Cutie de viteze :
+                  <i class="fa fa-circle pr-1" style="color: #18bc9c"></i> Cutie
+                  de viteze :
                   {{ announce.car.gearbox }}
                 </li>
               </ul>
@@ -243,22 +258,47 @@
           </accordion-group>
         </accordion>
       </div>
-    </div>
-    <div class="carousel-spacer">
-      <carousel>
-        <slide>
-          <img class="d-block w-100" weight="1080px" height="240px" src="../../../assets/banner1.jpg" alt="First slide">
-        </slide>
-        <slide>
-          <img class="d-block w-100" weight="1080px" height="240px" src="../../../assets/banner3.jpg" alt="Second slide">
-        </slide>
-        <slide>
-          <img class="d-block w-100" weight="1080px" height="240px" src="../../../assets/banner2.jpg" alt="Third slide">
-        </slide>
-        <slide>
-          <img class="d-block w-100" weight="1080px" height="240px" src="../../../assets/banner4.jpg" alt="First slide">
-        </slide>
-      </carousel>
+
+      <div class="carousel-spacer">
+        <carousel>
+          <slide>
+            <img
+              class="d-block w-100"
+              weight="1080px"
+              height="240px"
+              src="../../../assets/banner1.jpg"
+              alt="First slide"
+            />
+          </slide>
+          <slide>
+            <img
+              class="d-block w-100"
+              weight="1080px"
+              height="240px"
+              src="../../../assets/banner3.jpg"
+              alt="Second slide"
+            />
+          </slide>
+          <slide>
+            <img
+              class="d-block w-100"
+              weight="1080px"
+              height="240px"
+              src="../../../assets/banner2.jpg"
+              alt="Third slide"
+            />
+          </slide>
+          <slide>
+            <img
+              class="d-block w-100"
+              weight="1080px"
+              height="240px"
+              src="../../../assets/banner4.jpg"
+              alt="First slide"
+            />
+          </slide>
+        </carousel>
+      </div>
     </div>
   </div>
 </div>
