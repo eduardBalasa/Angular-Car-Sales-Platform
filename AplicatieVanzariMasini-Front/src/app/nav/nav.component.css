@@ -9,7 +9,7 @@
   display: inline;
 }
 
-dropdown-menu mt-3 {
+.dropdown-menu mt-3 {
   left: 0px;
   right: auto;
   top: 70%;
@@ -20,3 +20,5 @@ dropdown-menu mt-3 {
 a.navbar-brand{
     font-size: 20px;
 }
+
+

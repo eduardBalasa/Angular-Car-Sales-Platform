@@ -30,6 +30,7 @@ import { PollutionRulesResolver } from "./_resolver/pollutionRules.resolver";
 import { TransmissionsResolver } from "./_resolver/transmissions.resolver";
 import { SavedAnnouncesResolver } from "./_resolver/saved-announces.resolver";
 import { UserAnnouncesResolver } from './_resolver/user-announces.resolver';
+import { PopularAnnouncesResolver } from './_resolver/popular-announces';
 
 export const appRoutes: Routes = [
   {
@@ -100,7 +101,8 @@ export const appRoutes: Routes = [
       {
         path: "announce/:id",
         component: AnnounceDetailsPageComponent,
-        resolve: { announceDetail: AnnounceDetailResolver },
+        resolve: { announceDetail: AnnounceDetailResolver,
+          popularAnnounces: PopularAnnouncesResolver },
       },
     ],
   },

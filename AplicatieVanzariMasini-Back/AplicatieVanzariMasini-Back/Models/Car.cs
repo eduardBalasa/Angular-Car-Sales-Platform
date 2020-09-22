@@ -9,7 +9,6 @@ namespace AplicatieVanzariMasini_Back.Models
     public class Car
     {
         public int CarId { get; set; }
-        public int CarView { get; set; }
         public string Km { get; set; }
         public string Price { get; set; }
         public string CylindricalCapacity { get; set; }

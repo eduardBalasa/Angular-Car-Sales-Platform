@@ -4,6 +4,7 @@ import { User } from './user';
 
 export interface Announce {
     announceId: number;
+    announceView: number;
     title: string;
     description: string;
     createdDate: Date;

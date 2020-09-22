@@ -37,11 +37,15 @@ namespace AplicatieVanzariMasini_Back.Data
 
             var announce = await query.FirstOrDefaultAsync(u => u.AnnounceId == id);
 
+            announce.AnnounceView++;
+
+            _context.Update(announce);
+
+            _context.SaveChanges();
+
             return announce;
 
         }
-
-    
 
         public async Task<PagedList<Announce>> GetAnnounces(AnnounceParams announceParams, int userId)
         {
@@ -143,9 +147,15 @@ namespace AplicatieVanzariMasini_Back.Data
                 announces = announces.Where(a => a.SaveAnnounces.Any(sa => sa.UserId == userId) == true).AsQueryable();
             }
 
-            if(announceParams.userAnnounces != "undefined" && announceParams.userAnnounces != null)
+            if (announceParams.userAnnounces != "undefined" && announceParams.userAnnounces != null)
             {
                 announces = announces.Where(a => a.UserId == userId).AsQueryable();
+            }
+
+            if (announceParams.AnnounceView != "undefined" && announceParams.AnnounceView != null)
+            {
+                announces = announces.OrderByDescending(a => a.AnnounceView);
+                announces = announces.Take(3);
             }
 
             return await PagedList<Announce>.CreateAsync(announces, announceParams.PageNumber, announceParams.PageSize);

@@ -45,6 +45,7 @@ export class AnnounceService {
       params = params.append('MaxManufacturingDate', announceParams.MaxManufacturingDate);
       params = params.append('MinPrice', announceParams.MinPrice);
       params = params.append('MaxPrice', announceParams.MaxPrice);
+      params = params.append('AnnounceView', announceParams.AnnounceView);
     }
 
     return this.http.get<Announce[]>(this.baseUrl + 'announce/getannounces', { observe: 'response', params})

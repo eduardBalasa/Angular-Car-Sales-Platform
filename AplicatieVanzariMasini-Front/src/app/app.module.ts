@@ -94,6 +94,7 @@ import { ContactService } from './_services/contact.service';
 import { AddAnnouncePhotoModalComponent } from './announce/add-announce-photo-modal/add-announce-photo-modal.component';
 import { SavedAnnouncesResolver } from './_resolver/saved-announces.resolver';
 import { UserAnnouncesResolver } from './_resolver/user-announces.resolver';
+import { PopularAnnouncesResolver } from './_resolver/popular-announces';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -190,6 +191,7 @@ export function tokenGetter() {
     SavedAnnouncesResolver,
     ListResolver,
     MessagesResolver,
+    PopularAnnouncesResolver,
     AdminService,
     FiltersService,
     AnnounceService,

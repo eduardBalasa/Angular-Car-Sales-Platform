@@ -9,7 +9,9 @@ import {
   NgxGalleryImage,
   NgxGalleryAnimation,
 } from "@kolkov/ngx-gallery";
-import { PhotoForAnnounce } from 'src/app/_models/photoForAnnounce';
+import { PhotoForAnnounce } from "src/app/_models/photoForAnnounce";
+import { AnnounceService } from "src/app/_services/announce.service";
+import { PaginatedResult } from "src/app/_models/pagination";
 
 declare const L: any;
 
@@ -20,6 +22,8 @@ declare const L: any;
 })
 export class AnnounceDetailsPageComponent implements OnInit {
   announce: Announce;
+  public announces: Announce[];
+  popularAnnounces: Announce[];
   bsModalRef: BsModalRef;
   user: User;
   galleryOptions: NgxGalleryOptions[];
@@ -27,18 +31,18 @@ export class AnnounceDetailsPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private announceService: AnnounceService
   ) {}
 
   ngOnInit() {
-
-    
     this.getAnnounce();
     console.log("Announce:");
     console.log(this.announce);
 
     this.route.data.subscribe((data) => {
       this.user = data["user"];
+      this.popularAnnounces = data["popularAnnounces"].result;
     });
 
     this.galleryOptions = [
@@ -52,7 +56,7 @@ export class AnnounceDetailsPageComponent implements OnInit {
       },
     ];
     this.galleryImages = this.getImages();
-    console.log("galleryImages:")
+    console.log("galleryImages:");
     console.log(this.galleryImages);
 
     if (!navigator.geolocation) {
@@ -79,11 +83,11 @@ export class AnnounceDetailsPageComponent implements OnInit {
       ).addTo(mymap);
 
       let marker = L.marker(latLong).addTo(mymap);
-      marker.bindPopup('<b>Te afli aici</b>').openPopup();
+      // marker.bindPopup('<b>Te afli aici</b>').openPopup();
     });
     this.watchPosition();
   }
-  
+
   watchPosition() {
     let desLat = 0;
     let desLon = 0;
@@ -126,14 +130,27 @@ export class AnnounceDetailsPageComponent implements OnInit {
     });
   }
 
-  announcePhotoModal(announceId: number, announcePhotos: PhotoForAnnounce[] ) {
+  announcePhotoModal(announceId: number, announcePhotos: PhotoForAnnounce[]) {
     const initialState = {
       announceId,
-      announcePhotos
+      announcePhotos,
     };
     this.bsModalRef = this.modalService.show(AddAnnouncePhotoModalComponent, {
       initialState,
     });
     //this.bsModalRef.content.closeBtnName = "Close";
   }
+
+  // getAnnounces() {
+  //   for (let iterator = 0; iterator < 4; iterator++){
+  //     this.announceService.getAnnounces().subscribe(
+  //       (countedAnnounces: PaginatedResult<Announce[]>) => {
+  //         this.announces = countedAnnounces.result;
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //       );
+  //     }
+  // }
 }

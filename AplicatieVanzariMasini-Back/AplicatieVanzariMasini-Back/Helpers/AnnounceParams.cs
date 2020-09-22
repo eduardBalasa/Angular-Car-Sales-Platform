@@ -26,6 +26,7 @@ namespace AplicatieVanzariMasini_Back.Helpers
         public string userAnnounces { get; set; }
         public string MinKm { get; set; }
         public string MaxKm { get; set; }
+        public string AnnounceView { get; set; }
         public string MinManufacturingDate { get; set; }
         public string MaxManufacturingDate { get; set; }
         public string MinPrice { get; set; }

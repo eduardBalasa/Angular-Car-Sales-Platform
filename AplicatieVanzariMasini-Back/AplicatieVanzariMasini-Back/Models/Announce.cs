@@ -8,6 +8,7 @@ namespace AplicatieVanzariMasini_Back.Models
     public class Announce
     {
         public int AnnounceId { get; set; }
+        public int AnnounceView { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }

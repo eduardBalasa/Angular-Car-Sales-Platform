@@ -166,7 +166,7 @@ export class HomeComponent implements OnInit {
       ).addTo(mymap);
 
       let marker = L.marker(latLong).addTo(mymap);
-      marker.bindPopup('<b>Te afli aici</b>').openPopup();
+      // marker.bindPopup('<b>Te afli aici</b>').openPopup();
     });
 
     this.watchPosition();

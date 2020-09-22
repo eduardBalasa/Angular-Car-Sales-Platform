@@ -63,7 +63,10 @@
 
             <div class="seller-box-wrapper">
               <div class="seller-name">
-                <a href="/home" title="Vizitează profilul">
+                <a
+                  [routerLink]="['/members/', announce.userId]"
+                  title="Vizitează profilul"
+                >
                   {{ announce.userName }}</a
                 >
                 <hr class="seller-divider" />
@@ -259,7 +262,7 @@
         </accordion>
       </div>
 
-      <div class="carousel-spacer">
+      <!-- <div class="carousel-spacer">
         <carousel>
           <slide>
             <img
@@ -298,6 +301,21 @@
             />
           </slide>
         </carousel>
+      </div> -->
+      <div class="recommanded-ann-wrapper">
+        <div class="recommanded-ann-holder">
+          <h4>Anunțuri populare</h4>
+          <div
+            class="row text-center text-xs-center text-sm-center text-md-center"
+          >
+            <div
+              *ngFor="let announce of popularAnnounces"
+              class="col-xs-12 col-sm-4 col-md-4"
+            >
+              <app-announce-card [announce]="announce"></app-announce-card>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
