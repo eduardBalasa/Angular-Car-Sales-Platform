@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace AplicatieVanzariMasini_Back.Controllers
 {
-    //[ServiceFilter(typeof(LogUserActivity))]
     [Route("[controller]")]
     [ApiController]
     public class CarsController : ControllerBase

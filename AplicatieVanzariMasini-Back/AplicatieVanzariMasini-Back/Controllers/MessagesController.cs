@@ -99,11 +99,14 @@ namespace AplicatieVanzariMasini_Back.Controllers
             {
 
                 var messageToReturn = _mapper.Map<MessageToReturnDto>(message);
-                
+
                 return CreatedAtRoute("GetMessage", new { userId, id = message.Id }, messageToReturn);
             }
+            else
+            {
+                throw new Exception("Eroare la crearea mesajului.");
+            }
 
-            throw new Exception("Eroare la crearea mesajului.");
         }
 
         [HttpPost("{id}")]
@@ -125,8 +128,10 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             if (await _repo.SaveAll())
                 return NoContent();
+            else
+                throw new Exception("Eroare la stergerea mesajului");
 
-            throw new Exception("Eroare la stergerea mesajului");
+
         }
 
         [HttpPost("{id}/read")]

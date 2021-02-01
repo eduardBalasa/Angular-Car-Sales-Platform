@@ -36,7 +36,6 @@ namespace AplicatieVanzariMasini_Back
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -83,12 +82,7 @@ namespace AplicatieVanzariMasini_Back
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin"));
             });
-               //.SetCompatibilityVersion(CompatibilityVersion.Latest)
-               //.AddJsonOptions(opt =>
-               //{
-               //    opt.SerializerSettings.ReferenceLoopHandling =
-               //        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-               //});
+          
             services.AddControllers();
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
@@ -100,9 +94,7 @@ namespace AplicatieVanzariMasini_Back
             services.AddScoped<LogUserActivity>();
             services.AddScoped<IEmailSender, EmailSender>();
         }
-        //
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

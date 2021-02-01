@@ -66,7 +66,7 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 .ForMember(m => m.UserMainPhotoUrl, opt => opt
                 .MapFrom(u => u.User.Photos.FirstOrDefault(a => a.IsMain).Url))
                 .ForMember(m => m.MainPhotoUrl, opt => opt
-                .MapFrom(u => u.PhotosForAnnounce.Where(a => a.AnnounceId == u.AnnounceId).FirstOrDefault().Url));
+                .MapFrom(u => u.PhotosForAnnounce.FirstOrDefault(a => a.AnnounceId == u.AnnounceId).Url));
 
 
             CreateMap<Car, AnnounceAndCarForReturnDto>()

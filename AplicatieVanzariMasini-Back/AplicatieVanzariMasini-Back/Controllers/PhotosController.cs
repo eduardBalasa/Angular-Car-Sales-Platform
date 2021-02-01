@@ -94,9 +94,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             var photo = _mapper.Map<PhotoForAnnounce>(photoForCreationDto);
 
-            //if (!announceFromRepo.Photos.Any(u => u.IsMain))
-            //    photo.IsMain = true;
-
             announceFromRepo.PhotosForAnnounce.Add(photo);
 
 

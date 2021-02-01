@@ -25,7 +25,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
-        private Cloudinary _cloudinary;
+        private readonly Cloudinary _cloudinary;
 
         public AdminController(
             DataContext context,
@@ -44,22 +44,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             _cloudinary = new Cloudinary(acc);
         }
-
-        //[Authorize(Policy = "RequireAdminRole")]
-        //[HttpGet("GetAnnounces")]
-        //public async Task<IActionResult> GetAnnounces()
-        //{
-        //    var announceList = await (from announce in _context.Announce
-        //                              orderby announce.Title
-        //                              select new
-        //                              {
-        //                                  Id = announce.AnnounceId,
-        //                                  Title = announce.Title
-        //                              }).ToListAsync();
-
-        //    return Ok(announceList);
-        //}
-
 
 
         [Authorize(Policy = "RequireAdminRole")]

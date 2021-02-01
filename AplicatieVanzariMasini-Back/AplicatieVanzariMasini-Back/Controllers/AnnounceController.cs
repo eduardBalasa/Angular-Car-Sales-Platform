@@ -45,8 +45,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
         [HttpGet("GetAnnouncesByUser/{userId}")]
         public async Task<IActionResult> GetAnnouncesByUser(int userId, [FromQuery] AnnounceParams announceParams)
         {
-            //var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
             var announce = await _announceRepository.GetAnnouncesByUser(userId, announceParams);
 
             var announceToReturn = _mapper.Map<IEnumerable<AnnounceAndCarForReturnDto>>(announce);

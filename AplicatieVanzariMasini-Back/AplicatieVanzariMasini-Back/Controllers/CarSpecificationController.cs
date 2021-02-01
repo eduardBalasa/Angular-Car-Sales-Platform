@@ -84,16 +84,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
             return Ok(manufacturingDate);
         }
 
-        //[HttpGet("GetPowers")]
-        //public async Task<IActionResult> GetPowers()
-        //{
-        //    var powerFromRepo = await _repo.GetPowers();
-
-        //    var power = _mapper.Map<List<SpecificationForReturnDto>>(powerFromRepo);
-
-        //    return Ok(power);
-        //}
-
         [HttpGet("GetPollutionRules")]
         public async Task<IActionResult> GetPollutionRules()
         {
@@ -123,16 +113,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             return Ok(fuel);
         }
-
-        //[HttpGet("GetCylindricalCapacities")]
-        //public async Task<IActionResult> GetCylindricalCapacities()
-        //{
-        //    var cylindricalCapacitiesFromRepo = await _repo.GetCylindricalCapacities();
-
-        //    var cylindricalCapacities = _mapper.Map<List<SpecificationForReturnDto>>(cylindricalCapacitiesFromRepo);
-
-        //    return Ok(cylindricalCapacities);
-        //}
 
         [HttpGet("GetCountries")]
         public async Task<IActionResult> GetCountries()

@@ -22,8 +22,6 @@ namespace AplicatieVanzariMasini_Back.Data
             if (user == null)
                 return null;
 
-            //if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-            //    return null;
             return user;
         }
 
